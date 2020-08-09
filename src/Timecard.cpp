@@ -10,14 +10,22 @@ auto ParseTimepoint(const std::string& timepoint)
         throw std::invalid_argument("Timepoint string must be 3 or 4 characters long");
     }
 
-    const auto time = std::stoi(timepoint);
-    const auto minutes = std::chrono::minutes(time % 100);
-    const auto hours = std::chrono::hours((time - (time % 100)) / 100);
+    try
+    {
+        const auto time = std::stoi(timepoint);
+        const auto minutes = std::chrono::minutes(time % 100);
+        const auto hours = std::chrono::hours((time - (time % 100)) / 100);
 
-    return hours + minutes;
+        return hours + minutes;
+    }
+    catch (...)
+    {
+        std::cerr << "Could not parse \"" << timepoint << '"' << std::endl;
+        throw;
+    }
 }
 
-int main(int argc, char* argv[])
+int main(int argc, char* argv[]) try
 {
     std::map<std::string, std::chrono::minutes> durations;
     for (int i = 2; i + 1 < argc; i += 2)
@@ -34,4 +42,9 @@ int main(int argc, char* argv[])
     {
         std::cout << duration.first << ": " << duration.second.count() << " minutes\n";
     }
+}
+catch (...)
+{
+    std::cerr << "Failed to parse arguments. Exiting.\n" << std::flush;
+    return 1;
 }
