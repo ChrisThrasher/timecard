@@ -43,7 +43,7 @@ try
             durations.at(key) += duration;
     }
 
-    for (const auto duration : durations)
+    for (const auto& duration : durations)
     {
         std::cout << duration.first << ": " << duration.second.count() << " minutes\n";
     }
