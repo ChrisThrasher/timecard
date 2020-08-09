@@ -1,5 +1,6 @@
 #include <chrono>
 #include <iostream>
+#include <map>
 
 auto ParseTimepoint(const std::string& timepoint)
 {
@@ -17,8 +18,19 @@ auto ParseTimepoint(const std::string& timepoint)
 
 int main(int argc, char* argv[])
 {
-    for (int i = 1; i < argc; ++i)
+    std::map<std::string, std::chrono::minutes> durations;
+    for (int i = 2; i + 1 < argc; i += 2)
     {
-        std::cout << ParseTimepoint(argv[i]).count() << " minutes\n";
+        const auto key = argv[i];
+        const auto duration = ParseTimepoint(argv[i + 1]) - ParseTimepoint(argv[i - 1]);
+        if (durations.find(key) == durations.end())
+            durations[key] = duration;
+        else
+            durations.at(key) += duration;
+    }
+
+    for (const auto duration : durations)
+    {
+        std::cout << duration.first << ": " << duration.second.count() << " minutes\n";
     }
 }
