@@ -6,8 +6,7 @@ auto ParseTimepoint(const std::string& timepoint)
 {
     try
     {
-        if (timepoint.size() > 4 or
-            timepoint.size() < 3)
+        if (timepoint.size() > 4 or timepoint.size() < 3)
         {
             throw std::invalid_argument("Timepoint string must be 3 or 4 characters long.");
         }
@@ -25,13 +24,19 @@ auto ParseTimepoint(const std::string& timepoint)
     }
 }
 
-int main(int argc, char* argv[]) try
+int main(int argc, char* argv[])
+try
 {
     std::map<std::string, std::chrono::minutes> durations;
     for (int i = 2; i + 1 < argc; i += 2)
     {
         const auto key = argv[i];
         const auto duration = ParseTimepoint(argv[i + 1]) - ParseTimepoint(argv[i - 1]);
+        if (duration < std::chrono::minutes(0))
+        {
+            throw std::runtime_error(std::string("Duration from ") + argv[i - 1] + " to " +
+                                     argv[i + 1] + " is negative.");
+        }
         if (durations.find(key) == durations.end())
             durations[key] = duration;
         else
