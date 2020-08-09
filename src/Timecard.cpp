@@ -43,6 +43,12 @@ int main(int argc, char* argv[]) try
         std::cout << duration.first << ": " << duration.second.count() << " minutes\n";
     }
 }
+catch (const std::exception& ex)
+{
+    std::cerr << ex.what() << '\n';
+    std::cerr << "Failed to parse arguments. Exiting.\n" << std::flush;
+    return 1;
+}
 catch (...)
 {
     std::cerr << "Failed to parse arguments. Exiting.\n" << std::flush;
