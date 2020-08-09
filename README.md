@@ -24,3 +24,17 @@ and you should expect to see the following returned in the console:
 gardening: 120 minutes
 reading: 60 minutes
 ```
+
+If multiple chunks of time were spent on one activity, then simply include whenever the additional chunks happening. Expanding on our previous example, lets add two more chunks for eating lunch and reading again.
+
+`$ ./build/timecard 0800 gardening 1000 reading 1100 lunch 1230 reading 1400`
+
+This yields:
+
+```
+gardening: 120 minutes
+lunch: 90 minutes
+reading: 150 minutes
+```
+
+Because the label `reading` appeared twice, its two durations were accumulated. This will be done for any labels which appear more than once.
