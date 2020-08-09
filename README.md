@@ -25,7 +25,7 @@ gardening: 120 minutes
 reading: 60 minutes
 ```
 
-If multiple chunks of time were spent on one activity, then simply include whenever the additional chunks happening. Expanding on our previous example, lets add two more chunks for eating lunch and reading again.
+If multiple chunks of time were spent on one activity, then include the additional chunks using the same label. Expanding on our previous example, lets add two more chunks for eating lunch and reading some more.
 
 `$ ./build/timecard 0800 gardening 1000 reading 1100 lunch 1230 reading 1400`
 
