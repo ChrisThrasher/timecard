@@ -12,7 +12,7 @@ Requires CMake 3.17 and a C++17-compliant compiler
 1. `$ cmake --build .`
 
 ## Running
-`$ ./build/timecard <time1> <label1> <time2> <label2> <timeN> <labelN>...`
+`$ ./build/timecard <time1> <label1> <time2> <label2> <timeN> <labelN> <timeN+1>...`
 
 Starting with the first time (using 24-hour time), list all times that activities changed along with the activities that occurred between adjacent times. If you spend 8:00am to 10:00am gardening then 10:00am to 11:00am reading, the arguments would look like this:
 
