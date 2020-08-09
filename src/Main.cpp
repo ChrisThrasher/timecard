@@ -1,6 +1,10 @@
 #include <iostream>
 
-int main()
+int main(int argc, char* argv[])
 {
-    std::cout << "Empty main()";
+    for (int i = 0; i < argc; ++i)
+    {
+        std::cout << argv[i] << ' ';
+    }
+    std::cout << '\n';
 }
