@@ -9,9 +9,9 @@ auto ParseTimepoint(const std::string& timepoint)
         if (timepoint.size() > 4 or
             timepoint.size() < 3)
         {
-            throw std::invalid_argument("Timepoint string must be 3 or 4 characters long");
+            throw std::invalid_argument("Timepoint string must be 3 or 4 characters long.");
         }
-        
+
         const auto time = std::stoi(timepoint);
         const auto minutes = std::chrono::minutes(time % 100);
         const auto hours = std::chrono::hours((time - (time % 100)) / 100);
@@ -20,7 +20,7 @@ auto ParseTimepoint(const std::string& timepoint)
     }
     catch (...)
     {
-        std::cerr << "Could not parse \"" << timepoint << '"' << std::endl;
+        std::cerr << "Could not parse \"" << timepoint << "\" as a time." << std::endl;
         throw;
     }
 }
