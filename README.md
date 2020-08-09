@@ -16,7 +16,7 @@ Requires CMake 3.17 and a C++17-compliant compiler
 
 Starting with the first time (using 24-hour time), list all times that activities changed along with the activities that occurred between adjacent times. If you spend 8:00am to 10:00am gardening then 10:00am to 11:00am reading, the arguments would look like this:
 
-`$./build/timecard 0800 gardening 1000 reading 1100`
+`$ ./build/timecard 0800 gardening 1000 reading 1100`
 
 and you should expect to see the following returned in the console:
 
