@@ -27,7 +27,7 @@ auto ParseTimepoint(const std::string& timepoint)
 int main(int argc, char* argv[])
 try
 {
-    std::map<std::string, std::chrono::minutes> durations;
+    std::map<std::string, std::chrono::duration<double, std::ratio<3600>>> durations;
     for (int i = 2; i + 1 < argc; i += 2)
     {
         const auto key = argv[i];
@@ -45,7 +45,7 @@ try
 
     for (const auto& duration : durations)
     {
-        std::cout << duration.first << ": " << duration.second.count() << " minutes\n";
+        std::cout << duration.first << ": " << duration.second.count() << " hours\n";
     }
 }
 catch (const std::exception& ex)
