@@ -31,9 +31,7 @@ auto ParseTimepoint(std::string timepoint)
 
         const auto time = std::stoi(timepoint);
         const auto minutes = time % 100;
-        const auto hours_unadjusted = (time - minutes) / 100;
-        const auto hours =
-            hours_unadjusted != 12 ? hours_unadjusted + am_pm_offset : hours_unadjusted;
+        const auto hours = ((time - minutes) / 100) % 12 + am_pm_offset;
 
         if (minutes >= 60)
         {
