@@ -10,13 +10,23 @@ TEST(ParseTimepoint, Garbage)
     EXPECT_THROW(ParseTimepoint("pm"), std::invalid_argument);
     EXPECT_THROW(ParseTimepoint("asdf"), std::invalid_argument);
     EXPECT_THROW(ParseTimepoint("just a plain ole string"), std::invalid_argument);
+    EXPECT_THROW(ParseTimepoint("af13"), std::invalid_argument);
+    EXPECT_THROW(ParseTimepoint("1200tns"), std::invalid_argument);
+}
+
+
+TEST(ParseTimepoint, NearlyGarbage)
+{
     EXPECT_THROW(ParseTimepoint("0am"), std::invalid_argument);
     EXPECT_THROW(ParseTimepoint("1pm"), std::invalid_argument);
     EXPECT_THROW(ParseTimepoint("10"), std::invalid_argument);
     EXPECT_THROW(ParseTimepoint("20"), std::invalid_argument);
     EXPECT_THROW(ParseTimepoint("99"), std::invalid_argument);
-    EXPECT_THROW(ParseTimepoint("af13"), std::invalid_argument);
-    EXPECT_THROW(ParseTimepoint("1200tns"), std::invalid_argument);
+}
+
+
+TEST(ParseTimepoint, TwentyFourHourTimes)
+{
     EXPECT_THROW(ParseTimepoint("000"), std::invalid_argument);
     EXPECT_THROW(ParseTimepoint("0000"), std::invalid_argument);
     EXPECT_THROW(ParseTimepoint("100"), std::invalid_argument);
