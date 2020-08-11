@@ -11,6 +11,11 @@ Requires CMake 3.10 and a C++14-compliant compiler.
 1. `$ cmake ../`
 1. `$ cmake --build .`
 
+## Installation
+Installation follows CMake convention. An executable called `timecard` will be installed to `/usr/local/bin`.
+1. `$ cd build`
+1. `$ sudo make install`
+
 ## Running
 `$ ./build/timecard <time1> <label1> <time2> <label2> <timeN> <labelN> <timeN+1>...`
 
