@@ -71,10 +71,10 @@ try
             durations.at(key) += duration;
     }
 
+    std::cout << std::fixed << std::setprecision(1);
     for (const auto& duration : durations)
     {
-        std::cout << duration.first << ": " << std::setprecision(3) << duration.second.count()
-                  << " hours\n";
+        std::cout << duration.first << ": " << duration.second.count() << " hours\n";
     }
 }
 catch (const std::exception& ex)
