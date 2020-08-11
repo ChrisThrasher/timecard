@@ -18,10 +18,14 @@ try
         am_pm_offset = 0;
         timepoint = timepoint.substr(0, timepoint.size() - 2);
     }
-    if (has_suffix("pm"))
+    else if (has_suffix("pm"))
     {
         am_pm_offset = 12;
         timepoint = timepoint.substr(0, timepoint.size() - 2);
+    }
+    else
+    {
+        throw std::invalid_argument("Found no am or pm prefix.");
     }
 
     if (timepoint.size() > 4 or timepoint.size() < 3)
