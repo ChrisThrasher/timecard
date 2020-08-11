@@ -18,6 +18,7 @@ add_compile_options(
 )
 
 add_executable(timecard src/Timecard.cpp)
+target_include_directories(timecard PRIVATE include)
 install(TARGETS timecard DESTINATION bin)
 
 include(ExternalProject)
@@ -38,7 +39,7 @@ add_subdirectory("${CMAKE_BINARY_DIR}/googletest-src"
 
 enable_testing()
 add_executable(unit_tests test/UnitTests.cpp)
-target_include_directories(unit_tests PRIVATE src)
+target_include_directories(unit_tests PRIVATE include)
 target_include_directories(unit_tests SYSTEM PRIVATE ${gtest_SOURCE_DIR}/include)
 target_link_libraries(unit_tests PRIVATE gtest)
 add_test(NAME unit_tests COMMAND unit_tests)
