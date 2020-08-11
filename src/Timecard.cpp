@@ -12,10 +12,19 @@ auto ParseTimepoint(const std::string& timepoint)
         }
 
         const auto time = std::stoi(timepoint);
-        const auto minutes = std::chrono::minutes(time % 100);
-        const auto hours = std::chrono::hours((time - (time % 100)) / 100);
+        const auto minutes = time % 100;
+        const auto hours = (time - minutes) / 100;
 
-        return hours + minutes;
+        if (minutes >= 60)
+        {
+            throw std::invalid_argument("Minutes are greater than 59.");
+        }
+        if (hours >= 24)
+        {
+            throw std::invalid_argument("Hours are greater than 23.");
+        }
+
+        return std::chrono::hours(hours) + std::chrono::minutes(minutes);
     }
     catch (...)
     {
