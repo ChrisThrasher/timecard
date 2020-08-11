@@ -18,3 +18,4 @@ add_compile_options(
 )
 
 add_executable(timecard src/Timecard.cpp)
+install(TARGETS timecard DESTINATION bin)
