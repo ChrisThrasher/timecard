@@ -37,13 +37,13 @@ try
     const auto minutes = time % 100;
     const auto hours = ((time - minutes) / 100) % 12 + am_pm_offset;
 
-    if (minutes >= 60)
+    if (minutes >= 60 or minutes < 0)
     {
-        throw std::invalid_argument("Minutes are greater than 59.");
+        throw std::invalid_argument("Minutes not in range [0, 59].");
     }
-    if (hours >= 24)
+    if (hours >= 24 or hours < 0)
     {
-        throw std::invalid_argument("Hours are greater than 23.");
+        throw std::invalid_argument("Hours not in range [0, 23].");
     }
 
     return std::chrono::hours(hours) + std::chrono::minutes(minutes);
