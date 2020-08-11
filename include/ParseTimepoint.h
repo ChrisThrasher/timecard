@@ -4,22 +4,24 @@
 #include <iostream>
 #include <string>
 
+bool HasSuffix(const std::string& timepoint, const std::string& suffix)
+{
+    return timepoint.size() >= suffix.size() and
+           timepoint.compare(timepoint.size() - suffix.size(), suffix.size(), suffix) == 0;
+};
+
 auto ParseTimepoint(const std::string& timepoint)
 try
 {
-    const auto has_suffix = [timepoint](const std::string& suffix) {
-        return timepoint.size() >= suffix.size() and
-               timepoint.compare(timepoint.size() - suffix.size(), suffix.size(), suffix) == 0;
-    };
 
     auto am_pm_offset = 0;
     auto modified_timepoint = timepoint;
-    if (has_suffix("am"))
+    if (HasSuffix(timepoint, "am"))
     {
         am_pm_offset = 0;
         modified_timepoint = timepoint.substr(0, timepoint.size() - 2);
     }
-    else if (has_suffix("pm"))
+    else if (HasSuffix(timepoint, "pm"))
     {
         am_pm_offset = 12;
         modified_timepoint = timepoint.substr(0, timepoint.size() - 2);
