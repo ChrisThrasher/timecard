@@ -41,6 +41,20 @@ TEST(ParseTimepoint, ValidAmTimes)
     EXPECT_EQ(11h + 30min, ParseTimepoint("1130am"));
 }
 
+
+TEST(ParseTimepoint, ValidPmTimes)
+{
+    using namespace std::chrono_literals;
+    EXPECT_EQ(12h + 0min, ParseTimepoint("1200"));
+    EXPECT_EQ(12h + 0min, ParseTimepoint("1200pm"));
+    EXPECT_EQ(12h + 30min, ParseTimepoint("1230"));
+    EXPECT_EQ(12h + 30min, ParseTimepoint("1230pm"));
+    EXPECT_EQ(14h + 0min, ParseTimepoint("1400"));
+    EXPECT_EQ(14h + 0min, ParseTimepoint("200pm"));
+    EXPECT_EQ(14h + 30min, ParseTimepoint("1430"));
+    EXPECT_EQ(14h + 30min, ParseTimepoint("230pm"));
+}
+
 int main(int argc, char* argv[])
 {
     ::testing::InitGoogleTest(&argc, argv);
