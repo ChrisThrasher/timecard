@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-auto ParseTimepoint(std::string timepoint)
+auto ParseTimepoint(const std::string& timepoint)
 try
 {
     const auto has_suffix = [timepoint](const std::string& suffix) {
@@ -13,27 +13,28 @@ try
     };
 
     auto am_pm_offset = 0;
+    auto modified_timepoint = timepoint;
     if (has_suffix("am"))
     {
         am_pm_offset = 0;
-        timepoint = timepoint.substr(0, timepoint.size() - 2);
+        modified_timepoint = timepoint.substr(0, timepoint.size() - 2);
     }
     else if (has_suffix("pm"))
     {
         am_pm_offset = 12;
-        timepoint = timepoint.substr(0, timepoint.size() - 2);
+        modified_timepoint = timepoint.substr(0, timepoint.size() - 2);
     }
     else
     {
         throw std::invalid_argument("Found no am or pm prefix.");
     }
 
-    if (timepoint.size() > 4 or timepoint.size() < 3)
+    if (modified_timepoint.size() > 4 or modified_timepoint.size() < 3)
     {
         throw std::invalid_argument("Timepoint string must contain 3 or 4 consecutive numbers.");
     }
 
-    const auto time = std::stoi(timepoint);
+    const auto time = std::stoi(modified_timepoint);
     const auto minutes = time % 100;
     if (minutes >= 60 or minutes < 0)
     {
