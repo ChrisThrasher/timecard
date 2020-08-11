@@ -26,8 +26,8 @@ Starting with the time the first activity started, list all times that activitie
 and you should expect to see the following returned in the console:
 
 ```
-gardening: 2 hours
-reading: 1 hours
+gardening: 2.0 hours
+reading: 1.0 hours
 ```
 
 If multiple chunks of time were spent on one activity, then include the additional chunks using the same label. Expanding on our previous example, lets add two more chunks for eating lunch and reading some more.
@@ -37,7 +37,7 @@ If multiple chunks of time were spent on one activity, then include the addition
 This yields:
 
 ```
-gardening: 2 hours
+gardening: 2.0 hours
 lunch: 1.5 hours
 reading: 2.5 hours
 ```
