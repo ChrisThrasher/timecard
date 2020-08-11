@@ -36,6 +36,15 @@ TEST(ParseTimepoint, TwentyFourHourTimes)
 }
 
 
+TEST(ParseTimepoint, NegativeTimes)
+{
+    EXPECT_THROW(ParseTimepoint("-100am"), std::invalid_argument);
+    EXPECT_THROW(ParseTimepoint("-0100am"), std::invalid_argument);
+    EXPECT_THROW(ParseTimepoint("-1300am"), std::invalid_argument);
+    EXPECT_THROW(ParseTimepoint("-1300pm"), std::invalid_argument);
+}
+
+
 TEST(ParseTimepoint, ValidAmTimes)
 {
     using namespace std::chrono_literals;
