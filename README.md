@@ -14,7 +14,7 @@ Requires CMake 3.10 and a C++14-compliant compiler.
 ## Running
 `$ ./build/timecard <time1> <label1> <time2> <label2> <timeN> <labelN> <timeN+1>...`
 
-Starting with the first time (using either 12-hour or 24-hour time), list all times that activities changed along with the activities that occurred between adjacent times. If you spent 8:00am to 10:00am gardening then 10:00am to 11:00am reading, the arguments would look like this:
+Starting with the time the first activity started, list all times that activities changed along with the activities that occurred between those times. If you spent 8:00am to 10:00am gardening then 10:00am to 11:00am reading, the arguments would look like this:
 
 `$ ./build/timecard 800am gardening 1000am reading 1100am`
 
