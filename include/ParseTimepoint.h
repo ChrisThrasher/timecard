@@ -35,16 +35,18 @@ try
 
     const auto time = std::stoi(timepoint);
     const auto minutes = time % 100;
-    const auto hours = ((time - minutes) / 100) % 12 + am_pm_offset;
-
     if (minutes >= 60 or minutes < 0)
     {
         throw std::invalid_argument("Minutes not in range [0, 59].");
     }
-    if (hours >= 24 or hours < 0)
+
+    const auto raw_hours = (time - minutes) / 100;
+    if (raw_hours > 12 or raw_hours <= 0)
     {
-        throw std::invalid_argument("Hours not in range [0, 23].");
+        throw std::invalid_argument("Hours not in range [1, 12].");
     }
+
+    const auto hours = raw_hours % 12 + am_pm_offset;
 
     return std::chrono::hours(hours) + std::chrono::minutes(minutes);
 }
