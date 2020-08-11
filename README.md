@@ -5,7 +5,7 @@ Calculates how long was spent on various activities throughout the day.
 ## Building
 Requires CMake 3.10 and a C++14-compliant compiler
 1. Clone repository
-1. `$ cd raytracer`
+1. `$ cd timecard`
 1. `$ mkdir build`
 1. `$ cd build`
 1. `$ cmake ../`
