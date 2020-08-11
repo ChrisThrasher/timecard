@@ -17,6 +17,12 @@ TEST(ParseTimepoint, Garbage)
     EXPECT_THROW(ParseTimepoint("99"), std::invalid_argument);
     EXPECT_THROW(ParseTimepoint("af13"), std::invalid_argument);
     EXPECT_THROW(ParseTimepoint("1200tns"), std::invalid_argument);
+    EXPECT_THROW(ParseTimepoint("000"), std::invalid_argument);
+    EXPECT_THROW(ParseTimepoint("0000"), std::invalid_argument);
+    EXPECT_THROW(ParseTimepoint("100"), std::invalid_argument);
+    EXPECT_THROW(ParseTimepoint("0100"), std::invalid_argument);
+    EXPECT_THROW(ParseTimepoint("1000"), std::invalid_argument);
+    EXPECT_THROW(ParseTimepoint("1200"), std::invalid_argument);
 }
 
 
