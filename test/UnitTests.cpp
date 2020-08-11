@@ -19,6 +19,28 @@ TEST(ParseTimepoint, Garbage)
     EXPECT_THROW(ParseTimepoint("1200tns"), std::invalid_argument);
 }
 
+
+TEST(ParseTimepoint, ValidAmTimes)
+{
+    using namespace std::chrono_literals;
+    EXPECT_EQ(0h + 0min, ParseTimepoint("000"));
+    EXPECT_EQ(0h + 0min, ParseTimepoint("0000"));
+    EXPECT_EQ(0h + 0min, ParseTimepoint("000am"));
+    EXPECT_EQ(0h + 0min, ParseTimepoint("0000am"));
+    EXPECT_EQ(0h + 0min, ParseTimepoint("1200"));
+    EXPECT_EQ(0h + 0min, ParseTimepoint("1200am"));
+    EXPECT_EQ(0h + 30min, ParseTimepoint("030"));
+    EXPECT_EQ(0h + 30min, ParseTimepoint("0030"));
+    EXPECT_EQ(0h + 30min, ParseTimepoint("030am"));
+    EXPECT_EQ(0h + 30min, ParseTimepoint("0030am"));
+    EXPECT_EQ(0h + 30min, ParseTimepoint("1230"));
+    EXPECT_EQ(0h + 30min, ParseTimepoint("1230am"));
+    EXPECT_EQ(11h + 0min, ParseTimepoint("1100"));
+    EXPECT_EQ(11h + 0min, ParseTimepoint("1100am"));
+    EXPECT_EQ(11h + 30min, ParseTimepoint("1130"));
+    EXPECT_EQ(11h + 30min, ParseTimepoint("1130am"));
+}
+
 int main(int argc, char* argv[])
 {
     ::testing::InitGoogleTest(&argc, argv);
