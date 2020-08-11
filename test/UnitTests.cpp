@@ -2,6 +2,32 @@
 
 #include <gtest/gtest.h>
 
+TEST(HasSuffix, HasSuffix)
+{
+    EXPECT_TRUE(HasSuffix("abcd", "abcd"));
+    EXPECT_TRUE(HasSuffix("abcd", "bcd"));
+    EXPECT_TRUE(HasSuffix("abcd", "cd"));
+    EXPECT_TRUE(HasSuffix("abcd", "d"));
+}
+
+TEST(HasSuffix, DoesNotHaveSuffix)
+{
+    EXPECT_FALSE(HasSuffix("dcba", "abcd"));
+    EXPECT_FALSE(HasSuffix("dcba", "bcd"));
+    EXPECT_FALSE(HasSuffix("dcba", "cd"));
+    EXPECT_FALSE(HasSuffix("dcba", "d"));
+}
+
+
+TEST(HasSuffix, RealTimes)
+{
+    EXPECT_TRUE(HasSuffix("1000pm", "pm"));
+    EXPECT_TRUE(HasSuffix("800am", "am"));
+    EXPECT_FALSE(HasSuffix("0200pm", "am"));
+    EXPECT_FALSE(HasSuffix("1200am", "pm"));
+}
+
+
 TEST(ParseTimepoint, Garbage)
 {
     EXPECT_THROW(ParseTimepoint(""), std::invalid_argument);
