@@ -8,7 +8,7 @@ bool HasSuffix(const std::string& timepoint, const std::string& suffix)
 {
     return timepoint.size() >= suffix.size() and
            timepoint.compare(timepoint.size() - suffix.size(), suffix.size(), suffix) == 0;
-};
+}
 
 auto ParseTimepoint(const std::string& timepoint)
 try
