@@ -2,6 +2,7 @@
 
 #include <chrono>
 #include <iostream>
+#include <stdexcept>
 #include <string>
 
 bool HasSuffix(const std::string& timepoint, const std::string& suffix)
