@@ -11,7 +11,8 @@ try
     if (argc > 1 and (std::string(argv[1]) == "-h" or std::string(argv[1]) == "--help"))
     {
         std::cout << "Usage: timecard <time1> <activity1> <time2> <activity2> <time3> <activityN> "
-                     "<timeN>\n";
+                     "<timeN>\n\n";
+        std::cout << "Times are formatted as 3 or 4 digits followed by either an 'am' or 'pm' suffix.\n";
         return 0;
     }
 
