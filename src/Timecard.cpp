@@ -8,6 +8,13 @@
 int main(int argc, char* argv[])
 try
 {
+    if (argc > 1 and (std::string(argv[1]) == "-h" or std::string(argv[1]) == "--help"))
+    {
+        std::cout << "Usage: timecard <time1> <activity1> <time2> <activity2> <time3> <activityN> "
+                     "<timeN>";
+        return 0;
+    }
+
     std::map<std::string, std::chrono::duration<double, std::ratio<3600>>> durations;
     for (int i = 2; i + 1 < argc; i += 2)
     {
