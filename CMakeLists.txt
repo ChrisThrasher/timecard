@@ -6,7 +6,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_BUILD_TYPE Release)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_compile_options(
+
+add_executable(timecard src/Timecard.cpp)
+target_include_directories(timecard PRIVATE include)
+target_compile_options(timecard PRIVATE
     -Werror
     -Wall
     -Wextra
@@ -16,9 +19,6 @@ add_compile_options(
     -Wsign-conversion
     -Wold-style-cast
 )
-
-add_executable(timecard src/Timecard.cpp)
-target_include_directories(timecard PRIVATE include)
 install(TARGETS timecard DESTINATION bin)
 
 include(ExternalProject)
