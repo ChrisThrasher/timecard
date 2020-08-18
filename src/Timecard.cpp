@@ -14,7 +14,8 @@ try
     {
         std::cout << "Usage: timecard <time1> <activity1> <time2> <activity2> <time3> <activityN> "
                      "<timeN>\n\n";
-        std::cout << "Times are formatted as 3 or 4 digits followed by either an 'am' or 'pm' suffix.\n";
+        std::cout
+            << "Times are formatted as 3 or 4 digits followed by either an 'am' or 'pm' suffix.\n";
         return 0;
     }
 
@@ -25,8 +26,8 @@ try
         const auto duration = ParseTimepoint(args[i + 1]) - ParseTimepoint(args[i - 1]);
         if (duration < std::chrono::minutes(0))
         {
-            throw std::runtime_error("Duration from " + args[i - 1] + " to " +
-                                     args[i + 1] + " is negative.");
+            throw std::runtime_error("Duration from " + args[i - 1] + " to " + args[i + 1] +
+                                     " is negative.");
         }
         if (durations.find(key) == durations.end())
             durations[key] = duration;
