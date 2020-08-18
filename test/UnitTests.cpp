@@ -1,6 +1,17 @@
+#include <CheckFlags.h>
 #include <ParseTimepoint.h>
 
 #include <gtest/gtest.h>
+
+TEST(CheckFlags, ExitSuccess)
+{
+    const auto exit_success = [](const int exit_code) { return exit_code == 0; };
+    EXPECT_EXIT(CheckFlags({"timecard", "-h"}), exit_success, "");
+    EXPECT_EXIT(CheckFlags({"timecard", "--help"}), exit_success, "");
+    EXPECT_EXIT(CheckFlags({"timecard", "-v"}), exit_success, "");
+    EXPECT_EXIT(CheckFlags({"timecard", "--version"}), exit_success, "");
+}
+
 
 TEST(HasSuffix, HasSuffix)
 {
@@ -9,6 +20,7 @@ TEST(HasSuffix, HasSuffix)
     EXPECT_TRUE(HasSuffix("abcd", "cd"));
     EXPECT_TRUE(HasSuffix("abcd", "d"));
 }
+
 
 TEST(HasSuffix, DoesNotHaveSuffix)
 {
