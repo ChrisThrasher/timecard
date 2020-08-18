@@ -10,6 +10,7 @@ TEST(HasSuffix, HasSuffix)
     EXPECT_TRUE(HasSuffix("abcd", "d"));
 }
 
+
 TEST(HasSuffix, DoesNotHaveSuffix)
 {
     EXPECT_FALSE(HasSuffix("dcba", "abcd"));
