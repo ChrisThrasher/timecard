@@ -21,7 +21,7 @@ try
 
     if (args.size() > 1 and (args[1] == "-v" or args[1] == "--version"))
     {
-        std::cout << "Timecard version 1.0\n";
+        std::cout << "Timecard version " << GIT_VERSION <<'\n';
         return 0;
     }
 

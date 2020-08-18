@@ -6,6 +6,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_BUILD_TYPE Release)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+execute_process(
+    COMMAND git describe --tags
+    OUTPUT_VARIABLE GIT_VERSION
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
+message(STATUS "Timecard version ${GIT_VERSION}")
+add_compile_definitions(GIT_VERSION="${GIT_VERSION}")
 
 add_executable(timecard src/Timecard.cpp)
 target_include_directories(timecard PRIVATE include)
