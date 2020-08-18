@@ -43,3 +43,8 @@ reading: 2.5 hours
 ```
 
 Because the label `reading` appeared twice, its two durations were accumulated. This will be done for any labels which appear more than once.
+
+## Testing
+
+1. `$ cd build`
+1. `$ make test`
