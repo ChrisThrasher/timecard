@@ -19,6 +19,12 @@ try
         return 0;
     }
 
+    if (args.size() > 1 and (args[1] == "-v" or args[1] == "--version"))
+    {
+        std::cout << "Timecard version 1.0\n";
+        return 0;
+    }
+
     std::map<std::string, std::chrono::duration<double, std::ratio<3600>>> durations;
     for (size_t i = 2; i + 1 < args.size(); i += 2)
     {
