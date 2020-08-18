@@ -1,4 +1,5 @@
 #include <ParseTimepoint.h>
+#include <VectorizeArguments.h>
 
 #include <chrono>
 #include <iomanip>
@@ -8,6 +9,7 @@
 int main(int argc, char* argv[])
 try
 {
+    const auto arguments = VectorizeArguments(argc, argv);
     if (argc > 1 and (std::string(argv[1]) == "-h" or std::string(argv[1]) == "--help"))
     {
         std::cout << "Usage: timecard <time1> <activity1> <time2> <activity2> <time3> <activityN> "
