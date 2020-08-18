@@ -9,8 +9,8 @@
 int main(int argc, char* argv[])
 try
 {
-    const auto arguments = VectorizeArguments(argc, argv);
-    if (argc > 1 and (std::string(argv[1]) == "-h" or std::string(argv[1]) == "--help"))
+    const auto args = VectorizeArguments(argc, argv);
+    if (args.size() > 1 and (args[1] == "-h" or args[1] == "--help"))
     {
         std::cout << "Usage: timecard <time1> <activity1> <time2> <activity2> <time3> <activityN> "
                      "<timeN>\n\n";
@@ -19,14 +19,14 @@ try
     }
 
     std::map<std::string, std::chrono::duration<double, std::ratio<3600>>> durations;
-    for (int i = 2; i + 1 < argc; i += 2)
+    for (size_t i = 2; i + 1 < args.size(); i += 2)
     {
-        const auto key = argv[i];
-        const auto duration = ParseTimepoint(argv[i + 1]) - ParseTimepoint(argv[i - 1]);
+        const auto key = args[i];
+        const auto duration = ParseTimepoint(args[i + 1]) - ParseTimepoint(args[i - 1]);
         if (duration < std::chrono::minutes(0))
         {
-            throw std::runtime_error(std::string("Duration from ") + argv[i - 1] + " to " +
-                                     argv[i + 1] + " is negative.");
+            throw std::runtime_error("Duration from " + args[i - 1] + " to " +
+                                     args[i + 1] + " is negative.");
         }
         if (durations.find(key) == durations.end())
             durations[key] = duration;
