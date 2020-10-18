@@ -12,12 +12,6 @@ try
 }
 catch (const std::exception& ex)
 {
-    std::cerr << ex.what() << '\n';
-    std::cerr << "Failed to parse arguments. Exiting.\n" << std::flush;
-    return 1;
-}
-catch (...)
-{
-    std::cerr << "Failed to parse arguments. Exiting.\n" << std::flush;
+    std::cerr << ex.what() << std::endl;
     return 1;
 }
