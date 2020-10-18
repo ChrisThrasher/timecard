@@ -130,6 +130,13 @@ TEST(ParseTimepoint, ValidPmTimes)
 }
 
 
+TEST(CalculateDurations, InvalidArgument)
+{
+    EXPECT_THROW(CalculateDurations({}), std::invalid_argument);
+    EXPECT_THROW(CalculateDurations({"1200pm"}), std::invalid_argument);
+    EXPECT_THROW(CalculateDurations({"1200pm", "1230pm"}), std::invalid_argument);
+}
+
 TEST(CalculateDurations, NegativeDuration)
 {
     EXPECT_THROW(CalculateDurations({"420am", "oh_no_this_will_throw", "410am"}), std::runtime_error);

@@ -11,6 +11,9 @@ using DurationMap = std::map<std::string, std::chrono::duration<double, std::rat
 
 auto CalculateDurations(const std::vector<std::string>& args) -> DurationMap
 {
+    if (args.size() < 3)
+        throw std::invalid_argument("Received " + std::to_string(args.size()) + " arguments. Expected 3 or more.");
+
     DurationMap durations;
 
     for (size_t i = 1; i + 1 < args.size(); i += 2)
