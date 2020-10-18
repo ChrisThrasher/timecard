@@ -2,8 +2,6 @@
 
 Calculates how much time was spent on various activities throughout the day.
 
-Requires CMake 3.14 and a C++14-compliant compiler. Follows CMake conventions for building, installing, and testing.
-
 # Usage
 ```
 $ timecard <time1> <label1> <time2> <label2> <timeN> <labelN> <timeN+1>...
