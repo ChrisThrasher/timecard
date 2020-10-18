@@ -17,15 +17,15 @@ int LongestLabel(const DurationMap& durations)
 
 void PrintDurations(DurationMap durations)
 {
-    const char separator = ' ';
-    const auto label_width = LongestLabel(durations) + 2;
-    const auto duration_width = 4;
-    std::cout << std::fixed << std::setprecision(1);
-
     const auto off_time_it = durations.find("-");
     const auto off_time =
         (off_time_it != durations.end()) ? off_time_it->second : std::chrono::duration<double, std::ratio<3600>>(0);
     durations.erase(off_time_it);
+
+    const char separator = ' ';
+    const auto label_width = LongestLabel(durations) + 2;
+    const auto duration_width = 4;
+    std::cout << std::fixed << std::setprecision(1);
 
     auto total = std::chrono::duration<double, std::ratio<3600>>(0);
     for (const auto& duration : durations)
