@@ -137,6 +137,13 @@ TEST(CalculateDurations, NegativeDuration)
 }
 
 
+TEST(CalculateDurations, ZeroDuration)
+{
+    EXPECT_THROW(CalculateDurations({"900am", "oh_no_this_will_throw", "900am"}), std::runtime_error);
+    EXPECT_THROW(CalculateDurations({"1100pm", "oh_no_this_will_throw", "1100pm"}), std::runtime_error);
+}
+
+
 TEST(CalculateDurations, OneDuration)
 {
     using namespace std::chrono_literals;
