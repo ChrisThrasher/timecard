@@ -2,6 +2,7 @@
 
 #include <chrono>
 #include <iostream>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 
@@ -54,8 +55,9 @@ try
 
     return std::chrono::hours(hours) + std::chrono::minutes(minutes);
 }
-catch (...)
+catch (const std::exception& ex)
 {
-    std::cerr << "Could not parse \"" << timepoint << "\" as a time." << std::endl;
-    throw;
+    std::stringstream error_text;
+    error_text << "Could not parse \"" << timepoint << "\" as a time.\n" << ex.what();
+    throw std::invalid_argument(error_text.str());
 }
