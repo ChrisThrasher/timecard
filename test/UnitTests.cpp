@@ -171,8 +171,10 @@ TEST(CalculateDurations, MultiDurations)
 
 TEST(PrintDurations, LongestLabel)
 {
-    const auto durations = CalculateDurations({"1200pm", "one", "1230pm", "two", "130pm", "-", "230pm", "three", "400pm"});
-    EXPECT_EQ(5, LongestLabel(durations));
+    EXPECT_EQ(5, LongestLabel(CalculateDurations({"1200pm", "one", "1230pm", "two", "130pm", "-", "230pm", "three", "400pm"})));
+    EXPECT_EQ(7, LongestLabel(CalculateDurations({"1200pm", "long", "1230pm", "longer", "130pm", "longest", "400pm"})));
+    EXPECT_EQ(1, LongestLabel(CalculateDurations({"1200pm", "a", "1230pm"})));
+    EXPECT_EQ(26, LongestLabel(CalculateDurations({"1200pm", "abcdefghijklmnopqrstuvwxyz", "1230pm"})));
 }
 
 int main(int argc, char* argv[])
