@@ -7,7 +7,8 @@
 #include <string>
 #include <vector>
 
-using DurationMap = std::map<std::string, std::chrono::duration<double, std::ratio<3600>>>;
+using DurationType = std::chrono::duration<double, std::ratio<3600>>;
+using DurationMap = std::map<std::string, DurationType>;
 
 auto CalculateDurations(const std::vector<std::string>& args) -> DurationMap
 {
