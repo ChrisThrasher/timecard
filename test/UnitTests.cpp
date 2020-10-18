@@ -1,5 +1,6 @@
 #include <CheckFlags.h>
 #include <ParseTimepoint.h>
+#include <CalculateDurations.h>
 
 #include <gtest/gtest.h>
 
@@ -126,6 +127,13 @@ TEST(ParseTimepoint, ValidPmTimes)
     EXPECT_EQ(16h +  6min, ParseTimepoint("0406pm"));
     EXPECT_EQ(22h +  7min, ParseTimepoint("1007pm"));
     EXPECT_EQ(23h + 59min, ParseTimepoint("1159pm"));
+}
+
+
+TEST(CalculateDurations, OneDuration)
+{
+    using namespace std::chrono_literals;
+    EXPECT_EQ((DurationMap{{"test", 30min}}), CalculateDurations({"timecard", "1200pm", "test", "1230pm"}));
 }
 
 int main(int argc, char* argv[])
