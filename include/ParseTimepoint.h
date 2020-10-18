@@ -30,12 +30,12 @@ try
     }
     else
     {
-        throw std::invalid_argument("Found no am or pm prefix.");
+        throw std::invalid_argument("No am or pm prefix.");
     }
 
     if (modified_timepoint.size() > 4 or modified_timepoint.size() < 3)
     {
-        throw std::invalid_argument("Timepoint string must contain 3 or 4 consecutive numbers.");
+        throw std::invalid_argument("Must contain 3 or 4 consecutive numbers.");
     }
 
     const auto time = std::stoi(modified_timepoint);
@@ -58,6 +58,6 @@ try
 catch (const std::exception& ex)
 {
     std::stringstream error_text;
-    error_text << "Could not parse \"" << timepoint << "\" as a time.\n" << ex.what();
+    error_text << "Failed to parse \"" << timepoint << "\". " << ex.what();
     throw std::invalid_argument(error_text.str());
 }
