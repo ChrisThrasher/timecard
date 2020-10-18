@@ -16,7 +16,7 @@ Installation follows CMake convention. An executable called `timecard` will be i
 1. `$ cd build`
 1. `$ sudo make install`
 
-# Running
+# Usage
 `$ timecard <time1> <label1> <time2> <label2> <timeN> <labelN> <timeN+1>...`
 
 Starting with the time the first activity started, list all times that activities changed along with the activities that occurred between those times. If you spent 8:00am to 10:00am gardening then 10:00am to 11:00am reading, the arguments would look like this:
