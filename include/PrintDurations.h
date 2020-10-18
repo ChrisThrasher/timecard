@@ -18,8 +18,12 @@ int LongestLabel(const DurationMap& durations)
 void PrintDurations(DurationMap durations)
 {
     const auto off_time_it = durations.find("-");
-    const auto off_time = (off_time_it != durations.end()) ? off_time_it->second : DurationType(0);
-    durations.erase(off_time_it);
+    auto off_time = DurationType(0);
+    if (off_time_it != durations.end())
+    {
+        off_time = off_time_it->second;
+        durations.erase(off_time_it);
+    }
 
     const char separator = ' ';
     const auto label_width = LongestLabel(durations) + 2;
