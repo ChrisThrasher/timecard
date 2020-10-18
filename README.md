@@ -2,19 +2,7 @@
 
 Calculates how much time was spent on various activities throughout the day.
 
-# Building
-Requires CMake 3.14 and a C++14-compliant compiler.
-1. Clone repository
-1. `$ cd timecard`
-1. `$ mkdir build`
-1. `$ cd build`
-1. `$ cmake ../`
-1. `$ cmake --build .`
-
-# Installation
-Installation follows CMake convention. An executable called `timecard` will be installed to `/usr/local/bin`.
-1. `$ cd build`
-1. `$ sudo make install`
+Requires CMake 3.14 and a C++14-compliant compiler. Follows CMake conventions for building, installing, and testing.
 
 # Usage
 ```
@@ -64,8 +52,3 @@ reading: 3.5 hours
 
 Total: 7.0 hours (7.0 hours off)
 ```
-
-# Testing
-
-1. `$ cd build`
-1. `$ make test`
