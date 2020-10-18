@@ -18,7 +18,7 @@ auto CalculateDurations(const std::vector<std::string>& args) -> DurationMap
 
     for (size_t i = 1; i + 1 < args.size(); i += 2)
     {
-        const auto duration = ParseTimepoint(args[i + 1]) - ParseTimepoint(args[i - 1]);
+        const auto duration = -ParseTimepoint(args[i - 1]) + ParseTimepoint(args[i + 1]);
         if (duration <= std::chrono::minutes(0))
             throw std::runtime_error("Duration from " + args[i - 1] + " to " + args[i + 1] + " is not positive.");
 
