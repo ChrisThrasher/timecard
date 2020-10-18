@@ -2,20 +2,12 @@
 
 Calculates how much time was spent on various activities throughout the day.
 
-# Usage
-```
-$ timecard <time1> <label1> <time2> <label2> <timeN> <labelN> <timeN+1>...
-```
+For help, run `timecard <-h|--help>`
 
-Starting with the time the first activity started, list all times that activities changed along with the activities that occurred between those times. If you spent 8:00am to 10:00am gardening then 10:00am to 11:00am reading, the arguments would look like this:
+Starting with the time the first activity started, list all times that activities changed along with the activities that occurred between those times. If you spent 8:00am to 10:00am gardening then 10:00am to 11:00am reading, the command would look like this:
 
 ```
 $ timecard 800am gardening 1000am reading 1100am
-```
-
-and you should expect to see the following returned in the console:
-
-```
 gardening: 2.0 hours
 reading: 1.0 hours
 
@@ -26,11 +18,6 @@ If multiple chunks of time were spent on one activity, then include the addition
 
 ```
 $ timecard 800am gardening 1000am reading 1100am lunch 1230pm reading 200pm
-```
-
-This yields:
-
-```
 gardening: 2.0 hours
 lunch: 1.5 hours
 reading: 2.5 hours
