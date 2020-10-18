@@ -152,11 +152,12 @@ TEST(CalculateDurations, OneDuration)
 }
 
 
-TEST(CalculateDurations, TwoDuration)
+TEST(CalculateDurations, MultiDurations)
 {
     using namespace std::chrono_literals;
     EXPECT_EQ((DurationMap{{"one", 30min}, {"two", 1h}}), CalculateDurations({"1200pm", "one", "1230pm", "two", "130pm"}));
     EXPECT_EQ((DurationMap{{"one", 45min}, {"two", 15min}}), CalculateDurations({"415pm", "one", "500pm", "two", "515pm"}));
+    EXPECT_EQ((DurationMap{{"one", 2h}, {"two", 1h}}), CalculateDurations({"800am", "one", "900am", "two", "1000am", "one", "1100am"}));
 }
 
 int main(int argc, char* argv[])
