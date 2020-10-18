@@ -15,7 +15,6 @@ bool HasSuffix(const std::string& timepoint, const std::string& suffix)
 auto ParseTimepoint(const std::string& timepoint)
 try
 {
-
     auto am_pm_offset = 0;
     auto modified_timepoint = timepoint;
     if (HasSuffix(timepoint, "am"))
@@ -52,7 +51,6 @@ try
     }
 
     const auto hours = raw_hours % 12 + am_pm_offset;
-
     return std::chrono::hours(hours) + std::chrono::minutes(minutes);
 }
 catch (const std::exception& ex)
