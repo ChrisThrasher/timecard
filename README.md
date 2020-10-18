@@ -50,6 +50,15 @@ reading: 2.5 hours
 
 Because the label `reading` appeared twice, its two durations were accumulated. This will be done for any labels which appear more than once.
 
+To ignore certain periods of time so that they're not reported, name them `-`. This will exclude them from the printed totals. Here's what that looks like.
+
+```
+$ timecard 800am gardening 1000am reading 1100am lunch 1230pm reading 200pm - 900pm reading 1000pm
+gardening: 2.0 hours
+lunch: 1.5 hours
+reading: 3.5 hours
+```
+
 # Testing
 
 1. `$ cd build`
