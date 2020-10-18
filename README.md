@@ -2,7 +2,7 @@
 
 Calculates how much time was spent on various activities throughout the day.
 
-For help, run `timecard <-h|--help>`
+For help, run `timecard --help`
 
 Starting with the time the first activity started, list all times that activities changed along with the activities that occurred between those times. If you spent 8:00am to 10:00am gardening then 10:00am to 11:00am reading, the command would look like this:
 
