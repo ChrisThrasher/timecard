@@ -7,9 +7,11 @@
 
 void PrintDurations(const DurationMap& durations)
 {
+    std::cout << std::fixed << std::setprecision(1);
+
     auto total = std::chrono::duration<double, std::ratio<3600>>(0);
     auto off_time = std::chrono::duration<double, std::ratio<3600>>(0);
-    std::cout << std::fixed << std::setprecision(1);
+
     for (const auto& duration : durations)
     {
         if (duration.first == "-")
@@ -20,6 +22,7 @@ void PrintDurations(const DurationMap& durations)
         std::cout << duration.first << ": " << duration.second.count() << " hours\n";
         total += duration.second;
     }
+
     std::cout << "\nTotal: " << total.count() << " hours";
     if (off_time > std::chrono::minutes(0))
     {
