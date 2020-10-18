@@ -17,11 +17,15 @@ Installation follows CMake convention. An executable called `timecard` will be i
 1. `$ sudo make install`
 
 # Usage
-`$ timecard <time1> <label1> <time2> <label2> <timeN> <labelN> <timeN+1>...`
+```
+$ timecard <time1> <label1> <time2> <label2> <timeN> <labelN> <timeN+1>...
+```
 
 Starting with the time the first activity started, list all times that activities changed along with the activities that occurred between those times. If you spent 8:00am to 10:00am gardening then 10:00am to 11:00am reading, the arguments would look like this:
 
-`$ timecard 800am gardening 1000am reading 1100am`
+```
+$ timecard 800am gardening 1000am reading 1100am
+```
 
 and you should expect to see the following returned in the console:
 
@@ -32,7 +36,9 @@ reading: 1.0 hours
 
 If multiple chunks of time were spent on one activity, then include the additional chunks using the same label. Expanding on our previous example, lets add two more chunks for eating lunch and reading some more.
 
-`$ timecard 800am gardening 1000am reading 1100am lunch 1230pm reading 200pm`
+```
+$ timecard 800am gardening 1000am reading 1100am lunch 1230pm reading 200pm
+```
 
 This yields:
 
