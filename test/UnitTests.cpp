@@ -1,15 +1,16 @@
 #include <CheckFlags.h>
 #include <ParseTimepoint.h>
+#include <CalculateDurations.h>
 
 #include <gtest/gtest.h>
 
 TEST(CheckFlags, ExitSuccess)
 {
     const auto exit_success = [](const int exit_code) { return exit_code == 0; };
-    EXPECT_EXIT(CheckFlags({"timecard", "-h"}), exit_success, "");
-    EXPECT_EXIT(CheckFlags({"timecard", "--help"}), exit_success, "");
-    EXPECT_EXIT(CheckFlags({"timecard", "-v"}), exit_success, "");
-    EXPECT_EXIT(CheckFlags({"timecard", "--version"}), exit_success, "");
+    EXPECT_EXIT(CheckFlags({"-h"}), exit_success, "");
+    EXPECT_EXIT(CheckFlags({"--help"}), exit_success, "");
+    EXPECT_EXIT(CheckFlags({"-v"}), exit_success, "");
+    EXPECT_EXIT(CheckFlags({"--version"}), exit_success, "");
 }
 
 
@@ -126,6 +127,44 @@ TEST(ParseTimepoint, ValidPmTimes)
     EXPECT_EQ(16h +  6min, ParseTimepoint("0406pm"));
     EXPECT_EQ(22h +  7min, ParseTimepoint("1007pm"));
     EXPECT_EQ(23h + 59min, ParseTimepoint("1159pm"));
+}
+
+
+TEST(CalculateDurations, InvalidArgument)
+{
+    EXPECT_THROW(CalculateDurations({}), std::invalid_argument);
+    EXPECT_THROW(CalculateDurations({"1200pm"}), std::invalid_argument);
+    EXPECT_THROW(CalculateDurations({"1200pm", "1230pm"}), std::invalid_argument);
+}
+
+TEST(CalculateDurations, NegativeDuration)
+{
+    EXPECT_THROW(CalculateDurations({"420am", "oh_no_this_will_throw", "410am"}), std::runtime_error);
+    EXPECT_THROW(CalculateDurations({"230pm", "oh_no_this_will_throw", "240am"}), std::runtime_error);
+}
+
+
+TEST(CalculateDurations, ZeroDuration)
+{
+    EXPECT_THROW(CalculateDurations({"900am", "oh_no_this_will_throw", "900am"}), std::runtime_error);
+    EXPECT_THROW(CalculateDurations({"1100pm", "oh_no_this_will_throw", "1100pm"}), std::runtime_error);
+}
+
+
+TEST(CalculateDurations, OneDuration)
+{
+    using namespace std::chrono_literals;
+    EXPECT_EQ((DurationMap{{"test", 30min}}), CalculateDurations({"1200pm", "test", "1230pm"}));
+    EXPECT_EQ((DurationMap{{"test", 2h}}), CalculateDurations({"200pm", "test", "400pm"}));
+}
+
+
+TEST(CalculateDurations, MultiDurations)
+{
+    using namespace std::chrono_literals;
+    EXPECT_EQ((DurationMap{{"one", 30min}, {"two", 1h}}), CalculateDurations({"1200pm", "one", "1230pm", "two", "130pm"}));
+    EXPECT_EQ((DurationMap{{"one", 45min}, {"two", 15min}}), CalculateDurations({"415pm", "one", "500pm", "two", "515pm"}));
+    EXPECT_EQ((DurationMap{{"one", 2h}, {"two", 1h}}), CalculateDurations({"800am", "one", "900am", "two", "1000am", "one", "1100am"}));
 }
 
 int main(int argc, char* argv[])
