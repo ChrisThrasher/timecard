@@ -13,7 +13,7 @@ auto CalculateDurations(const std::vector<std::string>& args) -> DurationMap
 {
     DurationMap durations;
 
-    for (size_t i = 2; i + 1 < args.size(); i += 2)
+    for (size_t i = 1; i + 1 < args.size(); i += 2)
     {
         const auto key = args[i];
         const auto duration = ParseTimepoint(args[i + 1]) - ParseTimepoint(args[i - 1]);
