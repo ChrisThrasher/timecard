@@ -57,7 +57,5 @@ try
 }
 catch (const std::exception& ex)
 {
-    std::stringstream error_text;
-    error_text << "Failed to parse \"" << timepoint << "\". " << ex.what();
-    throw std::invalid_argument(error_text.str());
+    throw std::invalid_argument("Failed to parse \"" + timepoint + "\". " + ex.what());
 }
