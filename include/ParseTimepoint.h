@@ -2,6 +2,7 @@
 
 #include <chrono>
 #include <iostream>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 
@@ -14,7 +15,6 @@ bool HasSuffix(const std::string& timepoint, const std::string& suffix)
 auto ParseTimepoint(const std::string& timepoint)
 try
 {
-
     auto am_pm_offset = 0;
     auto modified_timepoint = timepoint;
     if (HasSuffix(timepoint, "am"))
@@ -29,12 +29,12 @@ try
     }
     else
     {
-        throw std::invalid_argument("Found no am or pm prefix.");
+        throw std::invalid_argument("No am or pm prefix.");
     }
 
     if (modified_timepoint.size() > 4 or modified_timepoint.size() < 3)
     {
-        throw std::invalid_argument("Timepoint string must contain 3 or 4 consecutive numbers.");
+        throw std::invalid_argument("Must contain 3 or 4 consecutive numbers.");
     }
 
     const auto time = std::stoi(modified_timepoint);
@@ -51,11 +51,9 @@ try
     }
 
     const auto hours = raw_hours % 12 + am_pm_offset;
-
     return std::chrono::hours(hours) + std::chrono::minutes(minutes);
 }
-catch (...)
+catch (const std::exception& ex)
 {
-    std::cerr << "Could not parse \"" << timepoint << "\" as a time." << std::endl;
-    throw;
+    throw std::invalid_argument("Failed to parse \"" + timepoint + "\". " + ex.what());
 }
