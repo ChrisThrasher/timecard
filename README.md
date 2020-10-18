@@ -2,7 +2,7 @@
 
 Calculates how much time was spent on various activities throughout the day.
 
-For help:
+# Usage
 
 ```
 $ timecard --help
