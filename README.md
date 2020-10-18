@@ -2,34 +2,20 @@
 
 Calculates how much time was spent on various activities throughout the day.
 
-# Building
-Requires CMake 3.14 and a C++14-compliant compiler.
-1. Clone repository
-1. `$ cd timecard`
-1. `$ mkdir build`
-1. `$ cd build`
-1. `$ cmake ../`
-1. `$ cmake --build .`
-
-# Installation
-Installation follows CMake convention. An executable called `timecard` will be installed to `/usr/local/bin`.
-1. `$ cd build`
-1. `$ sudo make install`
-
 # Usage
+
 ```
-$ timecard <time1> <label1> <time2> <label2> <timeN> <labelN> <timeN+1>...
+$ timecard --help
+Usage: timecard <time1> <activity1> <time2> <activity2> <time3> <activityN> <timeN>
+
+Times are formatted as 3 or 4 digits followed by either an 'am' or 'pm' suffix.
+Any activities named "-" will be ignored.
 ```
 
-Starting with the time the first activity started, list all times that activities changed along with the activities that occurred between those times. If you spent 8:00am to 10:00am gardening then 10:00am to 11:00am reading, the arguments would look like this:
+Starting with the time the first activity started, list all times that activities changed along with the activities that occurred between those times. If you spent 8:00am to 10:00am gardening then 10:00am to 11:00am reading, the command would look like this:
 
 ```
 $ timecard 800am gardening 1000am reading 1100am
-```
-
-and you should expect to see the following returned in the console:
-
-```
 gardening: 2.0 hours
 reading: 1.0 hours
 
@@ -40,11 +26,6 @@ If multiple chunks of time were spent on one activity, then include the addition
 
 ```
 $ timecard 800am gardening 1000am reading 1100am lunch 1230pm reading 200pm
-```
-
-This yields:
-
-```
 gardening: 2.0 hours
 lunch: 1.5 hours
 reading: 2.5 hours
@@ -64,8 +45,3 @@ reading: 3.5 hours
 
 Total: 7.0 hours (7.0 hours off)
 ```
-
-# Testing
-
-1. `$ cd build`
-1. `$ make test`
