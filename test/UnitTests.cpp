@@ -130,6 +130,13 @@ TEST(ParseTimepoint, ValidPmTimes)
 }
 
 
+TEST(CalculateDurations, NegativeDuration)
+{
+    EXPECT_THROW(CalculateDurations({"420am", "oh_no_this_will_throw", "410am"}), std::runtime_error);
+    EXPECT_THROW(CalculateDurations({"230pm", "oh_no_this_will_throw", "240am"}), std::runtime_error);
+}
+
+
 TEST(CalculateDurations, OneDuration)
 {
     using namespace std::chrono_literals;
