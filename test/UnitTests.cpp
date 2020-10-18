@@ -1,6 +1,7 @@
 #include <CheckFlags.h>
 #include <ParseTimepoint.h>
 #include <CalculateDurations.h>
+#include <PrintDurations.h>
 
 #include <gtest/gtest.h>
 
@@ -155,16 +156,34 @@ TEST(CalculateDurations, OneDuration)
 {
     using namespace std::chrono_literals;
     EXPECT_EQ((DurationMap{{"test", 30min}}), CalculateDurations({"1200pm", "test", "1230pm"}));
-    EXPECT_EQ((DurationMap{{"test", 2h}}), CalculateDurations({"200pm", "test", "400pm"}));
+    EXPECT_EQ((DurationMap{{"test", 2h}}),    CalculateDurations({"200pm", "test", "400pm"}));
 }
 
 
 TEST(CalculateDurations, MultiDurations)
 {
     using namespace std::chrono_literals;
-    EXPECT_EQ((DurationMap{{"one", 30min}, {"two", 1h}}), CalculateDurations({"1200pm", "one", "1230pm", "two", "130pm"}));
+    EXPECT_EQ((DurationMap{{"one", 30min}, {"two", 1h}}),    CalculateDurations({"1200pm", "one", "1230pm", "two", "130pm"}));
     EXPECT_EQ((DurationMap{{"one", 45min}, {"two", 15min}}), CalculateDurations({"415pm", "one", "500pm", "two", "515pm"}));
-    EXPECT_EQ((DurationMap{{"one", 2h}, {"two", 1h}}), CalculateDurations({"800am", "one", "900am", "two", "1000am", "one", "1100am"}));
+    EXPECT_EQ((DurationMap{{"one", 2h},    {"two", 1h}}),    CalculateDurations({"800am", "one", "900am", "two", "1000am", "one", "1100am"}));
+}
+
+
+TEST(PrintDurations, OffTime)
+{
+    using namespace std::chrono_literals;
+    auto durations = CalculateDurations({"1200pm", "one", "1230pm", "-", "230pm", "three", "400pm"});
+    EXPECT_EQ(2h, OffTime(durations));
+    EXPECT_TRUE(durations.find("-") == durations.end());
+}
+
+
+TEST(PrintDurations, LongestLabel)
+{
+    EXPECT_EQ(5,  LongestLabel(CalculateDurations({"1200pm", "one", "1230pm", "two", "130pm", "-", "230pm", "three", "400pm"})));
+    EXPECT_EQ(7,  LongestLabel(CalculateDurations({"1200pm", "long", "1230pm", "longer", "130pm", "longest", "400pm"})));
+    EXPECT_EQ(1,  LongestLabel(CalculateDurations({"1200pm", "a", "1230pm"})));
+    EXPECT_EQ(26, LongestLabel(CalculateDurations({"1200pm", "abcdefghijklmnopqrstuvwxyz", "1230pm"})));
 }
 
 int main(int argc, char* argv[])
