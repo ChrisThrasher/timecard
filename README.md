@@ -32,6 +32,8 @@ and you should expect to see the following returned in the console:
 ```
 gardening: 2.0 hours
 reading: 1.0 hours
+
+Total: 3.0 hours
 ```
 
 If multiple chunks of time were spent on one activity, then include the additional chunks using the same label. Expanding on our previous example, lets add two more chunks for eating lunch and reading some more.
@@ -46,6 +48,8 @@ This yields:
 gardening: 2.0 hours
 lunch: 1.5 hours
 reading: 2.5 hours
+
+Total: 6.0 hours
 ```
 
 Because the label `reading` appeared twice, its two durations were accumulated. This will be done for any labels which appear more than once.
@@ -57,6 +61,8 @@ $ timecard 800am gardening 1000am reading 1100am lunch 1230pm reading 200pm - 90
 gardening: 2.0 hours
 lunch: 1.5 hours
 reading: 3.5 hours
+
+Total: 7.0 hours (7.0 hours off)
 ```
 
 # Testing
