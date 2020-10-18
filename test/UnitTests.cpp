@@ -169,6 +169,14 @@ TEST(CalculateDurations, MultiDurations)
 }
 
 
+TEST(PrintDurations, OffTime)
+{
+    using namespace std::chrono_literals;
+    auto durations = CalculateDurations({"1200pm", "one", "1230pm", "-", "230pm", "three", "400pm"});
+    EXPECT_EQ(2h, OffTime(durations));
+    EXPECT_TRUE(durations.find("-") == durations.end());
+}
+
 TEST(PrintDurations, LongestLabel)
 {
     EXPECT_EQ(5, LongestLabel(CalculateDurations({"1200pm", "one", "1230pm", "two", "130pm", "-", "230pm", "three", "400pm"})));

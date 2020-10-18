@@ -5,6 +5,14 @@
 #include <iomanip>
 #include <iostream>
 
+DurationType OffTime(DurationMap& durations)
+{
+    const auto off_time_key = "-";
+    const auto off_time_it = durations.find(off_time_key);
+    durations.erase(off_time_key);
+    return (off_time_it != durations.end()) ? off_time_it->second : DurationType(0);
+}
+
 int LongestLabel(const DurationMap& durations)
 {
     size_t longest_label = 0;
@@ -17,10 +25,7 @@ int LongestLabel(const DurationMap& durations)
 
 void PrintDurations(DurationMap durations)
 {
-    const auto off_time_key = "-";
-    const auto off_time_it = durations.find(off_time_key);
-    const auto off_time = (off_time_it != durations.end()) ? off_time_it->second : DurationType(0);
-    durations.erase(off_time_key);
+    const auto off_time = OffTime(durations);
 
     const char separator = ' ';
     const auto label_width = LongestLabel(durations) + 2;
