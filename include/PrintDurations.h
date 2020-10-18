@@ -47,8 +47,9 @@ void PrintDurations(const DurationMap& durations)
             off_time += duration.second;
             continue;
         }
-        std::cout << std::left << std::setw(label_width) << std::setfill(separator) << duration.first << std::right
-                  << std::setw(duration_width) << std::setfill(separator) << duration.second.count() << " hours\n";
+        std::cout << std::left << std::setw(label_width) << std::setfill(separator) << duration.first;
+        std::cout << std::right << std::setw(duration_width) << std::setfill(separator) << duration.second.count()
+                  << " hours\n";
         total += duration.second;
     }
 
