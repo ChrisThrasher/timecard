@@ -53,7 +53,7 @@ void PrintDurations(const DurationMap& durations)
         total += duration.second;
     }
 
-    std::cout << "\nTotal:\t" << total.count() << " hours";
+    std::cout << "\nTotal: " << total.count() << " hours";
     if (off_time > std::chrono::minutes(0))
     {
         std::cout << " (" << off_time.count() << " hours off)";
