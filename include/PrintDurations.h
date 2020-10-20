@@ -15,12 +15,10 @@ DurationType OffTime(DurationMap& durations)
 
 int LongestLabel(const DurationMap& durations)
 {
-    size_t longest_label = 0;
-    for (const auto& duration : durations)
-    {
-        longest_label = std::max(longest_label, duration.first.length());
-    }
-    return static_cast<int>(longest_label);
+    return static_cast<int>(
+        std::max_element(std::begin(durations), std::end(durations), [](const auto& lhs, const auto& rhs) {
+            return lhs.first.length() < rhs.first.length();
+        })->first.length());
 }
 
 void PrintDurations(DurationMap durations)
