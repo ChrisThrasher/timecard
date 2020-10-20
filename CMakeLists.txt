@@ -35,7 +35,7 @@ FetchContent_Declare(
 )
 FetchContent_GetProperties(gtest)
 FetchContent_Populate(gtest)
-add_subdirectory(${gtest_SOURCE_DIR} ${gtest_BINARY_DIR})
+add_subdirectory(${gtest_SOURCE_DIR} ${gtest_BINARY_DIR} EXCLUDE_FROM_ALL)
 
 enable_testing()
 add_executable(unit_tests test/UnitTests.cpp)
