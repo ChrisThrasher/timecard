@@ -24,10 +24,8 @@ auto CalculateDurations(const std::vector<std::string>& args) -> DurationMap
             throw std::runtime_error("Duration from " + args[i - 1] + " to " + args[i + 1] + " is not positive.");
 
         const auto key = args[i];
-        if (durations.find(key) == durations.end())
-            durations[key] = duration;
-        else
-            durations.at(key) += duration;
+        durations.insert({key, DurationType(0)});
+        durations.at(key) += duration;
     }
 
     return durations;
