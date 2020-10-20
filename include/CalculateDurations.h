@@ -14,6 +14,8 @@ auto CalculateDurations(const std::vector<std::string>& args) -> DurationMap
 {
     if (args.size() < 3)
         throw std::invalid_argument("Received " + std::to_string(args.size()) + " arguments. Expected 3 or more.");
+    if (args.size() % 2 == 0)
+        throw std::invalid_argument("Received even number of arguments. Ignoring \"" + args.back() + "\".\n");
 
     DurationMap durations;
 

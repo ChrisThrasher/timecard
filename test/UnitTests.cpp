@@ -154,6 +154,16 @@ TEST(CalculateDurations, InvalidArgument)
     EXPECT_THROW(CalculateDurations({"1200pm", "1230pm"}), std::invalid_argument);
 }
 
+
+TEST(CalculateDurations, ExtraArgument)
+{
+    EXPECT_THROW(CalculateDurations({"100am", "so_far_so_good", "200am", "oh_no_an_extra_label"}), std::invalid_argument);
+    EXPECT_THROW(CalculateDurations({"230pm", "ok", "300pm", "still_good", "500pm", "time_to_throw"}), std::invalid_argument);
+    EXPECT_THROW(CalculateDurations({"230pm", "ok", "300pm", "still_good", "500pm", "-"}), std::invalid_argument);
+    EXPECT_THROW(CalculateDurations({"230pm", "-", "300pm", "-", "500pm", "-"}), std::invalid_argument);
+}
+
+
 TEST(CalculateDurations, NegativeDuration)
 {
     EXPECT_THROW(CalculateDurations({"420am", "oh_no_this_will_throw", "410am"}), std::runtime_error);
