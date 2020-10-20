@@ -1,7 +1,5 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.11)
 project(timecard LANGUAGES CXX)
-
-include(FetchContent)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -29,12 +27,15 @@ target_compile_options(timecard PRIVATE
 )
 install(TARGETS timecard DESTINATION bin)
 
+include(FetchContent)
 FetchContent_Declare(
-    googletest
+    gtest
     GIT_REPOSITORY "https://github.com/google/googletest.git"
     GIT_TAG master
 )
-FetchContent_MakeAvailable(googletest)
+FetchContent_GetProperties(gtest)
+FetchContent_Populate(gtest)
+add_subdirectory(${gtest_SOURCE_DIR} ${gtest_BINARY_DIR} EXCLUDE_FROM_ALL)
 
 enable_testing()
 add_executable(unit_tests test/UnitTests.cpp)
