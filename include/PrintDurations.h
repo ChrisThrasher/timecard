@@ -2,6 +2,7 @@
 
 #include <CalculateDurations.h>
 
+#include <algorithm>
 #include <iomanip>
 #include <iostream>
 
