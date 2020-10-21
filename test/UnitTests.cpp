@@ -215,7 +215,7 @@ TEST(PrintDurations, LongestLabel)
 
 TEST(PrintDurations, FormatDurations)
 {
-    const auto output = FormatDurations(CalculateDurations({"1200pm", "one", "1230pm", "two", "130pm", "-", "230pm", "three", "400pm"})).str();
+    const auto output = FormatDurations({{"one", DurationType(0.5)}, {"two", DurationType(1.0)}, {"three", DurationType(1.5)}, {"-", DurationType(1.0)}}).str();
     const auto expected =
         "one     0.5 hours\n"
         "three   1.5 hours\n"
