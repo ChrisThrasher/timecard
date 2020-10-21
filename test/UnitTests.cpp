@@ -212,6 +212,18 @@ TEST(PrintDurations, LongestLabel)
     EXPECT_EQ(26, LongestLabel(CalculateDurations({"1200pm", "abcdefghijklmnopqrstuvwxyz", "1230pm"})));
 }
 
+
+TEST(PrintDurations, FormatDurations)
+{
+    const auto output = FormatDurations(CalculateDurations({"1200pm", "one", "1230pm", "two", "130pm", "-", "230pm", "three", "400pm"})).str();
+    const auto expected =
+        "one     0.5 hours\n"
+        "three   1.5 hours\n"
+        "two     1.0 hours\n"
+        "\nTotal: 3.0 hours (1.0 hours off)\n";
+    EXPECT_EQ(expected, output);
+}
+
 int main(int argc, char* argv[])
 {
     ::testing::InitGoogleTest(&argc, argv);
