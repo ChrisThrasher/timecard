@@ -239,6 +239,14 @@ TEST(PrintDurations, FormatDurations)
         "sleep                                      8.0 hours\n"
         "\nTotal: 11.1 hours\n",
         FormatDurations({{"eat", 2h}, {"sleep", 8h}, {"areallylongactivitythatdominatesthetable", 66min}}).str());
+    EXPECT_EQ(
+        "a   0.0 hours\n"
+        "b   0.1 hours\n"
+        "c   0.1 hours\n"
+        "d   0.1 hours\n"
+        "e   0.2 hours\n"
+        "\nTotal: 0.5 hours\n",
+        FormatDurations({{"a", 2min}, {"b", 3min}, {"c", 8min}, {"d", 9min}, {"e", 10min}}).str());
 }
 
 int main(int argc, char* argv[])
