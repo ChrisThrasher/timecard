@@ -221,6 +221,12 @@ TEST(PrintDurations, FormatDurations)
         "two     1.0 hours\n"
         "\nTotal: 3.0 hours (1.0 hours off)\n",
         FormatDurations({{"one", DurationType(0.5)}, {"two", DurationType(1.0)}, {"three", DurationType(1.5)}, {"-", DurationType(1.0)}}).str());
+    EXPECT_EQ(
+        "areallylongactivitythatdominatesthetable   1.1 hours\n"
+        "eat                                        2.0 hours\n"
+        "sleep                                      8.0 hours\n"
+        "\nTotal: 11.1 hours\n",
+        FormatDurations({{"eat", DurationType(2.0)}, {"sleep", DurationType(8.0)}, {"areallylongactivitythatdominatesthetable", DurationType(1.1)}}).str());
 }
 
 int main(int argc, char* argv[])
