@@ -215,18 +215,19 @@ TEST(PrintDurations, LongestLabel)
 
 TEST(PrintDurations, FormatDurations)
 {
+    using namespace std::chrono_literals;
     EXPECT_EQ(
         "one     0.5 hours\n"
         "three   1.5 hours\n"
         "two     1.0 hours\n"
         "\nTotal: 3.0 hours (1.0 hours off)\n",
-        FormatDurations({{"one", DurationType(0.5)}, {"two", DurationType(1.0)}, {"three", DurationType(1.5)}, {"-", DurationType(1.0)}}).str());
+        FormatDurations({{"one", 30min}, {"two", 60min}, {"three", 90min}, {"-", 60min}}).str());
     EXPECT_EQ(
         "areallylongactivitythatdominatesthetable   1.1 hours\n"
         "eat                                        2.0 hours\n"
         "sleep                                      8.0 hours\n"
         "\nTotal: 11.1 hours\n",
-        FormatDurations({{"eat", DurationType(2.0)}, {"sleep", DurationType(8.0)}, {"areallylongactivitythatdominatesthetable", DurationType(1.1)}}).str());
+        FormatDurations({{"eat", 2h}, {"sleep", 8h}, {"areallylongactivitythatdominatesthetable", 66min}}).str());
 }
 
 int main(int argc, char* argv[])
