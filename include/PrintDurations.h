@@ -5,13 +5,14 @@
 #include <algorithm>
 #include <iomanip>
 #include <iostream>
+#include <sstream>
 
-DurationType OffTime(DurationMap& durations)
+Hours OffTime(DurationMap& durations)
 {
     const auto off_time_key = "-";
     const auto off_time_it = durations.find(off_time_key);
     durations.erase(off_time_key);
-    return (off_time_it != durations.end()) ? off_time_it->second : DurationType(0);
+    return (off_time_it != durations.end()) ? off_time_it->second : Hours(0);
 }
 
 int LongestLabel(const DurationMap& durations)
@@ -22,26 +23,31 @@ int LongestLabel(const DurationMap& durations)
         })->first.length());
 }
 
-void PrintDurations(DurationMap durations)
+auto FormatDurations(DurationMap durations)
 {
     const auto off_time = OffTime(durations);
 
     const char separator = ' ';
     const auto label_width = LongestLabel(durations) + 2;
     const auto duration_width = 4;
-    std::cout << std::fixed << std::setprecision(1);
 
-    auto total = DurationType(0);
+    std::stringstream out;
+    out << std::fixed << std::setprecision(1) << std::setfill(separator);
+
+    auto total = Hours(0);
     for (const auto& duration : durations)
     {
-        std::cout << std::left << std::setw(label_width) << std::setfill(separator) << duration.first;
-        std::cout << std::right << std::setw(duration_width) << std::setfill(separator) << duration.second.count()
-                  << " hours\n";
+        out << std::left << std::setw(label_width) << duration.first;
+        out << std::right << std::setw(duration_width) << duration.second.count() << " hours\n";
         total += duration.second;
     }
 
-    std::cout << "\nTotal: " << total.count() << " hours";
+    out << "\nTotal: " << total.count() << " hours";
     if (off_time > std::chrono::minutes(0))
-        std::cout << " (" << off_time.count() << " hours off)";
-    std::cout << '\n';
+        out << " (" << off_time.count() << " hours off)";
+    out << '\n';
+
+    return out;
 }
+
+void PrintDurations(DurationMap durations) { std::cout << FormatDurations(durations).str(); }

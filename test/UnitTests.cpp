@@ -147,6 +147,17 @@ TEST(ParseTimepoint, ValidPmTimes)
 }
 
 
+TEST(CalculateDurations, Hours)
+{
+    using namespace std::chrono_literals;
+    EXPECT_EQ(0h,   Hours(0));
+    EXPECT_EQ(1h,   Hours(1));
+    EXPECT_EQ(5h,   Hours(5));
+    EXPECT_EQ(10h,  Hours(10));
+    EXPECT_EQ(100h, Hours(100));
+}
+
+
 TEST(CalculateDurations, InvalidArgument)
 {
     EXPECT_THROW(CalculateDurations({}), std::invalid_argument);
@@ -210,6 +221,32 @@ TEST(PrintDurations, LongestLabel)
     EXPECT_EQ(7,  LongestLabel(CalculateDurations({"1200pm", "long", "1230pm", "longer", "130pm", "longest", "400pm"})));
     EXPECT_EQ(1,  LongestLabel(CalculateDurations({"1200pm", "a", "1230pm"})));
     EXPECT_EQ(26, LongestLabel(CalculateDurations({"1200pm", "abcdefghijklmnopqrstuvwxyz", "1230pm"})));
+}
+
+
+TEST(PrintDurations, FormatDurations)
+{
+    using namespace std::chrono_literals;
+    EXPECT_EQ(
+        "one     0.5 hours\n"
+        "three   1.5 hours\n"
+        "two     1.0 hours\n"
+        "\nTotal: 3.0 hours (1.0 hours off)\n",
+        FormatDurations({{"one", 30min}, {"two", 60min}, {"three", 90min}, {"-", 60min}}).str());
+    EXPECT_EQ(
+        "areallylongactivitythatdominatesthetable   1.1 hours\n"
+        "eat                                        2.0 hours\n"
+        "sleep                                      8.0 hours\n"
+        "\nTotal: 11.1 hours\n",
+        FormatDurations({{"eat", 2h}, {"sleep", 8h}, {"areallylongactivitythatdominatesthetable", 66min}}).str());
+    EXPECT_EQ(
+        "a   0.0 hours\n"
+        "b   0.1 hours\n"
+        "c   0.1 hours\n"
+        "d   0.1 hours\n"
+        "e   0.2 hours\n"
+        "\nTotal: 0.5 hours\n",
+        FormatDurations({{"a", 2min}, {"b", 3min}, {"c", 8min}, {"d", 9min}, {"e", 10min}}).str());
 }
 
 int main(int argc, char* argv[])
