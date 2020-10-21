@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <iomanip>
 #include <iostream>
+#include <sstream>
 
 DurationType OffTime(DurationMap& durations)
 {
@@ -22,25 +23,31 @@ int LongestLabel(const DurationMap& durations)
         })->first.length());
 }
 
-void PrintDurations(DurationMap durations)
+auto FormatDurations(DurationMap durations)
 {
     const auto off_time = OffTime(durations);
 
     const char separator = ' ';
     const auto label_width = LongestLabel(durations) + 2;
     const auto duration_width = 4;
-    std::cout << std::fixed << std::setprecision(1) << std::setfill(separator);
+
+    std::stringstream out;
+    out << std::fixed << std::setprecision(1) << std::setfill(separator);
 
     auto total = DurationType(0);
     for (const auto& duration : durations)
     {
-        std::cout << std::left << std::setw(label_width) << duration.first;
-        std::cout << std::right << std::setw(duration_width) << duration.second.count() << " hours\n";
+        out << std::left << std::setw(label_width) << duration.first;
+        out << std::right << std::setw(duration_width) << duration.second.count() << " hours\n";
         total += duration.second;
     }
 
-    std::cout << "\nTotal: " << total.count() << " hours";
+    out << "\nTotal: " << total.count() << " hours";
     if (off_time > std::chrono::minutes(0))
-        std::cout << " (" << off_time.count() << " hours off)";
-    std::cout << '\n';
+        out << " (" << off_time.count() << " hours off)";
+    out << '\n';
+
+    return out;
 }
+
+void PrintDurations(DurationMap durations) { std::cout << FormatDurations(durations).str(); }
