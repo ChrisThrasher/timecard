@@ -147,6 +147,17 @@ TEST(ParseTimepoint, ValidPmTimes)
 }
 
 
+TEST(CalculateDurations, DurationType)
+{
+    using namespace std::chrono_literals;
+    EXPECT_EQ(0h,   DurationType(0));
+    EXPECT_EQ(1h,   DurationType(1));
+    EXPECT_EQ(5h,   DurationType(5));
+    EXPECT_EQ(10h,  DurationType(10));
+    EXPECT_EQ(100h, DurationType(100));
+}
+
+
 TEST(CalculateDurations, InvalidArgument)
 {
     EXPECT_THROW(CalculateDurations({}), std::invalid_argument);
