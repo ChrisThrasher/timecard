@@ -7,12 +7,12 @@
 #include <iostream>
 #include <sstream>
 
-DurationType OffTime(DurationMap& durations)
+Hours OffTime(DurationMap& durations)
 {
     const auto off_time_key = "-";
     const auto off_time_it = durations.find(off_time_key);
     durations.erase(off_time_key);
-    return (off_time_it != durations.end()) ? off_time_it->second : DurationType(0);
+    return (off_time_it != durations.end()) ? off_time_it->second : Hours(0);
 }
 
 int LongestLabel(const DurationMap& durations)
@@ -34,7 +34,7 @@ auto FormatDurations(DurationMap durations)
     std::stringstream out;
     out << std::fixed << std::setprecision(1) << std::setfill(separator);
 
-    auto total = DurationType(0);
+    auto total = Hours(0);
     for (const auto& duration : durations)
     {
         out << std::left << std::setw(label_width) << duration.first;
