@@ -215,13 +215,12 @@ TEST(PrintDurations, LongestLabel)
 
 TEST(PrintDurations, FormatDurations)
 {
-    const auto output = FormatDurations({{"one", DurationType(0.5)}, {"two", DurationType(1.0)}, {"three", DurationType(1.5)}, {"-", DurationType(1.0)}}).str();
-    const auto expected =
+    EXPECT_EQ(
         "one     0.5 hours\n"
         "three   1.5 hours\n"
         "two     1.0 hours\n"
-        "\nTotal: 3.0 hours (1.0 hours off)\n";
-    EXPECT_EQ(expected, output);
+        "\nTotal: 3.0 hours (1.0 hours off)\n",
+        FormatDurations({{"one", DurationType(0.5)}, {"two", DurationType(1.0)}, {"three", DurationType(1.5)}, {"-", DurationType(1.0)}}).str());
 }
 
 int main(int argc, char* argv[])
