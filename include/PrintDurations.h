@@ -29,14 +29,13 @@ void PrintDurations(DurationMap durations)
     const char separator = ' ';
     const auto label_width = LongestLabel(durations) + 2;
     const auto duration_width = 4;
-    std::cout << std::fixed << std::setprecision(1);
+    std::cout << std::fixed << std::setprecision(1) << std::setfill(separator);
 
     auto total = DurationType(0);
     for (const auto& duration : durations)
     {
-        std::cout << std::left << std::setw(label_width) << std::setfill(separator) << duration.first;
-        std::cout << std::right << std::setw(duration_width) << std::setfill(separator) << duration.second.count()
-                  << " hours\n";
+        std::cout << std::left << std::setw(label_width) << duration.first;
+        std::cout << std::right << std::setw(duration_width) << duration.second.count() << " hours\n";
         total += duration.second;
     }
 
