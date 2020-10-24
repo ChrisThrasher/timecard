@@ -25,6 +25,6 @@ void CheckFlags(const std::vector<std::string>& args)
     }
     if (flag[0] == '-')
     {
-        throw std::invalid_argument("Failed to parse flag: " + flag);
+        throw std::invalid_argument("Unrecognized flag: " + flag);
     }
 }
