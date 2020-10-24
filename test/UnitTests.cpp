@@ -23,11 +23,20 @@ TEST(VectorizeArguments, Checkout)
 
 TEST(CheckFlags, ExitSuccess)
 {
-    const auto exit_success = [](const int exit_code) { return exit_code == 0; };
-    EXPECT_EXIT(CheckFlags({"-h"}), exit_success, "");
-    EXPECT_EXIT(CheckFlags({"--help"}), exit_success, "");
-    EXPECT_EXIT(CheckFlags({"-v"}), exit_success, "");
+    const auto exit_success = [](const int exit_code) { return exit_code == EXIT_SUCCESS; };
+    EXPECT_EXIT(CheckFlags({"-h"}),        exit_success, "");
+    EXPECT_EXIT(CheckFlags({"--help"}),    exit_success, "");
+    EXPECT_EXIT(CheckFlags({"-v"}),        exit_success, "");
     EXPECT_EXIT(CheckFlags({"--version"}), exit_success, "");
+}
+
+
+TEST(CheckFlags, Throws)
+{
+    EXPECT_THROW(CheckFlags({"--h"}),      std::invalid_argument);
+    EXPECT_THROW(CheckFlags({"-help"}),    std::invalid_argument);
+    EXPECT_THROW(CheckFlags({"--v"}),      std::invalid_argument);
+    EXPECT_THROW(CheckFlags({"-version"}), std::invalid_argument);
 }
 
 
