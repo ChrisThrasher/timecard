@@ -50,4 +50,4 @@ auto FormatDurations(DurationMap durations)
     return out;
 }
 
-void PrintDurations(DurationMap durations) { std::cout << FormatDurations(durations).str(); }
+void PrintDurations(const DurationMap& durations) { std::cout << FormatDurations(durations).str(); }
