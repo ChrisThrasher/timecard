@@ -23,4 +23,8 @@ void CheckFlags(const std::vector<std::string>& args)
         std::cout << "Timecard version " << GIT_VERSION << '\n';
         std::exit(EXIT_SUCCESS);
     }
+    if (flag[0] == '-')
+    {
+        throw std::invalid_argument("Failed to parse flag: " + flag);
+    }
 }
