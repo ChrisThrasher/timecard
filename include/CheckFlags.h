@@ -5,10 +5,16 @@
 #include <string>
 #include <vector>
 
-static constexpr auto help_text = R"(Usage: timecard <time1> <activity1> <time2> <activity2> <time3> <activityN> <timeN>
+static constexpr auto help_text = R"(Usage
+  timecard [options]
+  timecard <time1> <activity1> <time2> <activity2> <time3> <activityN> <timeN>
 
 Times are formatted as 3 or 4 digits followed by either an 'am' or 'pm' suffix.
 Any activities named "-" will be ignored.
+
+Options
+  -h, --help        Show this help text
+  -v, --version     Print program version
 )";
 
 void CheckFlags(const std::vector<std::string>& args)
