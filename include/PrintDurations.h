@@ -9,7 +9,7 @@
 
 Hours OffTime(DurationMap& durations)
 {
-    const auto off_time_key = "-";
+    constexpr auto off_time_key = "-";
     const auto off_time_it = durations.find(off_time_key);
     durations.erase(off_time_key);
     return (off_time_it != durations.end()) ? off_time_it->second : Hours(0);
