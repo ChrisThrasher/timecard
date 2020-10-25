@@ -7,8 +7,8 @@ Calculates how much time was spent on various activities throughout the day.
 ```
 $ timecard --help
 Usage
-  timecard [options]
   timecard <time1> <activity1> <time2> <activity2> <time3> <activityN> <timeN>
+  timecard [options]
 
 Times are formatted as 3 or 4 digits followed by either an 'am' or 'pm' suffix.
 For example, 8:00 a.m. is represented as "800am". 12:30 p.m. is represented as
