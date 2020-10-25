@@ -3,7 +3,7 @@
 #include <PrintDurations.h>
 #include <VectorizeArguments.h>
 
-int main(int argc, char* argv[])
+int main(const int argc, const char* const argv[])
 try
 {
     const auto args = VectorizeArguments(argc, argv);
