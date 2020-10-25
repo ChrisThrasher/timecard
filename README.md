@@ -11,7 +11,11 @@ Usage
   timecard <time1> <activity1> <time2> <activity2> <time3> <activityN> <timeN>
 
 Times are formatted as 3 or 4 digits followed by either an 'am' or 'pm' suffix.
-Any activities named "-" will be ignored.
+For example, 8:00 a.m. is represented as "800am". 12:30 p.m. is represented as
+"1230pm".
+
+Any activities named "-" will be ignored. This activity's durations are
+reported as "off time" should they exist.
 
 Options
   -h, --help        Show this help text
