@@ -39,6 +39,6 @@ void CheckFlags(const std::vector<std::string>& args)
     }
     if (flag[0] == '-')
     {
-        throw std::invalid_argument("Unrecognized flag: " + flag + '\n' + help_text);
+        throw std::invalid_argument("Unrecognized option: " + flag + '\n' + help_text);
     }
 }
