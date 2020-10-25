@@ -10,12 +10,12 @@ TEST(VectorizeArguments, Checkout)
 {
     {
     constexpr int argc = 8;
-    char* argv[argc] = {"timecard", "830am", "breakfast", "900am", "sleep", "1200pm", "lunch", "100pm"};
+    const char* argv[argc] = {"timecard", "830am", "breakfast", "900am", "sleep", "1200pm", "lunch", "100pm"};
     EXPECT_EQ(std::vector<std::string>({"830am", "breakfast", "900am", "sleep", "1200pm", "lunch", "100pm"}), VectorizeArguments(argc, argv));
     }
     {
     constexpr int argc = 2;
-    char* argv[argc] = {"my_program_name", "some_input"};
+    const char* argv[argc] = {"my_program_name", "some_input"};
     EXPECT_EQ(std::vector<std::string>({"some_input"}), VectorizeArguments(argc, argv));
     }
 }
