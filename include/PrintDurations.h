@@ -27,9 +27,9 @@ auto FormatDurations(DurationMap durations)
 {
     const auto off_time = OffTime(durations);
 
-    const char separator = ' ';
     const auto label_width = LongestLabel(durations) + 2;
-    const auto duration_width = 4;
+    constexpr char separator = ' ';
+    constexpr auto duration_width = 4;
 
     std::stringstream out;
     out << std::fixed << std::setprecision(1) << std::setfill(separator);
