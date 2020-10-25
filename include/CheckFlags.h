@@ -10,7 +10,8 @@ static constexpr auto help_text = R"(Usage
   timecard <time1> <activity1> <time2> <activity2> <time3> <activityN> <timeN>
 
 Times are formatted as 3 or 4 digits followed by either an 'am' or 'pm' suffix.
-Any activities named "-" will be ignored.
+Any activities named "-" will be ignored. For example, 8:00am is represented as
+"800am". 12:30pm is represented as "1230pm".
 
 Options
   -h, --help        Show this help text
