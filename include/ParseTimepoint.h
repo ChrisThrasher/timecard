@@ -16,22 +16,20 @@ auto ParseTimepoint(const std::string& timepoint)
 try
 {
     auto am_pm_offset = 0;
-    auto modified_timepoint = timepoint;
     if (HasSuffix(timepoint, "am"))
     {
         am_pm_offset = 0;
-        modified_timepoint = timepoint.substr(0, timepoint.size() - 2);
     }
     else if (HasSuffix(timepoint, "pm"))
     {
         am_pm_offset = 12;
-        modified_timepoint = timepoint.substr(0, timepoint.size() - 2);
     }
     else
     {
         throw std::invalid_argument("No am or pm prefix.");
     }
 
+    const auto modified_timepoint = timepoint.substr(0, timepoint.size() - 2);
     if (modified_timepoint.size() > 4 or modified_timepoint.size() < 3)
     {
         throw std::invalid_argument("Must contain 3 or 4 consecutive numbers.");
