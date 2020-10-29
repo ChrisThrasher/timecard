@@ -20,7 +20,6 @@ TEST(VectorizeArguments, Checkout)
     }
 }
 
-
 TEST(CheckFlags, ExitSuccess)
 {
     const auto exit_success = [](const int exit_code) { return exit_code == EXIT_SUCCESS; };
@@ -30,7 +29,6 @@ TEST(CheckFlags, ExitSuccess)
     EXPECT_EXIT(CheckFlags({"--version"}), exit_success, "");
 }
 
-
 TEST(CheckFlags, Throws)
 {
     EXPECT_THROW(CheckFlags({"--h"}),      std::invalid_argument);
@@ -38,7 +36,6 @@ TEST(CheckFlags, Throws)
     EXPECT_THROW(CheckFlags({"--v"}),      std::invalid_argument);
     EXPECT_THROW(CheckFlags({"-version"}), std::invalid_argument);
 }
-
 
 TEST(HasSuffix, HasSuffix)
 {
@@ -48,7 +45,6 @@ TEST(HasSuffix, HasSuffix)
     EXPECT_TRUE(HasSuffix("abcd", "d"));
 }
 
-
 TEST(HasSuffix, DoesNotHaveSuffix)
 {
     EXPECT_FALSE(HasSuffix("dcba", "abcd"));
@@ -57,7 +53,6 @@ TEST(HasSuffix, DoesNotHaveSuffix)
     EXPECT_FALSE(HasSuffix("dcba", "d"));
 }
 
-
 TEST(HasSuffix, RealTimes)
 {
     EXPECT_TRUE(HasSuffix("1000pm", "pm"));
@@ -65,7 +60,6 @@ TEST(HasSuffix, RealTimes)
     EXPECT_FALSE(HasSuffix("0200pm", "am"));
     EXPECT_FALSE(HasSuffix("1200am", "pm"));
 }
-
 
 TEST(ParseTimepoint, Garbage)
 {
@@ -79,7 +73,6 @@ TEST(ParseTimepoint, Garbage)
     EXPECT_THROW(ParseTimepoint("1200tns"), std::invalid_argument);
 }
 
-
 TEST(ParseTimepoint, NearlyGarbage)
 {
     EXPECT_THROW(ParseTimepoint("0am"), std::invalid_argument);
@@ -88,7 +81,6 @@ TEST(ParseTimepoint, NearlyGarbage)
     EXPECT_THROW(ParseTimepoint("20"), std::invalid_argument);
     EXPECT_THROW(ParseTimepoint("99"), std::invalid_argument);
 }
-
 
 TEST(ParseTimepoint, TwentyFourHourTimes)
 {
@@ -100,7 +92,6 @@ TEST(ParseTimepoint, TwentyFourHourTimes)
     EXPECT_THROW(ParseTimepoint("1200"), std::invalid_argument);
 }
 
-
 TEST(ParseTimepoint, NegativeTimes)
 {
     EXPECT_THROW(ParseTimepoint("-100am"), std::invalid_argument);
@@ -108,7 +99,6 @@ TEST(ParseTimepoint, NegativeTimes)
     EXPECT_THROW(ParseTimepoint("-1300am"), std::invalid_argument);
     EXPECT_THROW(ParseTimepoint("-1300pm"), std::invalid_argument);
 }
-
 
 TEST(ParseTimepoint, Invalid12HourTimes)
 {
@@ -126,7 +116,6 @@ TEST(ParseTimepoint, Invalid12HourTimes)
     EXPECT_THROW(ParseTimepoint("1261pm"), std::invalid_argument);
 }
 
-
 TEST(ParseTimepoint, ValidAmTimes)
 {
     using namespace std::chrono_literals;
@@ -141,7 +130,6 @@ TEST(ParseTimepoint, ValidAmTimes)
     EXPECT_EQ(11h + 59min, ParseTimepoint("1159am"));
 }
 
-
 TEST(ParseTimepoint, ValidPmTimes)
 {
     using namespace std::chrono_literals;
@@ -155,7 +143,6 @@ TEST(ParseTimepoint, ValidPmTimes)
     EXPECT_EQ(23h + 59min, ParseTimepoint("1159pm"));
 }
 
-
 TEST(CalculateDurations, Hours)
 {
     using namespace std::chrono_literals;
@@ -166,14 +153,12 @@ TEST(CalculateDurations, Hours)
     EXPECT_EQ(100h, Hours(100));
 }
 
-
 TEST(CalculateDurations, InvalidArgument)
 {
     EXPECT_THROW(CalculateDurations({}), std::invalid_argument);
     EXPECT_THROW(CalculateDurations({"1200pm"}), std::invalid_argument);
     EXPECT_THROW(CalculateDurations({"1200pm", "1230pm"}), std::invalid_argument);
 }
-
 
 TEST(CalculateDurations, ExtraArgument)
 {
@@ -183,13 +168,11 @@ TEST(CalculateDurations, ExtraArgument)
     EXPECT_THROW(CalculateDurations({"230pm", "-", "300pm", "-", "500pm", "-"}), std::invalid_argument);
 }
 
-
 TEST(CalculateDurations, NegativeDuration)
 {
     EXPECT_THROW(CalculateDurations({"420am", "oh_no_this_will_throw", "410am"}), std::runtime_error);
     EXPECT_THROW(CalculateDurations({"230pm", "oh_no_this_will_throw", "240am"}), std::runtime_error);
 }
-
 
 TEST(CalculateDurations, ZeroDuration)
 {
@@ -197,14 +180,12 @@ TEST(CalculateDurations, ZeroDuration)
     EXPECT_THROW(CalculateDurations({"1100pm", "oh_no_this_will_throw", "1100pm"}), std::runtime_error);
 }
 
-
 TEST(CalculateDurations, OneDuration)
 {
     using namespace std::chrono_literals;
     EXPECT_EQ((DurationMap{{"test", 30min}}), CalculateDurations({"1200pm", "test", "1230pm"}));
     EXPECT_EQ((DurationMap{{"test", 2h}}),    CalculateDurations({"200pm", "test", "400pm"}));
 }
-
 
 TEST(CalculateDurations, MultiDurations)
 {
@@ -214,7 +195,6 @@ TEST(CalculateDurations, MultiDurations)
     EXPECT_EQ((DurationMap{{"one", 2h},    {"two", 1h}}),    CalculateDurations({"800am", "one", "900am", "two", "1000am", "one", "1100am"}));
 }
 
-
 TEST(PrintDurations, OffTime)
 {
     using namespace std::chrono_literals;
@@ -223,7 +203,6 @@ TEST(PrintDurations, OffTime)
     EXPECT_TRUE(durations.find("-") == durations.end());
 }
 
-
 TEST(PrintDurations, LongestLabel)
 {
     EXPECT_EQ(5,  LongestLabel(CalculateDurations({"1200pm", "one", "1230pm", "two", "130pm", "-", "230pm", "three", "400pm"})));
@@ -231,7 +210,6 @@ TEST(PrintDurations, LongestLabel)
     EXPECT_EQ(1,  LongestLabel(CalculateDurations({"1200pm", "a", "1230pm"})));
     EXPECT_EQ(26, LongestLabel(CalculateDurations({"1200pm", "abcdefghijklmnopqrstuvwxyz", "1230pm"})));
 }
-
 
 TEST(PrintDurations, FormatDurations)
 {
