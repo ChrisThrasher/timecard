@@ -20,11 +20,7 @@ try
     if (not is_am and not is_pm)
         throw std::invalid_argument("No am or pm prefix.");
 
-    const auto modified_timepoint = timepoint.substr(0, timepoint.size() - 2);
-    if (modified_timepoint.size() > 4 or modified_timepoint.size() < 3)
-        throw std::invalid_argument("Must contain 3 or 4 consecutive numbers.");
-
-    const auto time = std::stoi(modified_timepoint);
+    const auto time = std::stoi(timepoint.substr(0, timepoint.size() - 2));
     const auto minutes = time % 100;
     if (minutes >= 60 or minutes < 0)
         throw std::invalid_argument("Minutes not in range [0, 59].");
