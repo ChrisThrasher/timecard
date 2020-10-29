@@ -15,19 +15,10 @@ bool HasSuffix(const std::string& timepoint, const std::string& suffix)
 auto ParseTimepoint(const std::string& timepoint)
 try
 {
-    auto am_pm_offset = 0;
-    if (HasSuffix(timepoint, "am"))
-    {
-        am_pm_offset = 0;
-    }
-    else if (HasSuffix(timepoint, "pm"))
-    {
-        am_pm_offset = 12;
-    }
-    else
-    {
+    const auto is_am = HasSuffix(timepoint, "am");
+    const auto is_pm = HasSuffix(timepoint, "pm");
+    if (not is_am and not is_pm)
         throw std::invalid_argument("No am or pm prefix.");
-    }
 
     const auto modified_timepoint = timepoint.substr(0, timepoint.size() - 2);
     if (modified_timepoint.size() > 4 or modified_timepoint.size() < 3)
@@ -48,7 +39,7 @@ try
         throw std::invalid_argument("Hours not in range [1, 12].");
     }
 
-    const auto hours = raw_hours % 12 + am_pm_offset;
+    const auto hours = raw_hours % 12 + (is_pm ? 12 : 0);
     return std::chrono::hours(hours) + std::chrono::minutes(minutes);
 }
 catch (const std::exception& ex)
