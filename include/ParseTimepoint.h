@@ -18,7 +18,7 @@ try
     const auto is_am = HasSuffix(timepoint, "am");
     const auto is_pm = HasSuffix(timepoint, "pm");
     if (not is_am and not is_pm)
-        throw std::invalid_argument("No am or pm prefix.");
+        throw std::invalid_argument("No am or pm suffix.");
 
     const auto time = std::stoi(timepoint.substr(0, timepoint.size() - 2));
     const auto minutes = time % 100;
