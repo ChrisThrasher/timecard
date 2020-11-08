@@ -37,28 +37,22 @@ TEST(CheckFlags, Throws)
     EXPECT_THROW(CheckFlags({"-version"}), std::invalid_argument);
 }
 
-TEST(HasSuffix, HasSuffix)
+TEST(AmPmOffset, Am)
 {
-    EXPECT_TRUE(HasSuffix("abcd", "abcd"));
-    EXPECT_TRUE(HasSuffix("abcd", "bcd"));
-    EXPECT_TRUE(HasSuffix("abcd", "cd"));
-    EXPECT_TRUE(HasSuffix("abcd", "d"));
+    EXPECT_EQ(0,  AmPmOffset("800am"));
+    EXPECT_EQ(0,  AmPmOffset("1200am"));
 }
 
-TEST(HasSuffix, DoesNotHaveSuffix)
+TEST(AmPmOffset, Pm)
 {
-    EXPECT_FALSE(HasSuffix("dcba", "abcd"));
-    EXPECT_FALSE(HasSuffix("dcba", "bcd"));
-    EXPECT_FALSE(HasSuffix("dcba", "cd"));
-    EXPECT_FALSE(HasSuffix("dcba", "d"));
+    EXPECT_EQ(12, AmPmOffset("1000pm"));
+    EXPECT_EQ(12, AmPmOffset("0200pm"));
 }
 
-TEST(HasSuffix, RealTimes)
+TEST(AmPmOffset, Garbage)
 {
-    EXPECT_TRUE(HasSuffix("1000pm", "pm"));
-    EXPECT_TRUE(HasSuffix("800am", "am"));
-    EXPECT_FALSE(HasSuffix("0200pm", "am"));
-    EXPECT_FALSE(HasSuffix("1200am", "pm"));
+    EXPECT_EQ(0, AmPmOffset("asdf"));
+    EXPECT_EQ(0, AmPmOffset("-----  _ -- _-"));
 }
 
 TEST(ParseTimepoint, Garbage)

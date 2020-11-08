@@ -7,9 +7,11 @@
 #include <stdexcept>
 #include <string>
 
-bool HasSuffix(const std::string& timepoint, const std::string& suffix)
+int AmPmOffset(const std::string& timepoint)
 {
-    return std::regex_match(timepoint, std::regex(".*" + suffix));
+    if (std::regex_match(timepoint, std::regex(".*pm")))
+        return 12;
+    return 0;
 }
 
 auto ParseTimepoint(const std::string& timepoint)
@@ -28,7 +30,7 @@ try
     if (raw_hours > 12 or raw_hours < 1)
         throw std::invalid_argument("Hours (" + std::to_string(raw_hours) + ") not in range [1, 12]");
 
-    const auto hours = raw_hours % 12 + (HasSuffix(timepoint, "pm") ? 12 : 0);
+    const auto hours = raw_hours % 12 + AmPmOffset(timepoint);
     return std::chrono::hours(hours) + std::chrono::minutes(minutes);
 }
 catch (const std::exception& ex)
