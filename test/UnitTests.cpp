@@ -51,8 +51,8 @@ TEST(AmPmOffset, Pm)
 
 TEST(AmPmOffset, Garbage)
 {
-    EXPECT_EQ(0, AmPmOffset("asdf"));
-    EXPECT_EQ(0, AmPmOffset("-----  _ -- _-"));
+    EXPECT_THROW(AmPmOffset("asdf"),   std::invalid_argument);
+    EXPECT_THROW(AmPmOffset("-  _ -"), std::invalid_argument);
 }
 
 TEST(ParseTimepoint, Garbage)

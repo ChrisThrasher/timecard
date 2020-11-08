@@ -11,7 +11,9 @@ int AmPmOffset(const std::string& timepoint)
 {
     if (std::regex_match(timepoint, std::regex(".*pm")))
         return 12;
-    return 0;
+    if (std::regex_match(timepoint, std::regex(".*am")))
+        return 0;
+    throw std::invalid_argument("Found no am/pm suffix");
 }
 
 auto ParseTimepoint(const std::string& timepoint)
