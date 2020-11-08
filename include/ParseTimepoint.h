@@ -2,14 +2,14 @@
 
 #include <chrono>
 #include <iostream>
+#include <regex>
 #include <sstream>
 #include <stdexcept>
 #include <string>
 
 bool HasSuffix(const std::string& timepoint, const std::string& suffix)
 {
-    return timepoint.size() >= suffix.size() and
-           timepoint.compare(timepoint.size() - suffix.size(), suffix.size(), suffix) == 0;
+    return std::regex_match(timepoint, std::regex(".*" + suffix));
 }
 
 auto ParseTimepoint(const std::string& timepoint)
