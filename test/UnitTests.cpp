@@ -37,28 +37,22 @@ TEST(CheckFlags, Throws)
     EXPECT_THROW(CheckFlags({"-version"}), std::invalid_argument);
 }
 
-TEST(HasSuffix, HasSuffix)
+TEST(AmPmOffset, Am)
 {
-    EXPECT_TRUE(HasSuffix("abcd", "abcd"));
-    EXPECT_TRUE(HasSuffix("abcd", "bcd"));
-    EXPECT_TRUE(HasSuffix("abcd", "cd"));
-    EXPECT_TRUE(HasSuffix("abcd", "d"));
+    EXPECT_EQ(0,  AmPmOffset("800am"));
+    EXPECT_EQ(0,  AmPmOffset("1200am"));
 }
 
-TEST(HasSuffix, DoesNotHaveSuffix)
+TEST(AmPmOffset, Pm)
 {
-    EXPECT_FALSE(HasSuffix("dcba", "abcd"));
-    EXPECT_FALSE(HasSuffix("dcba", "bcd"));
-    EXPECT_FALSE(HasSuffix("dcba", "cd"));
-    EXPECT_FALSE(HasSuffix("dcba", "d"));
+    EXPECT_EQ(12, AmPmOffset("1000pm"));
+    EXPECT_EQ(12, AmPmOffset("0200pm"));
 }
 
-TEST(HasSuffix, RealTimes)
+TEST(AmPmOffset, Garbage)
 {
-    EXPECT_TRUE(HasSuffix("1000pm", "pm"));
-    EXPECT_TRUE(HasSuffix("800am", "am"));
-    EXPECT_FALSE(HasSuffix("0200pm", "am"));
-    EXPECT_FALSE(HasSuffix("1200am", "pm"));
+    EXPECT_THROW(AmPmOffset("asdf"),   std::invalid_argument);
+    EXPECT_THROW(AmPmOffset("-  _ -"), std::invalid_argument);
 }
 
 TEST(ParseTimepoint, Garbage)
@@ -123,9 +117,9 @@ TEST(ParseTimepoint, ValidAmTimes)
     EXPECT_EQ( 0h +  0min, ParseTimepoint("1200am"));
     EXPECT_EQ( 0h + 30min, ParseTimepoint("1230am"));
     EXPECT_EQ( 2h + 15min, ParseTimepoint("215am"));
-    EXPECT_EQ( 4h + 20min, ParseTimepoint("0420am"));
-    EXPECT_EQ( 9h + 41min, ParseTimepoint("0941am"));
-    EXPECT_EQ( 7h +  1min, ParseTimepoint("0701am"));
+    EXPECT_EQ( 4h + 20min, ParseTimepoint("420am"));
+    EXPECT_EQ( 9h + 41min, ParseTimepoint("941am"));
+    EXPECT_EQ( 7h +  1min, ParseTimepoint("701am"));
     EXPECT_EQ(11h +  0min, ParseTimepoint("1100am"));
     EXPECT_EQ(11h + 30min, ParseTimepoint("1130am"));
     EXPECT_EQ(11h + 59min, ParseTimepoint("1159am"));
@@ -136,10 +130,10 @@ TEST(ParseTimepoint, ValidPmTimes)
     using namespace std::chrono_literals;
     EXPECT_EQ(12h +  0min, ParseTimepoint("1200pm"));
     EXPECT_EQ(12h + 30min, ParseTimepoint("1230pm"));
-    EXPECT_EQ(13h +  0min, ParseTimepoint("0100pm"));
+    EXPECT_EQ(13h +  0min, ParseTimepoint("100pm"));
     EXPECT_EQ(14h +  0min, ParseTimepoint("200pm"));
     EXPECT_EQ(14h + 30min, ParseTimepoint("230pm"));
-    EXPECT_EQ(16h +  6min, ParseTimepoint("0406pm"));
+    EXPECT_EQ(16h +  6min, ParseTimepoint("406pm"));
     EXPECT_EQ(22h +  7min, ParseTimepoint("1007pm"));
     EXPECT_EQ(23h + 59min, ParseTimepoint("1159pm"));
 }
