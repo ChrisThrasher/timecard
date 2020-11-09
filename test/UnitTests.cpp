@@ -76,16 +76,6 @@ TEST(ParseTimepoint, NearlyGarbage)
     EXPECT_THROW(ParseTimepoint("99"), std::invalid_argument);
 }
 
-TEST(ParseTimepoint, TwentyFourHourTimes)
-{
-    EXPECT_THROW(ParseTimepoint( "0:00"), std::invalid_argument);
-    EXPECT_THROW(ParseTimepoint("00:00"), std::invalid_argument);
-    EXPECT_THROW(ParseTimepoint( "1:00"), std::invalid_argument);
-    EXPECT_THROW(ParseTimepoint("01:00"), std::invalid_argument);
-    EXPECT_THROW(ParseTimepoint("10:00"), std::invalid_argument);
-    EXPECT_THROW(ParseTimepoint("12:00"), std::invalid_argument);
-}
-
 TEST(ParseTimepoint, NegativeTimes)
 {
     EXPECT_THROW(ParseTimepoint( "-1:00am"), std::invalid_argument);
