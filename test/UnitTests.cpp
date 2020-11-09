@@ -117,9 +117,9 @@ TEST(ParseTimepoint, ValidAmTimes)
     EXPECT_EQ( 0h +  0min, ParseTimepoint("1200am"));
     EXPECT_EQ( 0h + 30min, ParseTimepoint("1230am"));
     EXPECT_EQ( 2h + 15min, ParseTimepoint("215am"));
-    EXPECT_EQ( 4h + 20min, ParseTimepoint("0420am"));
-    EXPECT_EQ( 9h + 41min, ParseTimepoint("0941am"));
-    EXPECT_EQ( 7h +  1min, ParseTimepoint("0701am"));
+    EXPECT_EQ( 4h + 20min, ParseTimepoint("420am"));
+    EXPECT_EQ( 9h + 41min, ParseTimepoint("941am"));
+    EXPECT_EQ( 7h +  1min, ParseTimepoint("701am"));
     EXPECT_EQ(11h +  0min, ParseTimepoint("1100am"));
     EXPECT_EQ(11h + 30min, ParseTimepoint("1130am"));
     EXPECT_EQ(11h + 59min, ParseTimepoint("1159am"));
@@ -130,10 +130,10 @@ TEST(ParseTimepoint, ValidPmTimes)
     using namespace std::chrono_literals;
     EXPECT_EQ(12h +  0min, ParseTimepoint("1200pm"));
     EXPECT_EQ(12h + 30min, ParseTimepoint("1230pm"));
-    EXPECT_EQ(13h +  0min, ParseTimepoint("0100pm"));
+    EXPECT_EQ(13h +  0min, ParseTimepoint("100pm"));
     EXPECT_EQ(14h +  0min, ParseTimepoint("200pm"));
     EXPECT_EQ(14h + 30min, ParseTimepoint("230pm"));
-    EXPECT_EQ(16h +  6min, ParseTimepoint("0406pm"));
+    EXPECT_EQ(16h +  6min, ParseTimepoint("406pm"));
     EXPECT_EQ(22h +  7min, ParseTimepoint("1007pm"));
     EXPECT_EQ(23h + 59min, ParseTimepoint("1159pm"));
 }
