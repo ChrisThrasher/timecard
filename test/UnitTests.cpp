@@ -121,7 +121,7 @@ TEST(CalculateDurations, Hours)
     EXPECT_EQ(100h, Hours(100));
 }
 
-TEST(CalculateDurations, InvalidArgument)
+TEST(CalculateDurations, TooFewArguments)
 {
     EXPECT_THROW(CalculateDurations({}), std::invalid_argument);
     EXPECT_THROW(CalculateDurations({"12:00pm"}), std::invalid_argument);
