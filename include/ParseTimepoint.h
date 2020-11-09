@@ -17,11 +17,9 @@ int AmPmOffset(const std::string& timepoint)
 }
 
 auto ParseTimepoint(const std::string& timepoint)
-try
 {
-    constexpr auto timepoint_regex = "([1][0-2]|[1-9])[0-5][0-9](a|p)m";
-    if (not std::regex_match(timepoint, std::regex(timepoint_regex)))
-        throw std::invalid_argument(std::string("Did not match regex: ") + timepoint_regex);
+    if (not std::regex_match(timepoint, std::regex("([1][0-2]|[1-9])[0-5][0-9](a|p)m")))
+        throw std::invalid_argument("Failed to parse \"" + timepoint + "\"");
 
     const auto time = std::stoi(timepoint.substr(0, timepoint.size() - 2));
 
@@ -31,8 +29,4 @@ try
     const auto hours = raw_hours % 12 + AmPmOffset(timepoint);
 
     return std::chrono::hours(hours) + std::chrono::minutes(minutes);
-}
-catch (const std::exception& ex)
-{
-    throw std::invalid_argument("Failed to parse \"" + timepoint + "\": " + ex.what());
 }
