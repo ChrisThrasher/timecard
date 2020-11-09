@@ -148,7 +148,7 @@ TEST(CalculateDurations, ZeroDuration)
     EXPECT_THROW(CalculateDurations({"11:00pm", "oh_no_this_will_throw", "11:00pm"}), std::runtime_error);
 }
 
-TEST(CalculateDurations, OneDuration)
+TEST(CalculateDurations, SingleDuration)
 {
     using namespace std::chrono_literals;
     EXPECT_EQ((DurationMap{{"test", 30min}}), CalculateDurations({"12:00pm", "test", "12:30pm"}));
