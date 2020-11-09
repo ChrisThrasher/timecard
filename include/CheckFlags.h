@@ -9,9 +9,12 @@ static constexpr auto help_text = R"(Usage
   timecard <time1> <activity1> <time2> <activity2> <time3> <activityN> <timeN>
   timecard [options]
 
-Times are formatted as 3 or 4 digits followed by either an 'am' or 'pm' suffix.
-For example, 8:00 a.m. is represented as "800am". 12:30 p.m. is represented as
-"1230pm".
+Times must follow the following regex:
+
+  ([1][0-2]|[1-9]):[0-5][0-9](a|p)m
+
+For examle, 8:00 a.m. is represented as "8:00am". 12:30 p.m. is represented as
+"12:30pm".
 
 Any activities named "-" will be ignored. This activity's durations are
 reported as "off time" should they exist.
