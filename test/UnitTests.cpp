@@ -67,33 +67,6 @@ TEST(ParseTimepoint, Garbage)
     EXPECT_THROW(ParseTimepoint("1200tns"), std::invalid_argument);
 }
 
-TEST(ParseTimepoint, NearlyGarbage)
-{
-    EXPECT_THROW(ParseTimepoint("0am"), std::invalid_argument);
-    EXPECT_THROW(ParseTimepoint("1pm"), std::invalid_argument);
-    EXPECT_THROW(ParseTimepoint("10"), std::invalid_argument);
-    EXPECT_THROW(ParseTimepoint("20"), std::invalid_argument);
-    EXPECT_THROW(ParseTimepoint("99"), std::invalid_argument);
-}
-
-TEST(ParseTimepoint, TwentyFourHourTimes)
-{
-    EXPECT_THROW(ParseTimepoint( "0:00"), std::invalid_argument);
-    EXPECT_THROW(ParseTimepoint("00:00"), std::invalid_argument);
-    EXPECT_THROW(ParseTimepoint( "1:00"), std::invalid_argument);
-    EXPECT_THROW(ParseTimepoint("01:00"), std::invalid_argument);
-    EXPECT_THROW(ParseTimepoint("10:00"), std::invalid_argument);
-    EXPECT_THROW(ParseTimepoint("12:00"), std::invalid_argument);
-}
-
-TEST(ParseTimepoint, NegativeTimes)
-{
-    EXPECT_THROW(ParseTimepoint( "-1:00am"), std::invalid_argument);
-    EXPECT_THROW(ParseTimepoint("-01:00am"), std::invalid_argument);
-    EXPECT_THROW(ParseTimepoint("-13:00am"), std::invalid_argument);
-    EXPECT_THROW(ParseTimepoint("-13:00pm"), std::invalid_argument);
-}
-
 TEST(ParseTimepoint, HoursOutOfRange)
 {
     EXPECT_THROW(ParseTimepoint( "0:00am"), std::invalid_argument);
@@ -148,7 +121,7 @@ TEST(CalculateDurations, Hours)
     EXPECT_EQ(100h, Hours(100));
 }
 
-TEST(CalculateDurations, InvalidArgument)
+TEST(CalculateDurations, TooFewArguments)
 {
     EXPECT_THROW(CalculateDurations({}), std::invalid_argument);
     EXPECT_THROW(CalculateDurations({"12:00pm"}), std::invalid_argument);
@@ -175,7 +148,7 @@ TEST(CalculateDurations, ZeroDuration)
     EXPECT_THROW(CalculateDurations({"11:00pm", "oh_no_this_will_throw", "11:00pm"}), std::runtime_error);
 }
 
-TEST(CalculateDurations, OneDuration)
+TEST(CalculateDurations, SingleDuration)
 {
     using namespace std::chrono_literals;
     EXPECT_EQ((DurationMap{{"test", 30min}}), CalculateDurations({"12:00pm", "test", "12:30pm"}));
