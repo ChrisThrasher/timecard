@@ -1,10 +1,8 @@
 #pragma once
 
 #include <chrono>
-#include <iostream>
 #include <regex>
 #include <sstream>
-#include <stdexcept>
 #include <string>
 
 int AmPmOffset(const std::string& timepoint)
