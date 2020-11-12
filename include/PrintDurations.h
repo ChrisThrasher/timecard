@@ -1,6 +1,6 @@
 #pragma once
 
-#include <CalculateDurations.h>
+#include <DurationMap.h>
 
 #include <algorithm>
 #include <iomanip>
