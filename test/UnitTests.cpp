@@ -42,7 +42,7 @@ TEST(CheckFlags, GitVersion)
 #ifndef GIT_VERSION
     FAIL() << "Git version macro not defined";
 #endif
-    EXPECT_GT(0, std::string(GIT_VERSION).length());
+    EXPECT_GT(std::string(GIT_VERSION).length(), 0);
     EXPECT_EQ('v', GIT_VERSION[0]);
 }
 
