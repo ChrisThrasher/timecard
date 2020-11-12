@@ -1,14 +1,9 @@
 #pragma once
 
+#include <DurationMap.h>
 #include <ParseTimepoint.h>
 
-#include <chrono>
-#include <map>
-#include <string>
 #include <vector>
-
-using Hours = std::chrono::duration<double, std::ratio<3600>>;
-using DurationMap = std::map<std::string, Hours>;
 
 auto CalculateDurations(const std::vector<std::string>& args) -> DurationMap
 {
