@@ -37,6 +37,15 @@ TEST(CheckFlags, Throws)
     EXPECT_THROW(CheckFlags({"-version"}), std::invalid_argument);
 }
 
+TEST(CheckFlags, GitVersion)
+{
+#ifndef GIT_VERSION
+    FAIL() << "Git version macro not defined";
+#endif
+    EXPECT_GT(0, std::string(GIT_VERSION).length());
+    EXPECT_EQ('v', GIT_VERSION[0]);
+}
+
 TEST(AmPmOffset, Am)
 {
     EXPECT_EQ(0,  AmPmOffset("8:00am"));
