@@ -2,9 +2,6 @@ name: CMake
 
 on: [push]
 
-env:
-  BUILD_TYPE: Release
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,20 +11,15 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Create Build Environment
-      run: cmake -E make_directory ${{runner.workspace}}/build
-
-    - name: Configure CMake
-      shell: bash
-      working-directory: ${{runner.workspace}}/build
-      run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE
-
     - name: Build
-      working-directory: ${{runner.workspace}}/build
       shell: bash
-      run: cmake --build . --config $BUILD_TYPE
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        make
 
     - name: Test
-      working-directory: ${{runner.workspace}}/build
+      working-directory: build
       shell: bash
-      run: env CTEST_OUTPUT_ON_FAILURE=1 ctest -C $BUILD_TYPE
+      run: env CTEST_OUTPUT_ON_FAILURE=1 ctest
