@@ -113,14 +113,14 @@ TEST(ParseTimepoint, ShortTimes)
     EXPECT_EQ(23h, ParseTimepoint("11pm"));
 }
 
-TEST(DurationMap, Hours)
+TEST(DurationMap, MappedType)
 {
     using namespace std::chrono_literals;
-    EXPECT_EQ(0h,   Hours(0));
-    EXPECT_EQ(1h,   Hours(1));
-    EXPECT_EQ(5h,   Hours(5));
-    EXPECT_EQ(10h,  Hours(10));
-    EXPECT_EQ(100h, Hours(100));
+    EXPECT_EQ(0h,   DurationMap::mapped_type(0));
+    EXPECT_EQ(1h,   DurationMap::mapped_type(1));
+    EXPECT_EQ(5h,   DurationMap::mapped_type(5));
+    EXPECT_EQ(10h,  DurationMap::mapped_type(10));
+    EXPECT_EQ(100h, DurationMap::mapped_type(100));
 }
 
 TEST(CalculateDurations, TooFewArguments)
