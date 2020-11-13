@@ -21,17 +21,15 @@ auto FormatDurations(DurationMap durations)
     durations.erase("-");
 
     const auto label_width = LongestLabel(durations) + 2;
-    constexpr char separator = ' ';
-    constexpr auto duration_width = 4;
 
     std::stringstream out;
-    out << std::fixed << std::setprecision(1) << std::setfill(separator);
+    out << std::fixed << std::setprecision(1) << std::setfill(' ');
 
     auto total = Hours(0);
     for (const auto& duration : durations)
     {
         out << std::left << std::setw(label_width) << duration.first;
-        out << std::right << std::setw(duration_width) << duration.second.count() << " hours\n";
+        out << std::right << std::setw(4) << duration.second.count() << " hours\n";
         total += duration.second;
     }
 
