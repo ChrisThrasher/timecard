@@ -120,6 +120,17 @@ TEST(ParseTimepoint, ValidPmTimes)
     EXPECT_EQ(23h + 59min, ParseTimepoint("11:59pm"));
 }
 
+TEST(ParseTimepoint, ShortTimes)
+{
+    using namespace std::chrono_literals;
+    EXPECT_EQ( 0h, ParseTimepoint("12am"));
+    EXPECT_EQ( 1h, ParseTimepoint( "1am"));
+    EXPECT_EQ( 8h, ParseTimepoint( "8am"));
+    EXPECT_EQ(12h, ParseTimepoint("12pm"));
+    EXPECT_EQ(13h, ParseTimepoint( "1pm"));
+    EXPECT_EQ(23h, ParseTimepoint("11pm"));
+}
+
 TEST(DurationMap, Hours)
 {
     using namespace std::chrono_literals;
