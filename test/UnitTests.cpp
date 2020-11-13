@@ -46,24 +46,6 @@ TEST(CheckFlags, GitVersion)
     EXPECT_EQ('v', GIT_VERSION[0]);
 }
 
-TEST(AmPmOffset, Am)
-{
-    EXPECT_EQ(0,  AmPmOffset("8:00am"));
-    EXPECT_EQ(0,  AmPmOffset("12:00am"));
-}
-
-TEST(AmPmOffset, Pm)
-{
-    EXPECT_EQ(12, AmPmOffset("10:00pm"));
-    EXPECT_EQ(12, AmPmOffset("02:00pm"));
-}
-
-TEST(AmPmOffset, Garbage)
-{
-    EXPECT_THROW(AmPmOffset("asdf"),   std::invalid_argument);
-    EXPECT_THROW(AmPmOffset("-  _ -"), std::invalid_argument);
-}
-
 TEST(ParseTimepoint, Garbage)
 {
     EXPECT_THROW(ParseTimepoint(""), std::invalid_argument);
