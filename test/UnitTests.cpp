@@ -150,7 +150,7 @@ TEST(CalculateDurations, TooFewArguments)
 
 TEST(CalculateDurations, ExtraArgument)
 {
-    EXPECT_THROW(CalculateDurations({"1:00am", "so_far_so_good", "2:00am", "oh_no_an_extra_label"}), std::invalid_argument);
+    EXPECT_THROW(CalculateDurations({"1am", "so_far_so_good", "2:00am", "oh_no_an_extra_label"}), std::invalid_argument);
     EXPECT_THROW(CalculateDurations({"2:30pm", "ok", "3:00pm", "still_good", "5:00pm", "time_to_throw"}), std::invalid_argument);
     EXPECT_THROW(CalculateDurations({"2:30pm", "ok", "3:00pm", "still_good", "5:00pm", "-"}), std::invalid_argument);
     EXPECT_THROW(CalculateDurations({"2:30pm", "-", "3:00pm", "-", "5:00pm", "-"}), std::invalid_argument);
@@ -164,29 +164,29 @@ TEST(CalculateDurations, NegativeDuration)
 
 TEST(CalculateDurations, ZeroDuration)
 {
-    EXPECT_THROW(CalculateDurations({"9:00am", "oh_no_this_will_throw", "9:00am"}), std::runtime_error);
+    EXPECT_THROW(CalculateDurations({"9am", "oh_no_this_will_throw", "9am"}), std::runtime_error);
     EXPECT_THROW(CalculateDurations({"11:00pm", "oh_no_this_will_throw", "11:00pm"}), std::runtime_error);
 }
 
 TEST(CalculateDurations, SingleDuration)
 {
     using namespace std::chrono_literals;
-    EXPECT_EQ((DurationMap{{"test", 30min}}), CalculateDurations({"12:00pm", "test", "12:30pm"}));
-    EXPECT_EQ((DurationMap{{"test", 2h}}),    CalculateDurations({"2:00pm", "test", "4:00pm"}));
+    EXPECT_EQ((DurationMap{{"test", 30min}}), CalculateDurations({"12pm", "test", "12:30pm"}));
+    EXPECT_EQ((DurationMap{{"test", 2h}}),    CalculateDurations({"2:00pm", "test", "4pm"}));
 }
 
 TEST(CalculateDurations, MultiDurations)
 {
     using namespace std::chrono_literals;
     EXPECT_EQ((DurationMap{{"one", 30min}, {"two", 1h}}),    CalculateDurations({"12:00pm", "one", "12:30pm", "two", "1:30pm"}));
-    EXPECT_EQ((DurationMap{{"one", 45min}, {"two", 15min}}), CalculateDurations({"4:15pm", "one", "5:00pm", "two", "5:15pm"}));
-    EXPECT_EQ((DurationMap{{"one", 2h},    {"two", 1h}}),    CalculateDurations({"8:00am", "one", "9:00am", "two", "10:00am", "one", "11:00am"}));
+    EXPECT_EQ((DurationMap{{"one", 45min}, {"two", 15min}}), CalculateDurations({"4:15pm", "one", "5pm", "two", "5:15pm"}));
+    EXPECT_EQ((DurationMap{{"one", 2h},    {"two", 1h}}),    CalculateDurations({"8am", "one", "9am", "two", "10:00am", "one", "11:00am"}));
 }
 
 TEST(PrintDurations, OffTime)
 {
     using namespace std::chrono_literals;
-    auto durations = CalculateDurations({"12:00pm", "one", "12:30pm", "-", "2:30pm", "three", "4:00pm"});
+    auto durations = CalculateDurations({"12:00pm", "one", "12:30pm", "-", "2:30pm", "three", "4pm"});
     EXPECT_EQ(2h, OffTime(durations));
     EXPECT_TRUE(durations.find("-") == durations.end());
 }
@@ -194,9 +194,9 @@ TEST(PrintDurations, OffTime)
 TEST(PrintDurations, LongestLabel)
 {
     EXPECT_EQ(5,  LongestLabel(CalculateDurations({"12:00pm", "one", "12:30pm", "two", "1:30pm", "-", "2:30pm", "three", "4:00pm"})));
-    EXPECT_EQ(7,  LongestLabel(CalculateDurations({"12:00pm", "long", "12:30pm", "longer", "1:30pm", "longest", "4:00pm"})));
+    EXPECT_EQ(7,  LongestLabel(CalculateDurations({"12:00pm", "long", "12:30pm", "longer", "1:30pm", "longest", "4pm"})));
     EXPECT_EQ(1,  LongestLabel(CalculateDurations({"12:00pm", "a", "12:30pm"})));
-    EXPECT_EQ(26, LongestLabel(CalculateDurations({"12:00pm", "abcdefghijklmnopqrstuvwxyz", "12:30pm"})));
+    EXPECT_EQ(26, LongestLabel(CalculateDurations({"12pm", "abcdefghijklmnopqrstuvwxyz", "12:30pm"})));
 }
 
 TEST(PrintDurations, FormatDurations)
