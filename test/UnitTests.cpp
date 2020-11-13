@@ -1,7 +1,7 @@
 #include <CheckFlags.h>
 #include <ParseTimepoint.h>
 #include <CalculateDurations.h>
-#include <PrintDurations.h>
+#include <FormatDurations.h>
 #include <VectorizeArguments.h>
 
 #include <gtest/gtest.h>
@@ -173,13 +173,13 @@ TEST(PrintDurations, FormatDurations)
         "three   1.5 hours\n"
         "two     1.0 hours\n"
         "\nTotal: 3.0 hours (1.0 hours off)\n",
-        FormatDurations({{"one", 30min}, {"two", 60min}, {"three", 90min}, {"-", 60min}}).str());
+        FormatDurations({{"one", 30min}, {"two", 60min}, {"three", 90min}, {"-", 60min}}));
     EXPECT_EQ(
         "areallylongactivitythatdominatesthetable   1.1 hours\n"
         "eat                                        2.0 hours\n"
         "sleep                                      8.0 hours\n"
         "\nTotal: 11.1 hours\n",
-        FormatDurations({{"eat", 2h}, {"sleep", 8h}, {"areallylongactivitythatdominatesthetable", 66min}}).str());
+        FormatDurations({{"eat", 2h}, {"sleep", 8h}, {"areallylongactivitythatdominatesthetable", 66min}}));
     EXPECT_EQ(
         "a   0.0 hours\n"
         "b   0.1 hours\n"
@@ -187,7 +187,7 @@ TEST(PrintDurations, FormatDurations)
         "d   0.1 hours\n"
         "e   0.2 hours\n"
         "\nTotal: 0.5 hours\n",
-        FormatDurations({{"a", 2min}, {"b", 3min}, {"c", 8min}, {"d", 9min}, {"e", 10min}}).str());
+        FormatDurations({{"a", 2min}, {"b", 3min}, {"c", 8min}, {"d", 9min}, {"e", 10min}}));
 }
 
 int main(int argc, char* argv[])

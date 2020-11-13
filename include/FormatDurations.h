@@ -40,7 +40,5 @@ auto FormatDurations(DurationMap durations)
         out << " (" << off_time.count() << " hours off)";
     out << '\n';
 
-    return out;
+    return out.str();
 }
-
-void PrintDurations(const DurationMap& durations) { std::cout << FormatDurations(durations).str(); }
