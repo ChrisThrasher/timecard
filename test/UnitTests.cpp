@@ -1,5 +1,6 @@
 #include <CalculateDurations.h>
 #include <CheckFlags.h>
+#include <DurationMap.h>
 #include <FormatDurations.h>
 #include <ParseTimepoint.h>
 #include <VectorizeArguments.h>
