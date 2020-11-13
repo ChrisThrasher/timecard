@@ -165,14 +165,6 @@ TEST(CalculateDurations, MultiDurations)
     EXPECT_EQ((DurationMap{{"one", 2h},    {"two", 1h}}),    CalculateDurations({"8am", "one", "9am", "two", "10:00am", "one", "11:00am"}));
 }
 
-TEST(PrintDurations, OffTime)
-{
-    using namespace std::chrono_literals;
-    auto durations = CalculateDurations({"12:00pm", "one", "12:30pm", "-", "2:30pm", "three", "4pm"});
-    EXPECT_EQ(2h, OffTime(durations));
-    EXPECT_TRUE(durations.find("-") == durations.end());
-}
-
 TEST(PrintDurations, LongestLabel)
 {
     EXPECT_EQ(5,  LongestLabel(CalculateDurations({"12:00pm", "one", "12:30pm", "two", "1:30pm", "-", "2:30pm", "three", "4:00pm"})));

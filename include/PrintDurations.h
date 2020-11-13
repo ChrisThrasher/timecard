@@ -7,14 +7,6 @@
 #include <iostream>
 #include <sstream>
 
-Hours OffTime(DurationMap& durations)
-{
-    constexpr auto off_time_key = "-";
-    const auto off_time_it = durations.find(off_time_key);
-    durations.erase(off_time_key);
-    return (off_time_it != durations.end()) ? off_time_it->second : Hours(0);
-}
-
 int LongestLabel(const DurationMap& durations)
 {
     return static_cast<int>(
@@ -25,7 +17,8 @@ int LongestLabel(const DurationMap& durations)
 
 auto FormatDurations(DurationMap durations)
 {
-    const auto off_time = OffTime(durations);
+    const auto off_time = durations.find("-") != durations.end() ? durations["-"] : Hours(0);
+    durations.erase("-");
 
     const auto label_width = LongestLabel(durations) + 2;
     constexpr char separator = ' ';
