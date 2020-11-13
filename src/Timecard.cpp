@@ -1,6 +1,6 @@
 #include <CalculateDurations.h>
 #include <CheckFlags.h>
-#include <PrintDurations.h>
+#include <FormatDurations.h>
 #include <VectorizeArguments.h>
 
 int main(int argc, char* argv[])
@@ -8,7 +8,7 @@ try
 {
     const auto args = VectorizeArguments(argc, argv);
     CheckFlags(args);
-    PrintDurations(CalculateDurations(args));
+    std::cout << FormatDurations(CalculateDurations(args));
 }
 catch (const std::exception& ex)
 {

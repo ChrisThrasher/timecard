@@ -1,7 +1,8 @@
-#include <CheckFlags.h>
-#include <ParseTimepoint.h>
 #include <CalculateDurations.h>
-#include <PrintDurations.h>
+#include <CheckFlags.h>
+#include <DurationMap.h>
+#include <FormatDurations.h>
+#include <ParseTimepoint.h>
 #include <VectorizeArguments.h>
 
 #include <gtest/gtest.h>
@@ -44,24 +45,6 @@ TEST(CheckFlags, GitVersion)
 #endif
     EXPECT_GT(std::string(GIT_VERSION).length(), 0);
     EXPECT_EQ('v', GIT_VERSION[0]);
-}
-
-TEST(AmPmOffset, Am)
-{
-    EXPECT_EQ(0,  AmPmOffset("8:00am"));
-    EXPECT_EQ(0,  AmPmOffset("12:00am"));
-}
-
-TEST(AmPmOffset, Pm)
-{
-    EXPECT_EQ(12, AmPmOffset("10:00pm"));
-    EXPECT_EQ(12, AmPmOffset("02:00pm"));
-}
-
-TEST(AmPmOffset, Garbage)
-{
-    EXPECT_THROW(AmPmOffset("asdf"),   std::invalid_argument);
-    EXPECT_THROW(AmPmOffset("-  _ -"), std::invalid_argument);
 }
 
 TEST(ParseTimepoint, Garbage)
@@ -131,14 +114,14 @@ TEST(ParseTimepoint, ShortTimes)
     EXPECT_EQ(23h, ParseTimepoint("11pm"));
 }
 
-TEST(DurationMap, Hours)
+TEST(DurationMap, MappedType)
 {
     using namespace std::chrono_literals;
-    EXPECT_EQ(0h,   Hours(0));
-    EXPECT_EQ(1h,   Hours(1));
-    EXPECT_EQ(5h,   Hours(5));
-    EXPECT_EQ(10h,  Hours(10));
-    EXPECT_EQ(100h, Hours(100));
+    EXPECT_EQ(0h,   DurationMap::mapped_type(0));
+    EXPECT_EQ(1h,   DurationMap::mapped_type(1));
+    EXPECT_EQ(5h,   DurationMap::mapped_type(5));
+    EXPECT_EQ(10h,  DurationMap::mapped_type(10));
+    EXPECT_EQ(100h, DurationMap::mapped_type(100));
 }
 
 TEST(CalculateDurations, TooFewArguments)
@@ -183,23 +166,7 @@ TEST(CalculateDurations, MultiDurations)
     EXPECT_EQ((DurationMap{{"one", 2h},    {"two", 1h}}),    CalculateDurations({"8am", "one", "9am", "two", "10:00am", "one", "11:00am"}));
 }
 
-TEST(PrintDurations, OffTime)
-{
-    using namespace std::chrono_literals;
-    auto durations = CalculateDurations({"12:00pm", "one", "12:30pm", "-", "2:30pm", "three", "4pm"});
-    EXPECT_EQ(2h, OffTime(durations));
-    EXPECT_TRUE(durations.find("-") == durations.end());
-}
-
-TEST(PrintDurations, LongestLabel)
-{
-    EXPECT_EQ(5,  LongestLabel(CalculateDurations({"12:00pm", "one", "12:30pm", "two", "1:30pm", "-", "2:30pm", "three", "4:00pm"})));
-    EXPECT_EQ(7,  LongestLabel(CalculateDurations({"12:00pm", "long", "12:30pm", "longer", "1:30pm", "longest", "4pm"})));
-    EXPECT_EQ(1,  LongestLabel(CalculateDurations({"12:00pm", "a", "12:30pm"})));
-    EXPECT_EQ(26, LongestLabel(CalculateDurations({"12pm", "abcdefghijklmnopqrstuvwxyz", "12:30pm"})));
-}
-
-TEST(PrintDurations, FormatDurations)
+TEST(FormatDurations, ExactOutput)
 {
     using namespace std::chrono_literals;
     EXPECT_EQ(
@@ -207,13 +174,13 @@ TEST(PrintDurations, FormatDurations)
         "three   1.5 hours\n"
         "two     1.0 hours\n"
         "\nTotal: 3.0 hours (1.0 hours off)\n",
-        FormatDurations({{"one", 30min}, {"two", 60min}, {"three", 90min}, {"-", 60min}}).str());
+        FormatDurations({{"one", 30min}, {"two", 60min}, {"three", 90min}, {"-", 60min}}));
     EXPECT_EQ(
         "areallylongactivitythatdominatesthetable   1.1 hours\n"
         "eat                                        2.0 hours\n"
         "sleep                                      8.0 hours\n"
         "\nTotal: 11.1 hours\n",
-        FormatDurations({{"eat", 2h}, {"sleep", 8h}, {"areallylongactivitythatdominatesthetable", 66min}}).str());
+        FormatDurations({{"eat", 2h}, {"sleep", 8h}, {"areallylongactivitythatdominatesthetable", 66min}}));
     EXPECT_EQ(
         "a   0.0 hours\n"
         "b   0.1 hours\n"
@@ -221,7 +188,7 @@ TEST(PrintDurations, FormatDurations)
         "d   0.1 hours\n"
         "e   0.2 hours\n"
         "\nTotal: 0.5 hours\n",
-        FormatDurations({{"a", 2min}, {"b", 3min}, {"c", 8min}, {"d", 9min}, {"e", 10min}}).str());
+        FormatDurations({{"a", 2min}, {"b", 3min}, {"c", 8min}, {"d", 9min}, {"e", 10min}}));
 }
 
 int main(int argc, char* argv[])
