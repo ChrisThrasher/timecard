@@ -1,7 +1,7 @@
-#include <CheckFlags.h>
-#include <ParseTimepoint.h>
 #include <CalculateDurations.h>
+#include <CheckFlags.h>
 #include <FormatDurations.h>
+#include <ParseTimepoint.h>
 #include <VectorizeArguments.h>
 
 #include <gtest/gtest.h>
