@@ -165,7 +165,7 @@ TEST(CalculateDurations, MultiDurations)
     EXPECT_EQ((DurationMap{{"one", 2h},    {"two", 1h}}),    CalculateDurations({"8am", "one", "9am", "two", "10:00am", "one", "11:00am"}));
 }
 
-TEST(PrintDurations, FormatDurations)
+TEST(FormatDurations, ExactOutput)
 {
     using namespace std::chrono_literals;
     EXPECT_EQ(
