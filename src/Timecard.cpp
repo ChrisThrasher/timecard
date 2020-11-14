@@ -2,7 +2,7 @@
 #include <FormatDurations.h>
 #include <VectorizeArguments.h>
 
-#include <Options.h>
+#include <Options/Options.h>
 
 static constexpr auto help_text = R"(Usage
   timecard <time1> <activity1> <time2> <activity2> <time3> <activityN> <timeN>
