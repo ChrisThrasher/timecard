@@ -2,7 +2,7 @@
 #include <FormatDurations.h>
 #include <VectorizeArguments.h>
 
-#include <Options.h>
+#include <Options/Options.h>
 
 static constexpr auto help_text = R"(Usage
   timecard <time1> <activity1> <time2> <activity2> <time3> <activityN> <timeN>
@@ -23,9 +23,9 @@ Options
 int main(int argc, char* argv[])
 try
 {
-    Options options(argc, argv);
-    options.ExitItem({"-h", "--help"}, help_text);
-    options.ExitItem({"-v", "--version"}, GIT_VERSION);
+    const Options options(argc, argv);
+    options.Help(help_text);
+    options.Version(GIT_VERSION);
 
     std::cout << FormatDurations(CalculateDurations(VectorizeArguments(argc, argv)));
 }
