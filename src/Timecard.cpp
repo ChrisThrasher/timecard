@@ -24,8 +24,8 @@ int main(int argc, char* argv[])
 try
 {
     Options options(argc, argv);
-    options.ExitItem({"-h", "--help"}, help_text);
-    options.ExitItem({"-v", "--version"}, GIT_VERSION);
+    options.Help(help_text);
+    options.Version(GIT_VERSION);
 
     std::cout << FormatDurations(CalculateDurations(VectorizeArguments(argc, argv)));
 }
