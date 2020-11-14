@@ -1,11 +1,19 @@
 #include <CalculateDurations.h>
-#include <CheckFlags.h>
 #include <DurationMap.h>
 #include <FormatDurations.h>
 #include <ParseTimepoint.h>
 #include <VectorizeArguments.h>
 
 #include <gtest/gtest.h>
+
+TEST(Options, GitVersion)
+{
+#ifndef GIT_VERSION
+    FAIL() << "GIT_VERSION symbol not defined";
+#endif
+    EXPECT_GT(std::string(GIT_VERSION).length(), 0);
+    EXPECT_EQ('v', GIT_VERSION[0]);
+}
 
 TEST(VectorizeArguments, SingleArgument)
 {
@@ -19,32 +27,6 @@ TEST(VectorizeArguments, MultipleArguments)
     constexpr int argc = 8;
     constexpr const char* argv[argc] = {"timecard", "830am", "breakfast", "900am", "sleep", "1200pm", "lunch", "100pm"};
     EXPECT_EQ(std::vector<std::string>({"830am", "breakfast", "900am", "sleep", "1200pm", "lunch", "100pm"}), VectorizeArguments(argc, argv));
-}
-
-TEST(CheckFlags, ExitSuccess)
-{
-    const auto exit_success = [](const int exit_code) { return exit_code == EXIT_SUCCESS; };
-    EXPECT_EXIT(CheckFlags({"-h"}),        exit_success, "");
-    EXPECT_EXIT(CheckFlags({"--help"}),    exit_success, "");
-    EXPECT_EXIT(CheckFlags({"-v"}),        exit_success, "");
-    EXPECT_EXIT(CheckFlags({"--version"}), exit_success, "");
-}
-
-TEST(CheckFlags, Throws)
-{
-    EXPECT_THROW(CheckFlags({"--h"}),      std::invalid_argument);
-    EXPECT_THROW(CheckFlags({"-help"}),    std::invalid_argument);
-    EXPECT_THROW(CheckFlags({"--v"}),      std::invalid_argument);
-    EXPECT_THROW(CheckFlags({"-version"}), std::invalid_argument);
-}
-
-TEST(CheckFlags, GitVersion)
-{
-#ifndef GIT_VERSION
-    FAIL() << "GIT_VERSION symbol not defined";
-#endif
-    EXPECT_GT(std::string(GIT_VERSION).length(), 0);
-    EXPECT_EQ('v', GIT_VERSION[0]);
 }
 
 TEST(ParseTimepoint, Garbage)
