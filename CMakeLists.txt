@@ -25,8 +25,7 @@ FetchContent_Populate(options)
 add_subdirectory(${options_SOURCE_DIR} ${options_BINARY_DIR} EXCLUDE_FROM_ALL)
 
 add_executable(timecard src/Timecard.cpp)
-target_include_directories(timecard PRIVATE include)
-target_include_directories(timecard SYSTEM PRIVATE ${options_SOURCE_DIR}/include)
+target_include_directories(timecard PRIVATE include ${options_SOURCE_DIR}/include)
 target_compile_options(timecard PRIVATE
     -Werror
     -Wall
