@@ -23,7 +23,7 @@ Options
 int main(int argc, char* argv[])
 try
 {
-    Options options(argc, argv);
+    const Options options(argc, argv);
     options.Help(help_text);
     options.Version(GIT_VERSION);
 
