@@ -27,7 +27,7 @@ try
     options.Help(help_text);
     options.Version(GIT_VERSION);
 
-    std::cout << FormatDurations(CalculateDurations(VectorizeArguments(argc, argv)));
+    std::cout << FormatDurations(CalculateDurations(options.Args()));
 }
 catch (const std::exception& ex)
 {
