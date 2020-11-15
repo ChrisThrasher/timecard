@@ -1,6 +1,5 @@
 #include <CalculateDurations.h>
 #include <FormatDurations.h>
-#include <VectorizeArguments.h>
 
 #include <Options/Options.h>
 
@@ -27,7 +26,7 @@ try
     options.Help(help_text);
     options.Version(GIT_VERSION);
 
-    std::cout << FormatDurations(CalculateDurations(VectorizeArguments(argc, argv)));
+    std::cout << FormatDurations(CalculateDurations(options.Args()));
 }
 catch (const std::exception& ex)
 {

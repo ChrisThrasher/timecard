@@ -2,7 +2,6 @@
 #include <DurationMap.h>
 #include <FormatDurations.h>
 #include <ParseTimepoint.h>
-#include <VectorizeArguments.h>
 
 #include <gtest/gtest.h>
 
@@ -13,20 +12,6 @@ TEST(Options, GitVersion)
 #endif
     EXPECT_GT(std::string(GIT_VERSION).length(), 0);
     EXPECT_EQ('v', GIT_VERSION[0]);
-}
-
-TEST(VectorizeArguments, SingleArgument)
-{
-    constexpr int argc = 2;
-    constexpr const char* argv[argc] = {"my_program_name", "some_input"};
-    EXPECT_EQ(std::vector<std::string>({"some_input"}), VectorizeArguments(argc, argv));
-}
-
-TEST(VectorizeArguments, MultipleArguments)
-{
-    constexpr int argc = 8;
-    constexpr const char* argv[argc] = {"timecard", "830am", "breakfast", "900am", "sleep", "1200pm", "lunch", "100pm"};
-    EXPECT_EQ(std::vector<std::string>({"830am", "breakfast", "900am", "sleep", "1200pm", "lunch", "100pm"}), VectorizeArguments(argc, argv));
 }
 
 TEST(ParseTimepoint, Garbage)
