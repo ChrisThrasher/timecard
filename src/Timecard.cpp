@@ -1,6 +1,5 @@
 #include <CalculateDurations.h>
 #include <FormatDurations.h>
-#include <VectorizeArguments.h>
 
 #include <Options/Options.h>
 
