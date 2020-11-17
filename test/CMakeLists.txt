@@ -13,6 +13,12 @@ target_link_libraries(unit_tests PRIVATE gtest)
 target_compile_options(unit_tests PRIVATE -Werror -Wall -Wextra)
 add_test(NAME unit_tests COMMAND unit_tests)
 
+add_test(NAME flag--help COMMAND timecard --help)
+set_property(TEST flag--help PROPERTY PASS_REGULAR_EXPRESSION "Usage.*")
+
+add_test(NAME flag-h COMMAND timecard -h)
+set_property(TEST flag-h PROPERTY PASS_REGULAR_EXPRESSION "Usage.*")
+
 add_test(NAME flag--version COMMAND timecard --version)
 set_property(TEST flag--version PROPERTY PASS_REGULAR_EXPRESSION "${GIT_VERSION}")
 
