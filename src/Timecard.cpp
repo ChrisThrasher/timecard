@@ -16,8 +16,7 @@ reported as "off time" should they exist.
 
 Options
   -h, --help        Show this help text
-  -v, --version     Print program version
-)";
+  -v, --version     Print program version)";
 
 int main(int argc, char* argv[])
 try

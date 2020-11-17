@@ -18,14 +18,15 @@ add_compile_definitions(GIT_VERSION="${GIT_VERSION}")
 FetchContent_Declare(
     options
     GIT_REPOSITORY "https://github.com/ChrisThrasher/options.git"
-    GIT_TAG v0.3.0
+    GIT_TAG v0.3.1
 )
 FetchContent_GetProperties(options)
 FetchContent_Populate(options)
 add_subdirectory(${options_SOURCE_DIR} ${options_BINARY_DIR} EXCLUDE_FROM_ALL)
 
 add_executable(timecard src/Timecard.cpp)
-target_include_directories(timecard PRIVATE include ${options_SOURCE_DIR}/include)
+target_include_directories(timecard PRIVATE include)
+target_link_libraries(timecard PRIVATE options)
 target_compile_options(timecard PRIVATE
     -Werror
     -Wall
@@ -38,18 +39,5 @@ target_compile_options(timecard PRIVATE
 )
 install(TARGETS timecard DESTINATION bin)
 
-FetchContent_Declare(
-    gtest
-    GIT_REPOSITORY "https://github.com/google/googletest.git"
-    GIT_TAG master
-)
-FetchContent_GetProperties(gtest)
-FetchContent_Populate(gtest)
-add_subdirectory(${gtest_SOURCE_DIR} ${gtest_BINARY_DIR} EXCLUDE_FROM_ALL)
-
 enable_testing()
-add_executable(unit_tests test/UnitTests.cpp)
-target_include_directories(unit_tests PRIVATE include)
-target_include_directories(unit_tests SYSTEM PRIVATE ${gtest_SOURCE_DIR}/include)
-target_link_libraries(unit_tests PRIVATE gtest)
-add_test(NAME unit_tests COMMAND unit_tests)
+add_subdirectory(test)
