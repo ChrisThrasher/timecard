@@ -18,7 +18,7 @@ add_compile_definitions(GIT_VERSION="${GIT_VERSION}")
 FetchContent_Declare(
     options
     GIT_REPOSITORY "https://github.com/ChrisThrasher/options.git"
-    GIT_TAG v0.3.1
+    GIT_TAG v0.3.2
 )
 FetchContent_GetProperties(options)
 FetchContent_Populate(options)
