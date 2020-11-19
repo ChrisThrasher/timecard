@@ -3,7 +3,7 @@
 
 #include <Options/Options.h>
 
-static constexpr auto help_text = R"(Usage
+static constexpr auto help = R"(Usage
   timecard <time1> <activity1> <time2> <activity2> <time3> <activityN> <timeN>
   timecard [options]
 
@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 try
 {
     Options options(argc, argv);
-    options.Help(help_text);
+    options.Help(help);
     options.Version(GIT_VERSION);
     options.Parse();
 
