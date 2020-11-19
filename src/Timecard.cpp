@@ -12,11 +12,7 @@ represents. 8:00 a.m. can be formatted as "8:00am" or "8am". 12:30 p.m. is
 formatted only as "12:30pm".
 
 Any activities named "-" will be ignored. This activity's durations are
-reported as "off time" should they exist.
-
-Options
-  -h, --help        Show this help text
-  -v, --version     Print program version)";
+reported as "off time" should they exist.)";
 
 int main(int argc, char* argv[])
 try
