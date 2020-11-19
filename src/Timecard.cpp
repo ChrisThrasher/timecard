@@ -21,9 +21,10 @@ Options
 int main(int argc, char* argv[])
 try
 {
-    const Options options(argc, argv);
+    Options options(argc, argv);
     options.Help(help_text);
     options.Version(GIT_VERSION);
+    options.Parse();
 
     std::cout << FormatDurations(CalculateDurations(options.Args()));
 }
