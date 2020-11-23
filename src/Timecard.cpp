@@ -1,7 +1,7 @@
 #include <CalculateDurations.h>
 #include <FormatDurations.h>
 
-#include <Options/Options.h>
+#include <Options/Parser.h>
 
 static constexpr auto help = R"(Usage
   timecard <time1> <activity1> <time2> <activity2> <time3> <activityN> <timeN>
@@ -17,12 +17,11 @@ reported as "off time" should they exist.)";
 int main(int argc, char* argv[])
 try
 {
-    Options options(argc, argv);
-    options.Help(help);
-    options.Version(GIT_VERSION);
-    options.Parse();
+    opts::Parser parser(argc, argv, help);
+    parser.Add("version,v", "Print program version", opts::Exit(GIT_VERSION));
+    parser.Parse();
 
-    std::cout << FormatDurations(CalculateDurations(options.Args()));
+    std::cout << FormatDurations(CalculateDurations(parser.Args()));
 }
 catch (const std::exception& ex)
 {
