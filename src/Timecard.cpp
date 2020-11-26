@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 try
 {
     opts::Parser parser(argc, argv, help);
-    parser.Add("v,version", "Print program version", opts::Exit(GIT_VERSION));
+    parser.Add("v,version", "Print program version", opts::Print(GIT_VERSION));
     parser.Parse();
 
     std::cout << FormatDurations(CalculateDurations(parser.Args()));
