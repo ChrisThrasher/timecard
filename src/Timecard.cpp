@@ -1,7 +1,7 @@
 #include <CalculateDurations.h>
 #include <FormatDurations.h>
 
-#include <Options/Parser.h>
+#include <argon/Parser.h>
 
 static constexpr auto help = R"(Usage
   timecard <time1> <activity1> <time2> <activity2> <time3> <activityN> <timeN>
@@ -17,8 +17,9 @@ reported as "off time" should they exist.)";
 int main(int argc, char* argv[])
 try
 {
-    opts::Parser parser(argc, argv, help);
-    parser.Add("v,version", "Print program version", opts::Print(GIT_VERSION));
+    argon::Parser parser(argc, argv);
+    parser.Add("h,help", "Show this help text", argon::Usage(help));
+    parser.Add("v,version", "Print program version", argon::Print(GIT_VERSION));
     parser.Parse();
 
     std::cout << FormatDurations(CalculateDurations(parser.Args()));
