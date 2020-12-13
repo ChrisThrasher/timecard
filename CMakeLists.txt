@@ -16,17 +16,17 @@ message(STATUS "Timecard version ${GIT_VERSION}")
 add_compile_definitions(GIT_VERSION="${GIT_VERSION}")
 
 FetchContent_Declare(
-    options
-    GIT_REPOSITORY "https://github.com/ChrisThrasher/options.git"
-    GIT_TAG v0.5.0
+    argon
+    GIT_REPOSITORY "https://github.com/ChrisThrasher/argon.git"
+    GIT_TAG v0.5.1
 )
-FetchContent_GetProperties(options)
-FetchContent_Populate(options)
-add_subdirectory(${options_SOURCE_DIR} ${options_BINARY_DIR} EXCLUDE_FROM_ALL)
+FetchContent_GetProperties(argon)
+FetchContent_Populate(argon)
+add_subdirectory(${argon_SOURCE_DIR} ${argon_BINARY_DIR} EXCLUDE_FROM_ALL)
 
 add_executable(timecard src/Timecard.cpp)
 target_include_directories(timecard PRIVATE include)
-target_link_libraries(timecard PRIVATE options)
+target_link_libraries(timecard PRIVATE argon)
 target_compile_options(timecard PRIVATE
     -Werror
     -Wall
