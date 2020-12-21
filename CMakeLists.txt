@@ -18,7 +18,7 @@ add_compile_definitions(GIT_VERSION="${GIT_VERSION}")
 FetchContent_Declare(
     argon
     GIT_REPOSITORY "https://github.com/ChrisThrasher/argon.git"
-    GIT_TAG v0.5.1
+    GIT_TAG v0.6.0
 )
 FetchContent_GetProperties(argon)
 FetchContent_Populate(argon)

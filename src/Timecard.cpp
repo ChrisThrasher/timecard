@@ -18,8 +18,8 @@ int main(int argc, char* argv[])
 try
 {
     argon::Parser parser(argc, argv);
-    parser.Add("h,help", "Show this help text", argon::Usage(help));
-    parser.Add("v,version", "Print program version", argon::Print(GIT_VERSION));
+    parser.AddOption("h,help", "Show this help text", argon::Usage(help));
+    parser.AddOption("v,version", "Print program version", argon::Print(GIT_VERSION));
     parser.Parse();
 
     std::cout << FormatDurations(CalculateDurations(parser.Args()));
