@@ -28,12 +28,22 @@ auto ParseShortTimepoint(const std::string& timepoint)
     return std::chrono::hours(hours);
 }
 
+auto CurrentTime()
+{
+    const auto now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+    const tm time = *localtime(&now);
+
+    return std::chrono::hours(time.tm_hour) + std::chrono::minutes(time.tm_min);
+}
+
 auto ParseTimepoint(const std::string& timepoint) -> std::chrono::minutes
 {
     if (std::regex_match(timepoint, std::regex("([1][0-2]|[1-9]):[0-5][0-9](a|p)m")))
         return ParseLongTimepoint(timepoint);
     if (std::regex_match(timepoint, std::regex("([1][0-2]|[1-9])(a|p)m")))
         return ParseShortTimepoint(timepoint);
+    if (std::regex_match(timepoint, std::regex("now")))
+        return CurrentTime();
 
     throw std::invalid_argument("Failed to parse \"" + timepoint + "\"");
 }
