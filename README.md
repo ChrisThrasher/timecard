@@ -12,7 +12,7 @@ Usage
 
 Time formatting can follow one of two patterns depending on the time it
 represents. 8:00 a.m. can be formatted as "8:00am" or "8am". 12:30 p.m. is
-formatted only as "12:30pm".
+formatted only as "12:30pm". "now" is interpreted as the current time.
 
 Any activities named "-" will be ignored. This activity's durations are
 reported as "off time" should they exist.
@@ -45,10 +45,21 @@ Total: 6.0 hours
 
 Because the label `reading` appeared twice, its two durations were accumulated. This will be done for any labels which appear more than once.
 
-To ignore certain periods of time so that they're not reported, name them `-`. This will exclude them from the printed totals. Here's what that looks like:
+To ignore certain periods of time so that they're not reported, name them `-`. This will exclude them from the printed totals.
 
 ```
 $ timecard 8am gardening 10am reading 11am lunch 12:30pm reading 2pm - 9pm reading 10pm
+gardening   2.0 hours
+lunch       1.5 hours
+reading     3.5 hours
+
+Total: 7.0 hours (7.0 hours off)
+```
+
+As a convenience "now" is interpreted as the current time. If you read until the time at which you ran the program (10:00 pm), you could simply do this:
+
+```
+$ timecard 8am gardening 10am reading 11am lunch 12:30pm reading 2pm - 9pm reading now
 gardening   2.0 hours
 lunch       1.5 hours
 reading     3.5 hours

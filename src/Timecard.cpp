@@ -9,7 +9,7 @@ static constexpr auto help = R"(Usage
 
 Time formatting can follow one of two patterns depending on the time it
 represents. 8:00 a.m. can be formatted as "8:00am" or "8am". 12:30 p.m. is
-formatted only as "12:30pm".
+formatted only as "12:30pm". "now" is interpreted as the current time.
 
 Any activities named "-" will be ignored. This activity's durations are
 reported as "off time" should they exist.)";
