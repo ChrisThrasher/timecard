@@ -3,10 +3,7 @@
 
 #include <argon/Parser.h>
 
-static constexpr auto help = R"(Usage
-  timecard <time1> <activity1> <time2> <activity2> <time3> <activityN> <timeN>
-  timecard [options]
-
+static constexpr auto help = R"(
 Time formatting can follow one of two patterns depending on the time it
 represents. 8:00 a.m. can be formatted as "8:00am" or "8am". 12:30 p.m. is
 formatted only as "12:30pm". "now" is interpreted as the current time.
@@ -18,8 +15,9 @@ int main(int argc, char* argv[])
 try
 {
     argon::Parser parser(argc, argv);
-    parser.AddOption("h,help", "Show this help text", argon::Usage(help));
-    parser.AddOption("v,version", "Print program version", argon::Print(GIT_VERSION));
+    parser.AddOption("h,help", "Show this help text", argon::USAGE, help);
+    parser.AddOption("v,version", "Print program version", argon::PRINT, GIT_VERSION);
+    parser.AddPosition("args...", "Alternating times and activities");
     parser.Parse();
 
     std::cout << FormatDurations(CalculateDurations(parser.Args()));
