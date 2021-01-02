@@ -41,15 +41,5 @@ add_executable(timecard src/Timecard.cpp)
 target_link_libraries(timecard PRIVATE argon core)
 install(TARGETS timecard DESTINATION bin)
 
-add_custom_target(format
-    COMMAND ${CMAKE_SOURCE_DIR}/format.sh
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-)
-
-add_custom_target(analyze
-    COMMAND ${CMAKE_SOURCE_DIR}/analyze.sh
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-)
-
 enable_testing()
 add_subdirectory(test)
