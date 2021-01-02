@@ -24,10 +24,9 @@ FetchContent_GetProperties(argon)
 FetchContent_Populate(argon)
 add_subdirectory(${argon_SOURCE_DIR} ${argon_BINARY_DIR} EXCLUDE_FROM_ALL)
 
-add_executable(timecard src/Timecard.cpp)
-target_include_directories(timecard PRIVATE include)
-target_link_libraries(timecard PRIVATE argon)
-target_compile_options(timecard PRIVATE
+add_library(core INTERFACE)
+target_include_directories(core INTERFACE include)
+target_compile_options(core INTERFACE
     -Werror
     -Wall
     -Wextra
@@ -37,17 +36,10 @@ target_compile_options(timecard PRIVATE
     -Wsign-conversion
     -Wold-style-cast
 )
+
+add_executable(timecard src/Timecard.cpp)
+target_link_libraries(timecard PRIVATE argon core)
 install(TARGETS timecard DESTINATION bin)
-
-add_custom_target(format
-    COMMAND ${CMAKE_SOURCE_DIR}/format.sh
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-)
-
-add_custom_target(analyze
-    COMMAND ${CMAKE_SOURCE_DIR}/analyze.sh
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-)
 
 enable_testing()
 add_subdirectory(test)
