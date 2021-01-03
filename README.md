@@ -7,8 +7,7 @@ Calculates how much time was spent on various activities throughout the day.
 ```
 $ timecard --help
 Usage
-  timecard <time1> <activity1> <time2> <activity2> <time3> <activityN> <timeN>
-  timecard [options]
+  timecard <args...> [options]
 
 Time formatting can follow one of two patterns depending on the time it
 represents. 8:00 a.m. can be formatted as "8:00am" or "8am". 12:30 p.m. is
@@ -17,9 +16,12 @@ formatted only as "12:30pm". "now" is interpreted as the current time.
 Any activities named "-" will be ignored. This activity's durations are
 reported as "off time" should they exist.
 
+Positions
+  args...                 Alternating times and activities
+
 Options
-  -h, --help        Show this help text
-  -v, --version     Print program version
+  -h, --help              Show this help text
+  -v, --version           Print program version
 ```
 
 Starting with the time the first activity started, list all times that activities changed along with the activities that occurred between those times. If you spent 8:00 a.m. to 10:00 a.m. gardening then 10:00 a.m. to 11:00 a.m. reading, the command would look like this:
