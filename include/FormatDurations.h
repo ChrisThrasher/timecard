@@ -26,8 +26,7 @@ auto FormatDurations(DurationMap durations)
     out << std::fixed << std::setprecision(1) << std::setfill(' ');
 
     auto total = Hours(0);
-    for (const auto& duration : durations)
-    {
+    for (const auto& duration : durations) {
         out << std::left << std::setw(label_width) << duration.first;
         out << std::right << std::setw(4) << duration.second.count() << " hours\n";
         total += duration.second;

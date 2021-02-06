@@ -12,8 +12,7 @@ Any activities named "-" will be ignored. This activity's durations are
 reported as "off time" should they exist.)";
 
 int main(int argc, char* argv[])
-try
-{
+try {
     argon::Parser parser(argc, argv);
     parser.AddOption("h,help", "Show this help text", argon::USAGE, help);
     parser.AddOption("v,version", "Print program version", argon::PRINT, GIT_VERSION);
@@ -21,9 +20,7 @@ try
     parser.Parse();
 
     std::cout << FormatDurations(CalculateDurations(parser.Args()));
-}
-catch (const std::exception& ex)
-{
+} catch (const std::exception& ex) {
     std::cerr << ex.what() << std::endl;
     return EXIT_FAILURE;
 }
