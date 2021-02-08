@@ -4,7 +4,6 @@
 
 #include <algorithm>
 #include <iomanip>
-#include <iostream>
 #include <sstream>
 
 int LongestLabel(const DurationMap& durations)

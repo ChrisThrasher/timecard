@@ -3,6 +3,8 @@
 
 #include <argon/Parser.h>
 
+#include <iostream>
+
 static constexpr auto help = R"(
 Time formatting can follow one of two patterns depending on the time it
 represents. 8:00 a.m. can be formatted as "8:00am" or "8am". 12:30 p.m. is
