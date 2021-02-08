@@ -157,9 +157,3 @@ TEST(FormatDurations, ExactOutput)
         "\nTotal: 0.5 hours\n",
         FormatDurations({{"a", 2min}, {"b", 3min}, {"c", 8min}, {"d", 9min}, {"e", 10min}}));
 }
-
-int main(int argc, char* argv[])
-{
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}

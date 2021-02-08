@@ -8,7 +8,7 @@ FetchContent_Populate(gtest)
 add_subdirectory(${gtest_SOURCE_DIR} ${gtest_BINARY_DIR} EXCLUDE_FROM_ALL)
 
 add_executable(unit_tests UnitTests.cpp)
-target_link_libraries(unit_tests PRIVATE gtest core)
+target_link_libraries(unit_tests PRIVATE core gtest_main)
 add_test(NAME unit_tests COMMAND unit_tests)
 
 add_test(NAME flag--help COMMAND timecard --help)
