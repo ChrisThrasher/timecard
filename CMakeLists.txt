@@ -24,17 +24,10 @@ FetchContent_GetProperties(argon)
 FetchContent_Populate(argon)
 add_subdirectory(${argon_SOURCE_DIR} ${argon_BINARY_DIR} EXCLUDE_FROM_ALL)
 
-add_library(core INTERFACE)
-target_include_directories(core INTERFACE include)
-target_compile_options(core INTERFACE
-    -Werror
-    -Wall
-    -Wextra
-    -Wpedantic
-    -Wshadow
-    -Wconversion
-    -Wsign-conversion
-    -Wold-style-cast)
+add_compile_options(-Werror -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion)
+
+add_library(core src/CalculateDurations.cpp src/FormatDurations.cpp src/ParseTimepoint.cpp)
+target_include_directories(core PUBLIC include)
 
 add_executable(timecard src/Timecard.cpp)
 target_link_libraries(timecard PRIVATE core argon::argon)
