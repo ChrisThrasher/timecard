@@ -19,8 +19,7 @@ add_compile_definitions(GIT_VERSION="${GIT_VERSION}")
 FetchContent_Declare(
     argon
     GIT_REPOSITORY "https://github.com/ChrisThrasher/argon.git"
-    GIT_TAG v0.7.1
-)
+    GIT_TAG v0.7.2)
 FetchContent_GetProperties(argon)
 FetchContent_Populate(argon)
 add_subdirectory(${argon_SOURCE_DIR} ${argon_BINARY_DIR} EXCLUDE_FROM_ALL)
@@ -35,11 +34,10 @@ target_compile_options(core INTERFACE
     -Wshadow
     -Wconversion
     -Wsign-conversion
-    -Wold-style-cast
-)
+    -Wold-style-cast)
 
 add_executable(timecard src/Timecard.cpp)
-target_link_libraries(timecard PRIVATE argon core)
+target_link_libraries(timecard PRIVATE core argon::argon)
 install(TARGETS timecard DESTINATION bin)
 
 enable_testing()
