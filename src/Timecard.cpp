@@ -16,12 +16,12 @@ reported as "off time" should they exist.)";
 int main(int argc, char* argv[])
 try {
     argon::Parser parser(argc, argv);
-    parser.AddOption("h,help", "Show this help text", argon::USAGE, help);
-    parser.AddOption("v,version", "Print program version", argon::PRINT, GIT_VERSION);
-    parser.AddPosition("args...", "Alternating times and activities");
-    parser.Parse();
+    parser.add_option("h,help", "Show this help text", argon::USAGE, help);
+    parser.add_option("v,version", "Print program version", argon::PRINT, GIT_VERSION);
+    parser.add_position("args...", "Alternating times and activities");
+    parser.parse();
 
-    std::cout << format_durations(calculate_durations(parser.Args()));
+    std::cout << format_durations(calculate_durations(parser.args()));
 } catch (const std::exception& ex) {
     std::cerr << ex.what() << std::endl;
     return EXIT_FAILURE;
