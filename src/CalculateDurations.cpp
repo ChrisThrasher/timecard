@@ -3,6 +3,7 @@
 #include <ParseTimepoint.h>
 
 #include <vector>
+#include <stdexcept>
 
 auto calculate_durations(const std::vector<std::string>& args) -> DurationMap
 {
