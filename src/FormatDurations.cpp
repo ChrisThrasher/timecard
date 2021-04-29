@@ -5,7 +5,7 @@
 #include <iomanip>
 #include <sstream>
 
-int LongestLabel(const DurationMap& durations)
+static int longest_label(const DurationMap& durations)
 {
     return static_cast<int>(
         std::max_element(std::begin(durations), std::end(durations), [](const auto& lhs, const auto& rhs) {
@@ -13,12 +13,12 @@ int LongestLabel(const DurationMap& durations)
         })->first.length());
 }
 
-auto FormatDurations(DurationMap durations) -> std::string
+auto format_durations(DurationMap durations) -> std::string
 {
     const auto off_time = durations.find("-") != durations.end() ? durations["-"] : Hours(0);
     durations.erase("-");
 
-    const auto label_width = LongestLabel(durations) + 2;
+    const auto label_width = longest_label(durations) + 2;
 
     std::stringstream out;
     out << std::fixed << std::setprecision(1) << std::setfill(' ');

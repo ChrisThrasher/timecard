@@ -5,4 +5,4 @@
 
 #include <vector>
 
-auto CalculateDurations(const std::vector<std::string>& args) -> DurationMap;
+auto calculate_durations(const std::vector<std::string>& args) -> DurationMap;

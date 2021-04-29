@@ -2,4 +2,4 @@
 
 #include <DurationMap.h>
 
-auto FormatDurations(DurationMap durations) -> std::string;
+auto format_durations(DurationMap durations) -> std::string;

@@ -4,7 +4,7 @@
 
 #include <vector>
 
-auto CalculateDurations(const std::vector<std::string>& args) -> DurationMap
+auto calculate_durations(const std::vector<std::string>& args) -> DurationMap
 {
     if (args.size() < 3)
         throw std::invalid_argument("Received " + std::to_string(args.size()) + " arguments. Expected 3 or more.");
@@ -14,7 +14,7 @@ auto CalculateDurations(const std::vector<std::string>& args) -> DurationMap
     DurationMap durations;
 
     for (size_t i = 1; i + 1 < args.size(); i += 2) {
-        const auto duration = -ParseTimepoint(args[i - 1]) + ParseTimepoint(args[i + 1]);
+        const auto duration = -parse_timepoint(args[i - 1]) + parse_timepoint(args[i + 1]);
         if (duration <= std::chrono::minutes(0))
             throw std::runtime_error("Duration from " + args[i - 1] + " to " + args[i + 1] + " is not positive.");
 

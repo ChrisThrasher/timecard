@@ -21,7 +21,7 @@ try {
     parser.AddPosition("args...", "Alternating times and activities");
     parser.Parse();
 
-    std::cout << FormatDurations(CalculateDurations(parser.Args()));
+    std::cout << format_durations(calculate_durations(parser.Args()));
 } catch (const std::exception& ex) {
     std::cerr << ex.what() << std::endl;
     return EXIT_FAILURE;
