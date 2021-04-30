@@ -21,7 +21,9 @@ try {
     parser.add_position("args...", "Alternating times and activities");
     parser.parse();
 
-    std::cout << format_durations(calculate_durations(parser.args()));
+    auto args = parser.args();
+    auto durations = calculate_durations(args);
+    std::cout << format_durations(durations);
 } catch (const std::exception& ex) {
     std::cerr << ex.what() << std::endl;
     return EXIT_FAILURE;
