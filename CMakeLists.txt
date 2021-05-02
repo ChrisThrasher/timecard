@@ -17,7 +17,7 @@ execute_process(
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     OUTPUT_VARIABLE GIT_VERSION
     OUTPUT_STRIP_TRAILING_WHITESPACE)
-message(STATUS "Timecard version ${GIT_VERSION}")
+message(STATUS "Timecard ${GIT_VERSION}")
 add_compile_definitions(GIT_VERSION="${GIT_VERSION}")
 
 add_compile_options(-Werror -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion)
