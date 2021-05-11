@@ -29,12 +29,12 @@ add_executable(timecard src/Timecard.cpp)
 target_link_libraries(timecard PRIVATE timecard-core argon::argon)
 install(TARGETS timecard DESTINATION bin)
 
+enable_testing()
+add_subdirectory(test)
+
 add_custom_target(format
     COMMAND clang-format -i `git ls-files src/* include/*`
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 add_custom_target(tidy
     COMMAND clang-tidy -p build/compile_commands.json `git ls-files src/*.cpp`
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
-
-enable_testing()
-add_subdirectory(test)
