@@ -22,11 +22,11 @@ add_compile_definitions(GIT_VERSION="${GIT_VERSION}")
 
 add_compile_options(-Werror -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion)
 
-add_library(timecard-core src/CalculateDurations.cpp src/FormatDurations.cpp src/ParseTimepoint.cpp)
-target_include_directories(timecard-core PUBLIC include)
+add_library(libtimecard src/CalculateDurations.cpp src/FormatDurations.cpp src/ParseTimepoint.cpp)
+target_include_directories(libtimecard PUBLIC include)
 
 add_executable(timecard src/Timecard.cpp)
-target_link_libraries(timecard PRIVATE timecard-core argon::argon)
+target_link_libraries(timecard PRIVATE libtimecard argon::argon)
 install(TARGETS timecard DESTINATION bin)
 
 enable_testing()

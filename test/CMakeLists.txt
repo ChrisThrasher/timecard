@@ -6,7 +6,7 @@ FetchContent_Declare(gtest
 FetchContent_MakeAvailable(gtest)
 
 add_executable(unit_tests UnitTests.cpp)
-target_link_libraries(unit_tests PRIVATE timecard-core gtest_main)
+target_link_libraries(unit_tests PRIVATE libtimecard GTest::gtest_main)
 add_test(NAME unit_tests COMMAND unit_tests)
 
 add_test(NAME flag--help COMMAND timecard --help)
