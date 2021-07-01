@@ -30,7 +30,7 @@ target_link_libraries(timecard PRIVATE libtimecard argon::argon)
 install(TARGETS timecard DESTINATION bin)
 
 enable_testing()
-add_subdirectory(test)
+add_subdirectory(tests)
 
 add_custom_target(format
     COMMAND clang-format -i `git ls-files src/* include/*`
