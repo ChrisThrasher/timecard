@@ -18,7 +18,6 @@ execute_process(
     OUTPUT_VARIABLE GIT_VERSION
     OUTPUT_STRIP_TRAILING_WHITESPACE)
 message(STATUS "Timecard ${GIT_VERSION}")
-add_compile_definitions(GIT_VERSION="${GIT_VERSION}")
 
 if(NOT MSVC)
     add_compile_options(-Werror -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion)
@@ -26,6 +25,7 @@ endif()
 
 add_library(libtimecard src/CalculateDurations.cpp src/FormatDurations.cpp src/ParseTimepoint.cpp)
 target_include_directories(libtimecard PUBLIC include)
+target_compile_definitions(libtimecard PUBLIC GIT_VERSION="${GIT_VERSION}")
 
 add_executable(timecard src/Timecard.cpp)
 target_link_libraries(timecard PRIVATE libtimecard argon::argon)
