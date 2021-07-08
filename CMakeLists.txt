@@ -20,7 +20,9 @@ execute_process(
 message(STATUS "Timecard ${GIT_VERSION}")
 add_compile_definitions(GIT_VERSION="${GIT_VERSION}")
 
-add_compile_options(-Werror -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion)
+if(NOT MSVC)
+    add_compile_options(-Werror -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion)
+endif()
 
 add_library(libtimecard src/CalculateDurations.cpp src/FormatDurations.cpp src/ParseTimepoint.cpp)
 target_include_directories(libtimecard PUBLIC include)
