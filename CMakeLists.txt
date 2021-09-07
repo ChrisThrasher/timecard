@@ -19,7 +19,7 @@ execute_process(
     OUTPUT_STRIP_TRAILING_WHITESPACE)
 message(STATUS "Timecard ${GIT_VERSION}")
 
-if(NOT MSVC)
+if(CMAKE_CXX_COMPILER_ID MATCHES "(GNU|Clang)")
     add_compile_options(-Werror -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion)
 endif()
 
