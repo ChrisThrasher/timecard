@@ -35,7 +35,7 @@ enable_testing()
 add_subdirectory(tests)
 
 add_custom_target(format
-    COMMAND clang-format -i `git ls-files src/* include/*`
+    COMMAND clang-format -i `git ls-files *.cpp *.h`
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 add_custom_target(tidy
     COMMAND clang-tidy -p ${CMAKE_BINARY_DIR} `git ls-files src/*.cpp`
