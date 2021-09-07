@@ -29,7 +29,7 @@ target_compile_definitions(timecard-core PUBLIC GIT_VERSION="${GIT_VERSION}")
 
 add_executable(timecard src/Timecard.cpp)
 target_link_libraries(timecard PRIVATE timecard-core argon::argon)
-install(TARGETS timecard DESTINATION bin)
+install(TARGETS timecard)
 
 enable_testing()
 add_subdirectory(tests)
