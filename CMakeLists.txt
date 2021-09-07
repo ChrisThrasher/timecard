@@ -23,12 +23,12 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "(GNU|Clang)")
     add_compile_options(-Werror -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion)
 endif()
 
-add_library(libtimecard src/CalculateDurations.cpp src/FormatDurations.cpp src/ParseTimepoint.cpp)
-target_include_directories(libtimecard PUBLIC include)
-target_compile_definitions(libtimecard PUBLIC GIT_VERSION="${GIT_VERSION}")
+add_library(timecard-core src/CalculateDurations.cpp src/FormatDurations.cpp src/ParseTimepoint.cpp)
+target_include_directories(timecard-core PUBLIC include)
+target_compile_definitions(timecard-core PUBLIC GIT_VERSION="${GIT_VERSION}")
 
 add_executable(timecard src/Timecard.cpp)
-target_link_libraries(timecard PRIVATE libtimecard argon::argon)
+target_link_libraries(timecard PRIVATE timecard-core argon::argon)
 install(TARGETS timecard DESTINATION bin)
 
 enable_testing()
