@@ -1,5 +1,5 @@
-#include <DurationMap.h>
-#include <FormatDurations.h>
+#include "DurationMap.h"
+#include "FormatDurations.h"
 
 #include <algorithm>
 #include <iomanip>

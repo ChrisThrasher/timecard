@@ -1,6 +1,6 @@
-#include <CalculateDurations.h>
-#include <DurationMap.h>
-#include <ParseTimepoint.h>
+#include "CalculateDurations.h"
+#include "DurationMap.h"
+#include "ParseTimepoint.h"
 
 #include <stdexcept>
 #include <vector>
