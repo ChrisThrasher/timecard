@@ -31,7 +31,7 @@ add_executable(timecard src/Timecard.cpp)
 target_link_libraries(timecard PRIVATE timecard-core argon::argon)
 install(TARGETS timecard)
 
-enable_testing()
+include(CTest)
 add_subdirectory(tests)
 
 add_custom_target(format
