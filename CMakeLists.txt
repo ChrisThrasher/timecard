@@ -15,9 +15,9 @@ FetchContent_MakeAvailable(argon)
 execute_process(
     COMMAND git describe --tags
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-    OUTPUT_VARIABLE GIT_VERSION
+    OUTPUT_VARIABLE TIMECARD_VERSION
     OUTPUT_STRIP_TRAILING_WHITESPACE)
-message(STATUS "Timecard ${GIT_VERSION}")
+message(STATUS "Timecard ${TIMECARD_VERSION}")
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "(GNU|Clang)")
     add_compile_options(-Werror -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion)
@@ -25,7 +25,7 @@ endif()
 
 add_library(timecard-core src/CalculateDurations.cpp src/FormatDurations.cpp src/ParseTimepoint.cpp)
 target_include_directories(timecard-core PUBLIC src)
-target_compile_definitions(timecard-core PUBLIC GIT_VERSION="${GIT_VERSION}")
+target_compile_definitions(timecard-core PUBLIC TIMECARD_VERSION="${TIMECARD_VERSION}")
 
 add_executable(timecard src/Timecard.cpp)
 target_link_libraries(timecard PRIVATE timecard-core argon::argon)

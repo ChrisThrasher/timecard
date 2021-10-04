@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
 try {
     argon::Parser parser(argc, argv);
     parser.add_option("h,help", "Show this help text", argon::USAGE, help);
-    parser.add_option("v,version", "Print program version", argon::PRINT, GIT_VERSION);
+    parser.add_option("v,version", "Print program version", argon::PRINT, TIMECARD_VERSION);
     parser.add_position("args...", "Alternating times and activities");
     parser.parse();
 

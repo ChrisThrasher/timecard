@@ -7,11 +7,11 @@
 
 TEST(Options, GitVersion)
 {
-#ifndef GIT_VERSION
-    FAIL() << "GIT_VERSION symbol not defined";
+#ifndef TIMECARD_VERSION
+    FAIL() << "TIMECARD_VERSION symbol not defined";
 #endif
-    EXPECT_GT(std::string(GIT_VERSION).length(), 0);
-    EXPECT_EQ('v', GIT_VERSION[0]);
+    EXPECT_GT(std::string(TIMECARD_VERSION).length(), 0);
+    EXPECT_EQ('v', TIMECARD_VERSION[0]);
 }
 
 TEST(parse_timepoint, Garbage)
