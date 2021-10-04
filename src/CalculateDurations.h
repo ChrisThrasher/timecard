@@ -1,7 +1,6 @@
 #pragma once
 
-#include <DurationMap.h>
-#include <ParseTimepoint.h>
+#include "DurationMap.h"
 
 #include <vector>
 
