@@ -4,7 +4,7 @@
 #include <iomanip>
 #include <sstream>
 
-static int longest_label(const DurationMap& durations)
+static auto longest_label(const DurationMap& durations)
 {
     return static_cast<int>(
         std::max_element(std::begin(durations), std::end(durations), [](const auto& lhs, const auto& rhs) {

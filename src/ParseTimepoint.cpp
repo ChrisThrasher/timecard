@@ -2,7 +2,7 @@
 
 #include <regex>
 
-static int am_pm_offset(const std::string& timepoint)
+static auto am_pm_offset(const std::string& timepoint)
 {
     if (std::regex_match(timepoint, std::regex(".*pm")))
         return 12;
@@ -29,7 +29,7 @@ static auto parse_short_timepoint(const std::string& timepoint)
 static auto current_time()
 {
     const auto now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-    const tm time = *localtime(&now);
+    const auto time = *localtime(&now);
 
     return std::chrono::hours(time.tm_hour) + std::chrono::minutes(time.tm_min);
 }
