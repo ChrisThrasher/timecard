@@ -24,7 +24,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "(GNU|Clang)")
 endif()
 
 add_library(timecard-core src/CalculateDurations.cpp src/FormatDurations.cpp src/ParseTimepoint.cpp)
-target_include_directories(timecard-core PUBLIC src)
+target_include_directories(timecard-core PUBLIC include)
 target_compile_definitions(timecard-core PUBLIC TIMECARD_VERSION="${TIMECARD_VERSION}")
 
 add_executable(timecard src/Timecard.cpp)
