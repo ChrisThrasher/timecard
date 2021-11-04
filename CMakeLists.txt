@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 project(timecard CXX)
 
-set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -26,6 +25,7 @@ endif()
 add_library(timecard-core src/CalculateDurations.cpp src/FormatDurations.cpp src/ParseTimepoint.cpp)
 target_include_directories(timecard-core PUBLIC include)
 target_compile_definitions(timecard-core PUBLIC TIMECARD_VERSION="${TIMECARD_VERSION}")
+target_compile_features(timecard-core PUBLIC cxx_std_14)
 
 add_executable(timecard src/Timecard.cpp)
 target_link_libraries(timecard PRIVATE timecard-core argon::argon)
