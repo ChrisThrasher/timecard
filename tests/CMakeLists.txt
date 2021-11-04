@@ -7,12 +7,12 @@ FetchContent_Declare(Catch2
     GIT_TAG v2.13.7)
 FetchContent_MakeAvailable(Catch2)
 
-add_executable(unit_tests UnitTests.cpp)
-target_link_libraries(unit_tests PRIVATE timecard-core Catch2::Catch2)
-add_test(NAME unit_tests COMMAND unit_tests)
+add_executable(test-timecard-core UnitTests.cpp)
+target_link_libraries(test-timecard-core PRIVATE timecard-core Catch2::Catch2)
+add_test(NAME test-timecard-core COMMAND test-timecard-core)
 
-add_test(NAME flag--help COMMAND timecard --help)
-set_property(TEST flag--help PROPERTY PASS_REGULAR_EXPRESSION "Usage.*")
+add_test(NAME test-help-flag COMMAND timecard --help)
+set_property(TEST test-help-flag PROPERTY PASS_REGULAR_EXPRESSION "Usage.*")
 
-add_test(NAME flag--version COMMAND timecard --version)
-set_property(TEST flag--version PROPERTY PASS_REGULAR_EXPRESSION "${GIT_VERSION}")
+add_test(NAME test-version-flag COMMAND timecard --version)
+set_property(TEST test-version-flag PROPERTY PASS_REGULAR_EXPRESSION "${GIT_VERSION}")
