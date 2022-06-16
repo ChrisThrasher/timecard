@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(timecard CXX)
+project(timecard VERSION 1.8.5 LANGUAGES CXX)
 
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -10,13 +10,6 @@ FetchContent_Declare(argon
     GIT_TAG v0.8.0)
 FetchContent_MakeAvailable(argon)
 
-execute_process(
-    COMMAND git describe --tags
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-    OUTPUT_VARIABLE TIMECARD_VERSION
-    OUTPUT_STRIP_TRAILING_WHITESPACE)
-message(STATUS "Timecard ${TIMECARD_VERSION}")
-
 if(CMAKE_CXX_COMPILER_ID MATCHES "(GNU|Clang)")
     add_compile_options(-Werror -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion)
     add_compile_options("$<$<CONFIG:DEBUG>:-fsanitize=address,undefined>")
@@ -25,7 +18,7 @@ endif()
 
 add_library(timecard-core src/CalculateDurations.cpp src/FormatDurations.cpp src/ParseTimepoint.cpp)
 target_include_directories(timecard-core PUBLIC include)
-target_compile_definitions(timecard-core PUBLIC TIMECARD_VERSION="${TIMECARD_VERSION}")
+target_compile_definitions(timecard-core PUBLIC TIMECARD_VERSION="v${timecard_VERSION}")
 target_compile_features(timecard-core PUBLIC cxx_std_14)
 
 add_executable(timecard src/Timecard.cpp)
