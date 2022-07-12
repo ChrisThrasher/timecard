@@ -12,8 +12,8 @@ FetchContent_MakeAvailable(argon)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "(GNU|Clang)")
     add_compile_options(-Werror -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion)
-    add_compile_options("$<$<CONFIG:DEBUG>:-fsanitize=address,undefined>")
-    add_link_options("$<$<CONFIG:DEBUG>:-fsanitize=address,undefined>")
+    add_compile_options($<$<CONFIG:DEBUG>:-fsanitize=address,undefined>)
+    add_link_options($<$<CONFIG:DEBUG>:-fsanitize=address,undefined>)
 endif()
 
 add_library(timecard-core src/CalculateDurations.cpp src/FormatDurations.cpp src/ParseTimepoint.cpp)
