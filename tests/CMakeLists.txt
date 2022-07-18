@@ -12,15 +12,6 @@ include(Catch)
 add_executable(test-timecard-core UnitTests.cpp)
 target_link_libraries(test-timecard-core PRIVATE timecard-core Catch2::Catch2)
 catch_discover_tests(test-timecard-core)
-if(WIN32 AND BUILD_SHARED_LIBS)
-    add_custom_command(TARGET test-timecard-core POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:test-timecard-core> $<TARGET_FILE_DIR:test-timecard-core> COMMAND_EXPAND_LISTS)
-endif()
-
-if(WIN32 AND BUILD_SHARED_LIBS)
-    add_custom_command(TARGET timecard POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:timecard> $<TARGET_FILE_DIR:timecard> COMMAND_EXPAND_LISTS)
-endif()
 
 add_test(NAME test-help-flag COMMAND timecard --help)
 set_property(TEST test-help-flag PROPERTY PASS_REGULAR_EXPRESSION "Usage.*")
