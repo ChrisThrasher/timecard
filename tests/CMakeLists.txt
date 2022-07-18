@@ -6,10 +6,12 @@ FetchContent_Declare(Catch2
     GIT_REPOSITORY "https://github.com/catchorg/Catch2.git"
     GIT_TAG v2.13.7)
 FetchContent_MakeAvailable(Catch2)
+list(APPEND CMAKE_MODULE_PATH "${catch2_SOURCE_DIR}/contrib/")
+include(Catch)
 
 add_executable(test-timecard-core UnitTests.cpp)
 target_link_libraries(test-timecard-core PRIVATE timecard-core Catch2::Catch2)
-add_test(NAME test-timecard-core COMMAND test-timecard-core)
+catch_discover_tests(test-timecard-core)
 if(WIN32 AND BUILD_SHARED_LIBS)
     add_custom_command(TARGET test-timecard-core POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_RUNTIME_DLLS:test-timecard-core> $<TARGET_FILE_DIR:test-timecard-core> COMMAND_EXPAND_LISTS)
