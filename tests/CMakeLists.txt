@@ -17,4 +17,4 @@ add_test(NAME test-help-flag COMMAND timecard --help)
 set_property(TEST test-help-flag PROPERTY PASS_REGULAR_EXPRESSION Usage.*)
 
 add_test(NAME test-version-flag COMMAND timecard --version)
-set_property(TEST test-version-flag PROPERTY PASS_REGULAR_EXPRESSION "${GIT_VERSION}")
+set_property(TEST test-version-flag PROPERTY PASS_REGULAR_EXPRESSION v${timecard_VERSION})
