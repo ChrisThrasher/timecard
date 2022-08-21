@@ -6,7 +6,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 include(FetchContent)
 FetchContent_Declare(argon
     GIT_REPOSITORY https://github.com/ChrisThrasher/argon.git
-    GIT_TAG v0.8.0)
+    GIT_TAG v0.9.0)
 FetchContent_MakeAvailable(argon)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "(GNU|Clang)")

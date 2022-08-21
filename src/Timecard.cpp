@@ -1,7 +1,7 @@
 #include <timecard/CalculateDurations.hpp>
 #include <timecard/FormatDurations.hpp>
 
-#include <argon/Parser.h>
+#include <argon/Parser.hpp>
 
 #include <iostream>
 
