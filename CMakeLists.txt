@@ -18,7 +18,7 @@ endif()
 add_library(timecard-core src/CalculateDurations.cpp src/FormatDurations.cpp src/ParseTimepoint.cpp)
 target_include_directories(timecard-core PUBLIC include)
 target_compile_definitions(timecard-core PUBLIC TIMECARD_VERSION="v${timecard_VERSION}")
-target_compile_features(timecard-core PUBLIC cxx_std_14)
+target_compile_features(timecard-core PUBLIC cxx_std_17)
 
 add_executable(timecard src/Timecard.cpp)
 target_link_libraries(timecard PRIVATE timecard-core argon::argon)
