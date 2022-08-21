@@ -1,5 +1,5 @@
-#include <CalculateDurations.h>
-#include <ParseTimepoint.h>
+#include <CalculateDurations.hpp>
+#include <ParseTimepoint.hpp>
 
 #include <stdexcept>
 

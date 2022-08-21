@@ -1,5 +1,5 @@
-#include <CalculateDurations.h>
-#include <FormatDurations.h>
+#include <CalculateDurations.hpp>
+#include <FormatDurations.hpp>
 
 #include <argon/Parser.h>
 

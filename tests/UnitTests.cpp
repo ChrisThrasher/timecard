@@ -1,7 +1,7 @@
-#include <CalculateDurations.h>
-#include <DurationMap.h>
-#include <FormatDurations.h>
-#include <ParseTimepoint.h>
+#include <CalculateDurations.hpp>
+#include <DurationMap.hpp>
+#include <FormatDurations.hpp>
+#include <ParseTimepoint.hpp>
 
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>

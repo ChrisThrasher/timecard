@@ -1,4 +1,4 @@
-#include <FormatDurations.h>
+#include <FormatDurations.hpp>
 
 #include <algorithm>
 #include <iomanip>
