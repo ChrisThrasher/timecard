@@ -10,7 +10,7 @@ FetchContent_Declare(argon
 FetchContent_MakeAvailable(argon)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "(GNU|Clang)")
-    add_compile_options(-Werror -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion)
+    add_compile_options(-Werror -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion -Wold-style-cast)
     add_compile_options($<$<CONFIG:DEBUG>:-fsanitize=address,undefined>)
     add_link_options($<$<CONFIG:DEBUG>:-fsanitize=address,undefined>)
 endif()
