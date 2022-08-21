@@ -17,7 +17,7 @@ auto calculate_durations(const std::vector<std::string>& args) -> DurationMap
         if (duration <= std::chrono::minutes(0))
             throw std::runtime_error("Duration from " + args[i - 1] + " to " + args[i + 1] + " is not positive.");
 
-        const auto key = args[i];
+        const auto& key = args[i];
         durations.insert({ key, Hours(0) });
         durations.at(key) += duration;
     }
