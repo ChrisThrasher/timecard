@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DurationMap.hpp"
+#include <timecard/DurationMap.hpp>
 
 #include <vector>
 

@@ -1,7 +1,7 @@
-#include <CalculateDurations.hpp>
-#include <DurationMap.hpp>
-#include <FormatDurations.hpp>
-#include <ParseTimepoint.hpp>
+#include <timecard/CalculateDurations.hpp>
+#include <timecard/DurationMap.hpp>
+#include <timecard/FormatDurations.hpp>
+#include <timecard/ParseTimepoint.hpp>
 
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>

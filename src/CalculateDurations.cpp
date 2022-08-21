@@ -1,5 +1,5 @@
-#include <CalculateDurations.hpp>
-#include <ParseTimepoint.hpp>
+#include <timecard/CalculateDurations.hpp>
+#include <timecard/ParseTimepoint.hpp>
 
 #include <stdexcept>
 

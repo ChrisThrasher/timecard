@@ -1,5 +1,5 @@
-#include <CalculateDurations.hpp>
-#include <FormatDurations.hpp>
+#include <timecard/CalculateDurations.hpp>
+#include <timecard/FormatDurations.hpp>
 
 #include <argon/Parser.h>
 

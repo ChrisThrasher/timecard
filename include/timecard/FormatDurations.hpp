@@ -1,5 +1,5 @@
 #pragma once
 
-#include "DurationMap.hpp"
+#include <timecard/DurationMap.hpp>
 
 auto format_durations(DurationMap durations) -> std::string;
