@@ -2,8 +2,6 @@ if(NOT BUILD_TESTING)
     return()
 endif()
 
-list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
-
 find_package(Catch2 3.1.0 REQUIRED)
 
 add_executable(test-timecard-core UnitTests.cpp)

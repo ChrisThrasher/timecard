@@ -3,11 +3,9 @@ project(timecard VERSION 1.8.5 LANGUAGES CXX)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-include(FetchContent)
-FetchContent_Declare(argon
-    GIT_REPOSITORY https://github.com/ChrisThrasher/argon.git
-    GIT_TAG v0.9.0)
-FetchContent_MakeAvailable(argon)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
+
+find_package(argon 0.9.0 REQUIRED)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "(GNU|Clang)")
     add_compile_options(-Werror -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion -Wold-style-cast)
