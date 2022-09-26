@@ -13,7 +13,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "(GNU|Clang)")
     add_link_options($<$<CONFIG:DEBUG>:-fsanitize=address,undefined>)
 endif()
 
-add_library(timecard-core src/CalculateDurations.cpp src/FormatDurations.cpp src/ParseTimepoint.cpp)
+add_library(timecard-core STATIC src/CalculateDurations.cpp src/FormatDurations.cpp src/ParseTimepoint.cpp)
 target_include_directories(timecard-core PUBLIC include)
 target_compile_definitions(timecard-core PUBLIC TIMECARD_VERSION="v${timecard_VERSION}")
 target_compile_features(timecard-core PUBLIC cxx_std_17)
