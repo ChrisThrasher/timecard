@@ -4,30 +4,72 @@ on: [push]
 
 jobs:
   build:
-    name: ${{ matrix.platform.name }} ${{ matrix.config.name }}
-    runs-on: ${{ matrix.platform.os }}
+    name: ${{matrix.platform.name}} ${{matrix.config.name}}
+    runs-on: ${{matrix.platform.os}}
 
     strategy:
       fail-fast: false
       matrix:
         platform:
-        - { name: Windows VS2022, os: windows-2022  }
-        - { name: Linux GCC,      os: ubuntu-latest }
-        - { name: Linux Clang,    os: ubuntu-latest, flags: -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ }
-        - { name: macOS,          os: macos-latest  }
+        - { name: Windows,     os: windows-2022 }
+        - { name: Linux GCC,   os: ubuntu-latest }
+        - { name: Linux Clang, os: ubuntu-latest, flags: -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ }
+        - { name: macOS,       os: macos-latest }
+        config:
+        - { name: Debug }
+        - { name: Release }
 
     steps:
     - name: Checkout
       uses: actions/checkout@v3
 
     - name: Configure
-      run: cmake -S . -B build -DCMAKE_INSTALL_PREFIX=install ${{matrix.platform.flags}} ${{matrix.config.flags}}
+      run: cmake -B build -DCMAKE_INSTALL_PREFIX=install ${{matrix.platform.flags}} -DCMAKE_BUILD_TYPE=${{matrix.config.name}}
 
     - name: Build
-      run: cmake --build build --config Release
+      run: cmake --build build --config ${{matrix.config.name}} --target install
 
-    - name: Test
-      run: ctest --test-dir build --build-config Release --output-on-failure
+    - name: Run Tests
+      run: ctest --test-dir build --build-config ${{matrix.config.name}} --output-on-failure
 
-    - name: Install
-      run: cmake --install build --config Release
+    - uses: actions/upload-artifact@v3
+      if: matrix.platform.name == 'Linux GCC' && matrix.config.name == 'Debug'
+      with:
+        name: binary_dir
+        path: build
+
+  format:
+    name: clang-format
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - uses: actions/download-artifact@v3
+      with:
+        name: binary_dir
+        path: build
+
+    - name: Format
+      run: |
+        cmake --build build --target format
+        git diff --exit-code
+
+  analyze:
+    name: clang-tidy
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - uses: actions/download-artifact@v3
+      with:
+        name: binary_dir
+        path: build
+
+    - name: Analyze
+      run: cmake --build build --target tidy
