@@ -9,6 +9,8 @@ find_package(argon 0.9.1 REQUIRED)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "(GNU|Clang)")
     add_compile_options(-Werror -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wsign-conversion -Wold-style-cast)
+elseif(MSVC)
+    add_compile_options(/WX /W4 /permissive- /wd4996)
 endif()
 
 add_library(timecard-core STATIC src/CalculateDurations.cpp src/FormatDurations.cpp src/ParseTimepoint.cpp)
