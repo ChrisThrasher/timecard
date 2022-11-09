@@ -1,5 +1,7 @@
 # timecard
 
+[![CI](https://github.com/ChrisThrasher/timecard/actions/workflows/ci.yml/badge.svg)](https://github.com/ChrisThrasher/timecard/actions/workflows/ci.yml)
+
 Calculates how much time was spent on various activities throughout the day.
 
 # Usage
