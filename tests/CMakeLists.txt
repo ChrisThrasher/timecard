@@ -6,7 +6,6 @@ find_package(Catch2 3.2.0 REQUIRED)
 
 add_executable(test-timecard
     CalculateDurations.cpp
-    DurationMap.cpp
     FormatDurations.cpp
     ParseTimepoint.cpp
     Timecard.cpp)
