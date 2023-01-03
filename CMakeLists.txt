@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(timecard VERSION 1.9.0 LANGUAGES CXX)
+project(timecard VERSION 1.9.1 LANGUAGES CXX)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
