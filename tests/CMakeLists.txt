@@ -2,7 +2,7 @@ if(NOT BUILD_TESTING)
     return()
 endif()
 
-find_package(Catch2 3.3.0 REQUIRED)
+find_package(Catch2 3.3.1 REQUIRED)
 
 add_executable(test-timecard
     CalculateDurations.cpp
