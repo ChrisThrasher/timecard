@@ -33,7 +33,7 @@ jobs:
       run: ctest --test-dir build --build-config ${{matrix.config.name}} --output-on-failure
 
     - uses: actions/upload-artifact@v3
-      if: matrix.platform.name == 'Linux GCC' && matrix.config.name == 'Debug'
+      if: matrix.platform.name == 'Linux Clang' && matrix.config.name == 'Debug'
       with:
         name: binary_dir
         path: build
