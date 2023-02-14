@@ -23,7 +23,9 @@ target_link_libraries(timecard PRIVATE timecard-core argon::argon)
 install(TARGETS timecard)
 
 include(CTest)
-add_subdirectory(tests)
+if(BUILD_TESTING)
+    add_subdirectory(tests)
+endif()
 
 add_custom_target(format
     COMMAND clang-format -i `git ls-files *.hpp *.cpp`

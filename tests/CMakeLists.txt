@@ -1,6 +1,4 @@
-if(NOT BUILD_TESTING)
-    return()
-endif()
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 
 find_package(Catch2 3.3.1 REQUIRED)
 
