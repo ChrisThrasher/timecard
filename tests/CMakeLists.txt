@@ -8,7 +8,7 @@ add_executable(test-timecard
     FormatDurations.cpp
     ParseTimepoint.cpp
     Timecard.cpp)
-target_link_libraries(test-timecard PRIVATE timecard-core Catch2::Catch2WithMain)
+target_link_libraries(test-timecard PRIVATE libtimecard Catch2::Catch2WithMain)
 catch_discover_tests(test-timecard)
 
 add_test(NAME test-help-flag COMMAND timecard --help)
