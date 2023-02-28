@@ -1,6 +1,6 @@
 #pragma once
 
 #include <chrono>
-#include <string>
+#include <string_view>
 
-auto parse_timepoint(const std::string& timepoint) -> std::chrono::minutes;
+auto parse_timepoint(std::string_view timepoint) -> std::chrono::minutes;

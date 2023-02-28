@@ -2,6 +2,6 @@
 
 #include <chrono>
 #include <map>
-#include <string>
+#include <string_view>
 
-using DurationMap = std::map<std::string, std::chrono::minutes>;
+using DurationMap = std::map<std::string_view, std::chrono::minutes>;
