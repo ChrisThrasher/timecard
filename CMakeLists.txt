@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.22)
 project(timecard VERSION 1.9.1 LANGUAGES CXX)
 
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 find_package(argon 0.11.0 REQUIRED)
