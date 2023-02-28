@@ -13,11 +13,10 @@ elseif(MSVC)
     add_compile_options(/WX /W4 /permissive- /wd4996)
 endif()
 
-add_library(libtimecard STATIC src/CalculateDurations.cpp src/FormatDurations.cpp src/ParseTimepoint.cpp)
+add_library(libtimecard OBJECT src/CalculateDurations.cpp src/FormatDurations.cpp src/ParseTimepoint.cpp)
 target_include_directories(libtimecard PUBLIC include)
 target_compile_definitions(libtimecard PUBLIC TIMECARD_VERSION="v${timecard_VERSION}")
 target_compile_features(libtimecard PUBLIC cxx_std_17)
-set_target_properties(libtimecard PROPERTIES OUTPUT_NAME timecard)
 
 add_executable(timecard src/Timecard.cpp)
 target_link_libraries(timecard PRIVATE libtimecard argon::argon)
