@@ -4,7 +4,8 @@
 #include <iomanip>
 #include <sstream>
 
-static auto longest_label(const DurationMap& durations)
+namespace {
+auto longest_label(const DurationMap& durations)
 {
     return static_cast<int>(
         std::max_element(std::begin(durations), std::end(durations), [](const auto& lhs, const auto& rhs) {
@@ -12,9 +13,10 @@ static auto longest_label(const DurationMap& durations)
         })->first.length());
 }
 
-static auto as_hours(const std::chrono::minutes& minutes)
+auto as_hours(const std::chrono::minutes& minutes)
 {
     return std::chrono::duration<double, std::ratio<3600>>(minutes).count();
+}
 }
 
 auto format_durations(DurationMap durations) -> std::string
