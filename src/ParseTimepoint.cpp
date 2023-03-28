@@ -4,7 +4,7 @@
 #include <string>
 
 namespace {
-auto am_pm_offset(std::string_view timepoint)
+[[nodiscard]] auto am_pm_offset(std::string_view timepoint)
 {
     if (std::regex_match(std::string(timepoint), std::regex(".*pm")))
         return 12;
@@ -13,7 +13,7 @@ auto am_pm_offset(std::string_view timepoint)
     throw std::invalid_argument("Found no am/pm suffix");
 }
 
-auto parse_long_timepoint(std::string_view timepoint)
+[[nodiscard]] auto parse_long_timepoint(std::string_view timepoint)
 {
     const auto hours = std::stoi(std::string(timepoint.substr(0, timepoint.size() - 5))) % 12 + am_pm_offset(timepoint);
     const auto minutes = std::stoi(std::string(timepoint.substr(timepoint.size() - 4, 2)));
@@ -21,14 +21,14 @@ auto parse_long_timepoint(std::string_view timepoint)
     return std::chrono::hours(hours) + std::chrono::minutes(minutes);
 }
 
-auto parse_short_timepoint(std::string_view timepoint)
+[[nodiscard]] auto parse_short_timepoint(std::string_view timepoint)
 {
     const auto hours = std::stoi(std::string(timepoint.substr(0, timepoint.size() - 2))) % 12 + am_pm_offset(timepoint);
 
     return std::chrono::hours(hours);
 }
 
-auto current_time()
+[[nodiscard]] auto current_time()
 {
     const auto now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     const auto time = *localtime(&now);

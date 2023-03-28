@@ -4,4 +4,4 @@
 
 #include <vector>
 
-auto calculate_durations(const std::vector<std::string_view>& args) -> DurationMap;
+[[nodiscard]] auto calculate_durations(const std::vector<std::string_view>& args) -> DurationMap;
