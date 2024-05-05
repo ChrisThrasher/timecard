@@ -95,7 +95,7 @@ export [[nodiscard]] auto calculate_durations(const std::vector<std::string_view
     return durations;
 }
 
-export [[nodiscard]] auto format_durations(DurationMap durations) -> std::string
+export [[nodiscard]] auto format_durations(DurationMap durations)
 {
     using namespace std::chrono_literals;
     const auto off_time = durations.find("-") != durations.end() ? durations["-"] : 0min;
