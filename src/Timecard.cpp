@@ -25,6 +25,6 @@ try {
     const auto durations = calculate_durations(args);
     std::cout << format_durations(durations);
 } catch (const std::exception& ex) {
-    std::cerr << ex.what() << std::endl;
+    std::cerr << ex.what() << '\n';
     return EXIT_FAILURE;
 }

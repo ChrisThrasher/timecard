@@ -10,6 +10,7 @@ Checks: >
   readability-*,
   -concurrency-mt-unsafe,
   -cppcoreguidelines-avoid-magic-numbers,
+  -misc-include-cleaner,
   -modernize-use-trailing-return-type,
   -readability-braces-around-statements,
   -readability-magic-numbers,
