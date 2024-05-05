@@ -13,6 +13,8 @@ module;
 
 export module timecard;
 
+using namespace std::chrono_literals;
+
 export using DurationMap = std::map<std::string_view, std::chrono::minutes>;
 
 [[nodiscard]] auto am_pm_offset(std::string_view timepoint)
@@ -77,7 +79,7 @@ export [[nodiscard]] auto calculate_durations(const std::vector<std::string_view
 
     for (std::size_t i = 1; i + 1 < args.size(); i += 2) {
         const auto duration = -parse_timepoint(args[i - 1]) + parse_timepoint(args[i + 1]);
-        if (duration <= std::chrono::minutes(0))
+        if (duration <= 0min)
             throw std::runtime_error(std::format("Duration from {} to {} is not positive.", args[i - 1], args[i + 1]));
 
         const auto& key = args[i];
@@ -90,7 +92,6 @@ export [[nodiscard]] auto calculate_durations(const std::vector<std::string_view
 
 export [[nodiscard]] auto format_durations(DurationMap durations)
 {
-    using namespace std::chrono_literals;
     const auto off_time = durations.contains("-") ? durations["-"] : 0min;
     durations.erase("-");
 
