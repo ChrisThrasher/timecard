@@ -75,7 +75,7 @@ export [[nodiscard]] auto calculate_durations(const std::vector<std::string_view
 
     DurationMap durations;
 
-    for (size_t i = 1; i + 1 < args.size(); i += 2) {
+    for (std::size_t i = 1; i + 1 < args.size(); i += 2) {
         const auto duration = -parse_timepoint(args[i - 1]) + parse_timepoint(args[i + 1]);
         if (duration <= std::chrono::minutes(0))
             throw std::runtime_error(std::format("Duration from {} to {} is not positive.", args[i - 1], args[i + 1]));
