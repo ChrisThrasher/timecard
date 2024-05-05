@@ -61,10 +61,9 @@ export [[nodiscard]] auto parse_timepoint(std::string_view timepoint) -> std::ch
 
 [[nodiscard]] auto longest_label(const DurationMap& durations)
 {
-    return static_cast<int>(
-        std::max_element(std::begin(durations), std::end(durations), [](const auto& lhs, const auto& rhs) {
-            return lhs.first.length() < rhs.first.length();
-        })->first.length());
+    return static_cast<int>(std::ranges::max_element(durations, [](const auto& lhs, const auto& rhs) {
+                                return lhs.first.length() < rhs.first.length();
+                            })->first.length());
 }
 
 [[nodiscard]] auto as_hours(const std::chrono::minutes& minutes)
