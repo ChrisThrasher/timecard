@@ -2,7 +2,7 @@ module;
 
 #include <algorithm>
 #include <chrono>
-#include <iomanip>
+#include <format>
 #include <map>
 #include <regex>
 #include <sstream>
@@ -56,7 +56,7 @@ export [[nodiscard]] auto parse_timepoint(std::string_view timepoint) -> std::ch
     if (std::regex_match(std::string(timepoint), std::regex("now")))
         return current_time();
 
-    throw std::invalid_argument("Failed to parse \"" + std::string(timepoint) + "\"");
+    throw std::invalid_argument(std::format("Failed to parse \"{}\"", timepoint));
 }
 
 [[nodiscard]] auto longest_label(const DurationMap& durations)
@@ -66,26 +66,19 @@ export [[nodiscard]] auto parse_timepoint(std::string_view timepoint) -> std::ch
                             })->first.length());
 }
 
-[[nodiscard]] auto as_hours(const std::chrono::minutes& minutes)
-{
-    return std::chrono::duration<double, std::ratio<3600>>(minutes).count();
-}
-
-export [[nodiscard]] auto calculate_durations(const std::vector<std::string_view>& args) -> DurationMap
+export [[nodiscard]] auto calculate_durations(const std::vector<std::string_view>& args)
 {
     if (args.size() < 3)
-        throw std::invalid_argument("Received " + std::to_string(args.size()) + " arguments. Expected 3 or more.");
+        throw std::invalid_argument(std::format("Received {} arguments. Expected 3 or more.", args.size()));
     if (args.size() % 2 == 0)
-        throw std::invalid_argument("Received even number of arguments. Ignoring \"" + std::string(args.back())
-                                    + "\".");
+        throw std::invalid_argument(std::format("Received even number of arguments. Ignoring \"{}\".", args.back()));
 
     DurationMap durations;
 
     for (size_t i = 1; i + 1 < args.size(); i += 2) {
         const auto duration = -parse_timepoint(args[i - 1]) + parse_timepoint(args[i + 1]);
         if (duration <= std::chrono::minutes(0))
-            throw std::runtime_error("Duration from " + std::string(args[i - 1]) + " to " + std::string(args[i + 1])
-                                     + " is not positive.");
+            throw std::runtime_error(std::format("Duration from {} to {} is not positive.", args[i - 1], args[i + 1]));
 
         const auto& key = args[i];
         durations.insert({ key, {} });
@@ -102,20 +95,21 @@ export [[nodiscard]] auto format_durations(DurationMap durations)
     durations.erase("-");
 
     const auto label_width = longest_label(durations) + 2;
+    const auto as_hours = [](const std::chrono::minutes& minutes) {
+        return std::chrono::duration<double, std::ratio<3600>>(minutes).count();
+    };
 
     std::stringstream out;
-    out << std::fixed << std::setprecision(1) << std::setfill(' ');
-
     auto total = 0min;
-    for (const auto& duration : durations) {
-        out << std::left << std::setw(label_width) << duration.first;
-        out << std::right << std::setw(4) << as_hours(duration.second) << " hours\n";
-        total += duration.second;
+    for (const auto& [label, duration] : durations) {
+        out << std::format("{:<{}}", label, label_width);
+        out << std::format("{:>4.1f} hours\n", as_hours(duration));
+        total += duration;
     }
 
-    out << "\nTotal: " << as_hours(total) << " hours";
+    out << std::format("\nTotal: {:.1f} hours", as_hours(total));
     if (off_time > 0min)
-        out << " (" << as_hours(off_time) << " hours off)";
+        out << std::format(" ({:.1f} hours off)", as_hours(off_time));
     out << '\n';
 
     return out.str();
