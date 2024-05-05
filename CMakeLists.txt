@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.28)
 project(timecard VERSION 1.9.1 LANGUAGES CXX)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
@@ -11,12 +11,12 @@ elseif(MSVC)
     add_compile_options(/WX /W4 /permissive- /wd4996)
 endif()
 
-add_library(libtimecard OBJECT src/CalculateDurations.cpp src/FormatDurations.cpp src/ParseTimepoint.cpp)
-target_include_directories(libtimecard PUBLIC include)
+add_library(libtimecard)
+target_sources(libtimecard PUBLIC FILE_SET CXX_MODULES FILES src/Timecard.cpp)
 target_compile_definitions(libtimecard PUBLIC TIMECARD_VERSION="v${timecard_VERSION}")
-target_compile_features(libtimecard PUBLIC cxx_std_17)
+target_compile_features(libtimecard PUBLIC cxx_std_20)
 
-add_executable(timecard src/Timecard.cpp)
+add_executable(timecard src/Main.cpp)
 target_link_libraries(timecard PRIVATE libtimecard argon::argon)
 install(TARGETS timecard)
 

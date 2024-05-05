@@ -1,6 +1,8 @@
-#include <timecard/CalculateDurations.hpp>
-
 #include <catch2/catch_test_macros.hpp>
+
+#include <map> // Required for testing duration maps
+
+import timecard;
 
 TEST_CASE("calculate_duration")
 {

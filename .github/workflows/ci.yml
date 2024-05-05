@@ -12,14 +12,21 @@ jobs:
       matrix:
         platform:
         - { name: Windows,     os: windows-latest }
-        - { name: Linux GCC,   os: ubuntu-latest }
-        - { name: Linux Clang, os: ubuntu-latest, flags: -DCMAKE_CXX_COMPILER=clang++ }
-        - { name: macOS,       os: macos-latest }
+        # - { name: Linux GCC,   os: ubuntu-latest }
+        # - { name: Linux Clang, os: ubuntu-latest, flags: -DCMAKE_CXX_COMPILER=clang++ }
+        - { name: macOS,       os: macos-latest,  flags: -GNinja -DCMAKE_CXX_COMPILER=clang++ }
         config:
         - { name: Debug }
         - { name: Release }
 
     steps:
+    - name: Install macOS Dependencies
+      if: runner.os == 'macOS'
+      run: |
+        brew update
+        brew install llvm ninja
+        echo /opt/homebrew/opt/llvm/bin >> $GITHUB_PATH
+
     - name: Checkout
       uses: actions/checkout@v4
 
@@ -33,7 +40,7 @@ jobs:
       run: ctest --test-dir build --build-config ${{matrix.config.name}} --output-on-failure
 
     - uses: actions/upload-artifact@v4
-      if: matrix.platform.name == 'Linux Clang' && matrix.config.name == 'Debug'
+      if: matrix.platform.name == 'macOS' && matrix.config.name == 'Debug'
       with:
         name: binary_dir
         path: build
@@ -41,9 +48,15 @@ jobs:
   format:
     name: clang-format
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
+    - name: Install Dependencies
+      run: |
+        brew update
+        brew install llvm ninja
+        echo /opt/homebrew/opt/llvm/bin >> $GITHUB_PATH
+
     - name: Checkout
       uses: actions/checkout@v4
 
@@ -60,9 +73,15 @@ jobs:
   tidy:
     name: clang-tidy
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
+    - name: Install Dependencies
+      run: |
+        brew update
+        brew install llvm ninja
+        echo /opt/homebrew/opt/llvm/bin >> $GITHUB_PATH
+
     - name: Checkout
       uses: actions/checkout@v4
 

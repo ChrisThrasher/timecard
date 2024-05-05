@@ -1,6 +1,6 @@
-#include <timecard/ParseTimepoint.hpp>
-
 #include <catch2/catch_test_macros.hpp>
+
+import timecard;
 
 TEST_CASE("parse_timepoint")
 {
