@@ -1,7 +1,6 @@
-#include <argon/Parser.hpp>
-
 #include <iostream>
 
+import argon;
 import timecard;
 
 static constexpr auto help = R"(
