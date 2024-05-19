@@ -12,14 +12,18 @@ jobs:
       matrix:
         platform:
         - { name: Windows,     os: windows-latest }
-        # - { name: Linux GCC,   os: ubuntu-latest }
-        # - { name: Linux Clang, os: ubuntu-latest, flags: -DCMAKE_CXX_COMPILER=clang++ }
-        - { name: macOS,       os: macos-latest,  flags: -GNinja -DCMAKE_CXX_COMPILER=clang++ }
+        - { name: Linux GCC,   os: ubuntu-24.04, flags: -GNinja -DCMAKE_CXX_COMPILER=g++-14 }
+        - { name: Linux Clang, os: ubuntu-24.04, flags: -GNinja -DCMAKE_CXX_COMPILER=clang++ }
+        - { name: macOS,       os: macos-latest, flags: -GNinja -DCMAKE_CXX_COMPILER=clang++ }
         config:
         - { name: Debug }
         - { name: Release }
 
     steps:
+    - name: Install Linux Dependencies
+      if: runner.os == 'Linux'
+      run: sudo apt install g++-14 ninja-build
+
     - name: Install macOS Dependencies
       if: runner.os == 'macOS'
       run: |
