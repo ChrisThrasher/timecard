@@ -22,13 +22,13 @@ jobs:
     steps:
     - name: Install Linux Dependencies
       if: runner.os == 'Linux'
-      run: sudo apt install g++-14 ninja-build
+      run: sudo apt install g++-14
 
     - name: Install macOS Dependencies
       if: runner.os == 'macOS'
       run: |
         brew update
-        brew install llvm ninja
+        brew install llvm
         echo /opt/homebrew/opt/llvm/bin >> $GITHUB_PATH
 
     - name: Checkout
@@ -58,7 +58,7 @@ jobs:
     - name: Install Dependencies
       run: |
         brew update
-        brew install llvm ninja
+        brew install llvm
         echo /opt/homebrew/opt/llvm/bin >> $GITHUB_PATH
 
     - name: Checkout
@@ -83,7 +83,7 @@ jobs:
     - name: Install Dependencies
       run: |
         brew update
-        brew install llvm ninja
+        brew install llvm
         echo /opt/homebrew/opt/llvm/bin >> $GITHUB_PATH
 
     - name: Checkout
