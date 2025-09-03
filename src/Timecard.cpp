@@ -17,6 +17,7 @@ using namespace std::chrono_literals;
 
 export using DurationMap = std::map<std::string_view, std::chrono::minutes>;
 
+namespace {
 [[nodiscard]] auto am_pm_offset(std::string_view timepoint)
 {
     if (std::regex_match(std::string(timepoint), std::regex(".*pm")))
@@ -49,6 +50,14 @@ export using DurationMap = std::map<std::string_view, std::chrono::minutes>;
     return std::chrono::hours(time.tm_hour) + std::chrono::minutes(time.tm_min);
 }
 
+[[nodiscard]] auto longest_label(const DurationMap& durations)
+{
+    return static_cast<int>(std::ranges::max_element(durations, [](const auto& lhs, const auto& rhs) {
+                                return lhs.first.length() < rhs.first.length();
+                            })->first.length());
+}
+}
+
 export [[nodiscard]] auto parse_timepoint(std::string_view timepoint) -> std::chrono::minutes
 {
     if (std::regex_match(std::string(timepoint), std::regex("([1][0-2]|[1-9]):[0-5][0-9](a|p)m")))
@@ -59,13 +68,6 @@ export [[nodiscard]] auto parse_timepoint(std::string_view timepoint) -> std::ch
         return current_time();
 
     throw std::invalid_argument(std::format("Failed to parse \"{}\"", timepoint));
-}
-
-[[nodiscard]] auto longest_label(const DurationMap& durations)
-{
-    return static_cast<int>(std::ranges::max_element(durations, [](const auto& lhs, const auto& rhs) {
-                                return lhs.first.length() < rhs.first.length();
-                            })->first.length());
 }
 
 export [[nodiscard]] auto calculate_durations(const std::vector<std::string_view>& args)
